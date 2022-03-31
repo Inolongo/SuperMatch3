@@ -9,7 +9,7 @@ namespace UI
 {
     public class UISystem : Singleton<UISystem>
     {
-        private const string PrefabsPath = "Views";
+        private const string ViewPrefabsPath = "Views";
 
         [SerializeField] private Transform rootViews;
         
@@ -19,7 +19,7 @@ namespace UI
 
         public void Initialize()
         {
-            _prefabs = Resources.LoadAll<UIView>(PrefabsPath);
+            _prefabs = Resources.LoadAll<UIView>(ViewPrefabsPath);
         }
 
         public T Show<T>() where T : UIView
@@ -35,7 +35,7 @@ namespace UI
 
             if (viewToShow is null)
             {
-                throw new Exception("Need add prefab type " + typeof(T) + "add in folder " + PrefabsPath);
+                throw new Exception("Need add prefab type " + typeof(T) + "add in folder " + ViewPrefabsPath);
             }
 
             if (_views.Count > 0)
