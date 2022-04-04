@@ -8,21 +8,17 @@ namespace UI.ScreenSystem.Screens
 {
     public class LobbySwipe : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
     {
-        private const float FOLLOW_SPEED = 0.2f;
-        [SerializeField] private float percentThreshold;
-        [SerializeField] private float smoothing;
         [SerializeField] private int pageCount;
-        [SerializeField] private float swipeDuration = 0.2f;
+        [SerializeField] private float swipeDuration;
 
         private RectTransform _rectTransform;
         private float _pageWidth;
-        private Vector3 _screenPosition;
         private LobbyPageType _currentPage;
         private float _swipeStartPositionX;
         private Vector3 _lastPagePosition;
         private Tween _moveToPageTween;
-
-        // Start is called before the first frame update
+        private float _distanceBetweenRectAndDragX;
+        
 
         public void Initialize()
         {
@@ -31,11 +27,7 @@ namespace UI.ScreenSystem.Screens
             _currentPage = LobbyPageType.Home;
             _lastPagePosition = _rectTransform.position;
         }
-
-        void Start()
-        {
-            _screenPosition = transform.position;
-        }
+        
 
         public void MoveToPage(LobbyPageType page)
         {
@@ -102,13 +94,14 @@ namespace UI.ScreenSystem.Screens
         public void OnBeginDrag(PointerEventData eventData)
         {
             _swipeStartPositionX = eventData.position.x;
+            _distanceBetweenRectAndDragX =  _swipeStartPositionX-_rectTransform.position.x;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             _rectTransform.position = Vector3.Lerp(_rectTransform.position,
-                new Vector3(_rectTransform.position.x + eventData.position.x - _swipeStartPositionX,
-                    _rectTransform.position.y, _rectTransform.position.z), 0.5f);//think about it
+                new Vector3(eventData.position.x - _distanceBetweenRectAndDragX,
+                    _rectTransform.position.y, _rectTransform.position.z), swipeDuration);
 
         }
 
