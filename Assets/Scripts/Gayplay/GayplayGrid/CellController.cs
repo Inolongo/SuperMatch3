@@ -5,7 +5,7 @@ namespace Gayplay.GayplayGrid
 {
     public class CellController: MonoBehaviour
     {
-        [SerializeField] private CellView cellView;
+        [SerializeField] public CellView cellView;
         
         private CellModel _cellModel;
 
@@ -13,6 +13,9 @@ namespace Gayplay.GayplayGrid
         {
             _cellModel = cellModel;
             cellView.Init(cellModel);
+            
         }
+        
+        
     }
 }
