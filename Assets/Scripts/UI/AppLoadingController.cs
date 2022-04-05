@@ -1,5 +1,4 @@
-﻿using System;
-using UI.Screens;
+﻿using UI.ScreenSystem.Screens;
 using UnityEngine;
 
 namespace UI

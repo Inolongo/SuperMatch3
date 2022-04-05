@@ -1,44 +1,39 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UI.Screens;
-using UI.ScreenSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FooterNooter : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private Button homeButton;
-    [SerializeField] private Button rankingButton;
-    [SerializeField] private Button shopButton;
-    
-    public event Action HomeButtonPressed;
-    public event Action RankingButtonPressed;
-    public event Action ShopButtonPressed;
-    
-    public void Initialize()
+    public class FooterNooter : MonoBehaviour
     {
-        homeButton.onClick.AddListener(OnHomeButtonClick);
-        rankingButton.onClick.AddListener(OnRankingButtonClick);
-        shopButton.onClick.AddListener(OnShopButtonClick);
+        [SerializeField] private Button homeButton;
+        [SerializeField] private Button rankingButton;
+        [SerializeField] private Button shopButton;
+
+        public event Action HomeButtonPressed;
+        public event Action RankingButtonPressed;
+        public event Action ShopButtonPressed;
+
+        public void Initialize()
+        {
+            homeButton.onClick.AddListener(OnHomeButtonClick);
+            rankingButton.onClick.AddListener(OnRankingButtonClick);
+            shopButton.onClick.AddListener(OnShopButtonClick);
+        }
+
+        private void OnShopButtonClick()
+        {
+            ShopButtonPressed?.Invoke();
+        }
+
+        private void OnRankingButtonClick()
+        {
+            RankingButtonPressed?.Invoke();
+        }
+
+        private void OnHomeButtonClick()
+        {
+            HomeButtonPressed?.Invoke();
+        }
     }
-
-    private void OnShopButtonClick()
-    {
-        ShopButtonPressed?.Invoke();
-    }
-
-    private void OnRankingButtonClick()
-    {
-        RankingButtonPressed?.Invoke();
-    }
-
-    private void OnHomeButtonClick()
-    {
-        HomeButtonPressed?.Invoke();
-    }
-
-
-
-
 }

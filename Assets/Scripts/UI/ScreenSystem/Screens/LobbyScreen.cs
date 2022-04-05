@@ -1,9 +1,7 @@
-﻿using System;
-using UI.ScreenSystem.Screens;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.Screens
+namespace UI.ScreenSystem.Screens
 {
     public class LobbyScreen : SwipeScreen
     {
@@ -16,6 +14,7 @@ namespace UI.Screens
             InitializeFooter();
             InitializeLobbySwipe();
         }
+
         private void InitializeFooter()
         {
             footer.Initialize();

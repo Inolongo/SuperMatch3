@@ -1,6 +1,4 @@
-using System.Collections;
 using DG.Tweening;
-using UI.Screens;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -48,7 +46,7 @@ namespace UI.ScreenSystem.Screens
 
         private void MoveLeft(int pagePlaceDifference, LobbyPageType page)
         {
-            if ((int) _currentPage > 1)
+            if ((int)_currentPage > 1)
             {
                 Move(pagePlaceDifference);
                 _currentPage = page;
@@ -61,7 +59,7 @@ namespace UI.ScreenSystem.Screens
 
         private void MoveRight(int pagePlaceDifference, LobbyPageType page)
         {
-            if ((int) _currentPage < pageCount)
+            if ((int)_currentPage < pageCount)
             {
                 Move(pagePlaceDifference);
                 _currentPage = page;

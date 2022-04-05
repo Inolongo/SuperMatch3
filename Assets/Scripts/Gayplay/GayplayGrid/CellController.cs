@@ -3,9 +3,11 @@ using UnityEngine;
 
 namespace Gayplay.GayplayGrid
 {
-    public class CellController: MonoBehaviour
+    public class CellController : MonoBehaviour
     {
-        [SerializeField] public CellView cellView;
+        [SerializeField] private CellView cellView;
+        
+        public CellType CellType => _cellModel.CellType;
         
         private CellModel _cellModel;
 
@@ -13,9 +15,6 @@ namespace Gayplay.GayplayGrid
         {
             _cellModel = cellModel;
             cellView.Init(cellModel);
-            
         }
-        
-        
     }
 }

@@ -1,7 +1,4 @@
-﻿using UI.ScreenSystem;
-using UnityEngine;
-
-namespace UI
+﻿namespace UI.ScreenSystem
 {
     public class SwipeScreen: ScreenBase<SwipeScreen>
     {

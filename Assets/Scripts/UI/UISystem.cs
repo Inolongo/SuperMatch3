@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
-
 using UnityEngine;
 
 namespace UI
@@ -12,8 +10,8 @@ namespace UI
         private const string ViewPrefabsPath = "Views";
 
         [SerializeField] private Transform rootViews;
-        
-        private  UIView[] _prefabs;
+
+        private UIView[] _prefabs;
 
         private readonly List<UIView> _views = new List<UIView>();
 
@@ -44,10 +42,10 @@ namespace UI
                 Hide(lastView);
             }
 
-            var uiView = (T) Instantiate(viewToShow, rootViews);
+            var uiView = (T)Instantiate(viewToShow, rootViews);
             uiView.OnShow();
             _views.Add(uiView);
-            
+
             return uiView;
         }
 
@@ -61,12 +59,12 @@ namespace UI
                     throw new Exception("Can't close single view");
             }
 
-            if (_views.Count > 1) 
+            if (_views.Count > 1)
             {
                 var previousView = _views.Last();
                 previousView.OnClose();
                 Destroy(previousView.gameObject);
-                
+
                 _views.Remove(previousView);
             }
 
@@ -79,7 +77,7 @@ namespace UI
         {
             lastView.gameObject.SetActive(false);
             lastView.OnHide();
-            
+
             return lastView;
         }
     }

@@ -1,6 +1,4 @@
-﻿using UI.ScreenSystem;
-
-namespace UI
+﻿namespace UI.ScreenSystem
 {
     public class Screen: ScreenBase<Screen>
     {

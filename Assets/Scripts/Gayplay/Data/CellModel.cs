@@ -8,11 +8,11 @@ namespace Gayplay.Data
     {
         [SerializeField] private Sprite pieceIcon;
         [SerializeField] private Sprite pieceFace;
-        [SerializeField] private string pieceType;
+        [SerializeField] private CellType cellType;
 
         public Sprite PieceIcon => pieceIcon;
         public Sprite PieceFace => pieceFace;
 
-        public string PieceType => pieceType;
+        public CellType CellType => cellType;
     }
 }

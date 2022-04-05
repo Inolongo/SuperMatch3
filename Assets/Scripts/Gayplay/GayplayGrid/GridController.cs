@@ -18,7 +18,7 @@ namespace Gayplay.GayplayGrid
         private readonly Dictionary<int, List<CellController>> _gridRowCells =
             new Dictionary<int, List<CellController>>();
 
-        private Random _random = new Random();
+        private readonly Random _random = new Random();
 
         private void Start()
         {
@@ -53,7 +53,7 @@ namespace Gayplay.GayplayGrid
                     }
                     else
                     {
-                        j = j - 1;
+                        j -= 1;
                     }
                 }
 
@@ -66,39 +66,24 @@ namespace Gayplay.GayplayGrid
             var randomIndex = _random.Next(0, data.CellModels.Count);
             return data.CellModels[randomIndex];
         }
-        
-        private bool IsSafeHorizontal(List<CellController> createdCells, int j, CellModel tempModel)
+
+        private bool IsSafeHorizontal(List<CellController> createdCells, int columnNum, CellModel tempModel)
         {
-            if (createdCells.Count > 1)
-            {
-                if (createdCells[j - 1].cellView.type == createdCells[j - 2].cellView.type &&
-                    tempModel.PieceType == createdCells[j - 1].cellView.type)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-
-            return true;
+            if (createdCells.Count <= 1) return true;
+            
+            return createdCells[columnNum - 1].CellType != createdCells[columnNum - 2].CellType ||
+                   tempModel.CellType != createdCells[columnNum - 1].CellType;
         }
 
-        private bool IsSafeVertical(int i, int j, CellModel tempModel)
+        private bool IsSafeVertical(int rowNum, int columnNum, CellModel tempModel)
         {
-            if (i > 1)
-            {
-                var tempList1 = _gridRowCells[i - 1];
-                var tempList2 = _gridRowCells[i - 2];
-                if (tempList1[j].cellView.type == tempModel.PieceType &&
-                    tempList1[j].cellView.type == tempList2[j].cellView.type)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-
-            return true;
+            if (rowNum <= 1) return true;
+            
+            var tempList1 = _gridRowCells[rowNum - 1];
+            var tempList2 = _gridRowCells[rowNum - 2];
+            
+            return tempList1[columnNum].CellType != tempModel.CellType ||
+                   tempList1[columnNum].CellType != tempList2[columnNum].CellType;
         }
     }
 }
