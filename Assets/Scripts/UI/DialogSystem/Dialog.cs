@@ -2,7 +2,7 @@
 
 namespace UI.DialogSystem
 {
-    public class Dialog : DialogBase<Dialog>
+    public class Dialog: DialogBase
     {
         public override void OnShow()
         {
@@ -13,6 +13,10 @@ namespace UI.DialogSystem
         }
 
         public override void OnClose()
+        {
+        }
+
+        protected override void Close()
         {
         }
     }

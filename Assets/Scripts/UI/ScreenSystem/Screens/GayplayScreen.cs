@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace UI.ScreenSystem.Screens
 {
-    public class GayplayScreen : ScreenBase<GayplayScreen>
+    public class GayplayScreen : ScreenBase
     {
         [SerializeField] private Button closeButtonTest;
 
@@ -20,6 +20,11 @@ namespace UI.ScreenSystem.Screens
         public override void OnClose()
         {
             closeButtonTest.onClick.RemoveListener(Close);
+        }
+
+        protected override void Close()
+        {
+            UISystem.Instance.Close<GayplayScreen>();
         }
     }
 }
