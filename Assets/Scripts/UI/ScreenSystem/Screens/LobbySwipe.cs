@@ -10,6 +10,7 @@ namespace UI.ScreenSystem.Screens
     {
         [SerializeField] private int pageCount;
         [SerializeField] private float swipeDuration;
+        [SerializeField] private float swipeBlock;
 
         private RectTransform _rectTransform;
         private float _pageWidth;
@@ -18,7 +19,7 @@ namespace UI.ScreenSystem.Screens
         private Vector3 _lastPagePosition;
         private Tween _moveToPageTween;
         private float _distanceBetweenRectAndDragX;
-        
+
 
         public void Initialize()
         {
@@ -27,14 +28,14 @@ namespace UI.ScreenSystem.Screens
             _currentPage = LobbyPageType.Home;
             _lastPagePosition = _rectTransform.position;
         }
-        
+
 
         public void MoveToPage(LobbyPageType page)
         {
             var pagePlaceDifference = page - _currentPage;
             var isMoveRight = page > _currentPage;
             var isMoveLeft = page < _currentPage;
-            
+
             if (isMoveRight)
             {
                 MoveRight(pagePlaceDifference, page);
@@ -57,7 +58,7 @@ namespace UI.ScreenSystem.Screens
                 Move(0);
             }
         }
-        
+
         private void MoveRight(int pagePlaceDifference, LobbyPageType page)
         {
             if ((int) _currentPage < pageCount)
@@ -81,7 +82,7 @@ namespace UI.ScreenSystem.Screens
                 _moveToPageTween.Kill();
                 _moveToPageTween = null;
             }
-            
+
             _moveToPageTween = _rectTransform.DOMove(endPosition, swipeDuration);
             _moveToPageTween.onComplete += OnMoveToPageComplete;
         }
@@ -90,11 +91,11 @@ namespace UI.ScreenSystem.Screens
         {
             _lastPagePosition = _rectTransform.position;
         }
-        
+
         public void OnBeginDrag(PointerEventData eventData)
         {
             _swipeStartPositionX = eventData.position.x;
-            _distanceBetweenRectAndDragX =  _swipeStartPositionX-_rectTransform.position.x;
+            _distanceBetweenRectAndDragX = _swipeStartPositionX - _rectTransform.position.x;
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -102,20 +103,23 @@ namespace UI.ScreenSystem.Screens
             _rectTransform.position = Vector3.Lerp(_rectTransform.position,
                 new Vector3(eventData.position.x - _distanceBetweenRectAndDragX,
                     _rectTransform.position.y, _rectTransform.position.z), swipeDuration);
-
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            var isSwipeToLeft = eventData.position.x - _swipeStartPositionX > 0;
-            Debug.Log(eventData.delta);
-            if (isSwipeToLeft)
+            var positionDelta = eventData.position.x - _swipeStartPositionX;
+            var isSwipeToLeft = positionDelta > 0;
+            Debug.Log("delta:" + Mathf.Abs(positionDelta));
+            if (Mathf.Abs(positionDelta) > swipeBlock)
             {
-                MoveToPage(_currentPage - 1);
-            }
-            else
-            {
-               MoveToPage(_currentPage + 1);
+                if (isSwipeToLeft)
+                {
+                    MoveToPage(_currentPage - 1);
+                }
+                else
+                {
+                    MoveToPage(_currentPage + 1);
+                }
             }
         }
     }

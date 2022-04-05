@@ -262,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pageCount: 3
   swipeDuration: 0.1
+  swipeBlock: 200
 --- !u!1 &1674086375992181908
 GameObject:
   m_ObjectHideFlags: 0
