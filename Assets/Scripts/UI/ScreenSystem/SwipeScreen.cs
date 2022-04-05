@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class SwipeScreen: ScreenBase
+    public class SwipeScreen: ScreenBase<SwipeScreen>
     {
         public override void OnShow()
         {

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
-
-namespace UI
+﻿namespace UI
 {
-    public abstract class DialogBase: UIView
+    public abstract class DialogBase<T>: UIView where T : UIView
     {
-        
+        protected override void Close()
+        {
+            UISystem.Instance.Close<T>();
+        }
     }
 }

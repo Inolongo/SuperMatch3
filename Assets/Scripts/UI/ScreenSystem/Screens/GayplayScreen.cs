@@ -4,18 +4,14 @@ using UnityEngine.UI;
 
 namespace UI.Screens
 {
-    public class TestView : ScreenBase
+    public class GayplayScreen : ScreenBase<GayplayScreen>
     {
         [SerializeField] private Button closeButtonTest;
         public override void OnShow()
         {
-            closeButtonTest.onClick.AddListener(CloseView);
+            closeButtonTest.onClick.AddListener(Close);
         }
-
-        private void CloseView()
-        {
-            UISystem.Instance.Close<TestView>();
-        }
+        
 
         public override void OnHide()
         {
@@ -24,7 +20,7 @@ namespace UI.Screens
 
         public override void OnClose()
         {
-            closeButtonTest.onClick.RemoveListener(CloseView);
+            closeButtonTest.onClick.RemoveListener(Close);
         }
         
         

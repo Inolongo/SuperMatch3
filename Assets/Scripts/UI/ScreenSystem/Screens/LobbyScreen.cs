@@ -54,7 +54,7 @@ namespace UI.Screens
 
         private void OnTestButtonClick()
         {
-            UISystem.Instance.Show<TestView>();
+            UISystem.Instance.Show<GayplayScreen>();
         }
 
         public override void OnClose()

@@ -7,5 +7,6 @@ namespace UI
         public abstract void OnShow();
         public abstract void OnHide();
         public abstract void OnClose();
+        protected abstract void Close();
     }
 }

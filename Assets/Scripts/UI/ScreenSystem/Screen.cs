@@ -2,7 +2,7 @@
 
 namespace UI
 {
-    public class Screen: ScreenBase
+    public class Screen: ScreenBase<Screen>
     {
         public override void OnShow()
         {
