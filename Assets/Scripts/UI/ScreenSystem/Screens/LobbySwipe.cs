@@ -4,29 +4,34 @@ using UnityEngine.EventSystems;
 
 namespace UI.ScreenSystem.Screens
 {
+    [RequireComponent(typeof(LobbySwipeSizeFitter))]
     public class LobbySwipe : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
     {
         [SerializeField] private int pageCount;
         [SerializeField] private float swipeDuration;
         [SerializeField] private float swipeBlock;
+        [SerializeField] private RectTransform screenRectTransform;
+        public int PageCount => pageCount;
 
-        private RectTransform _rectTransform;
+        private RectTransform _lobbySwipeRectTransform;
         private float _pageWidth;
         private LobbyPageType _currentPage;
         private float _swipeStartPositionX;
         private Vector3 _lastPagePosition;
         private Tween _moveToPageTween;
         private float _distanceBetweenRectAndDragX;
-
+        private LobbySwipeSizeFitter _lobbySwipeSizeFitter;
 
         public void Initialize()
         {
-            _rectTransform = GetComponent<RectTransform>();
-            _pageWidth = _rectTransform.rect.width / pageCount;
-            _currentPage = LobbyPageType.Home;
-            _lastPagePosition = _rectTransform.position;
-        }
+            _lobbySwipeSizeFitter = GetComponent<LobbySwipeSizeFitter>();
 
+            _lobbySwipeRectTransform = GetComponent<RectTransform>();
+            _lobbySwipeSizeFitter.SetSwiperSize(screenRectTransform, _lobbySwipeRectTransform, PageCount);
+            _pageWidth = _lobbySwipeRectTransform.rect.width / pageCount;
+            _currentPage = LobbyPageType.Home;
+            _lastPagePosition = _lobbySwipeRectTransform.position;
+        }
 
         public void MoveToPage(LobbyPageType page)
         {
@@ -44,7 +49,7 @@ namespace UI.ScreenSystem.Screens
             }
             else
             {
-                _moveToPageTween = _rectTransform.DOMove(_lastPagePosition, swipeDuration);
+                _moveToPageTween = _lobbySwipeRectTransform.DOMove(_lastPagePosition, swipeDuration);
             }
         }
 
@@ -78,6 +83,8 @@ namespace UI.ScreenSystem.Screens
         {
             var endPosition = new Vector3(_lastPagePosition.x - pagePlaceDifference * _pageWidth,
                 _lastPagePosition.y, _lastPagePosition.z);
+            Debug.Log("last position" + _lastPagePosition);
+            Debug.Log("end position" + endPosition);
 
             if (_moveToPageTween != null)
             {
@@ -85,26 +92,26 @@ namespace UI.ScreenSystem.Screens
                 _moveToPageTween = null;
             }
 
-            _moveToPageTween = _rectTransform.DOMove(endPosition, swipeDuration);
+            _moveToPageTween = _lobbySwipeRectTransform.DOMove(endPosition, swipeDuration);
             _moveToPageTween.onComplete += OnMoveToPageComplete;
         }
 
         private void OnMoveToPageComplete()
         {
-            _lastPagePosition = _rectTransform.position;
+            _lastPagePosition = _lobbySwipeRectTransform.position;
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
             _swipeStartPositionX = eventData.position.x;
-            _distanceBetweenRectAndDragX = _swipeStartPositionX - _rectTransform.position.x;
+            _distanceBetweenRectAndDragX = _swipeStartPositionX - _lobbySwipeRectTransform.position.x;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            _rectTransform.position = Vector3.Lerp(_rectTransform.position,
+            _lobbySwipeRectTransform.position = Vector3.Lerp(_lobbySwipeRectTransform.position,
                 new Vector3(eventData.position.x - _distanceBetweenRectAndDragX,
-                    _rectTransform.position.y, _rectTransform.position.z), swipeDuration);
+                    _lobbySwipeRectTransform.position.y, _lobbySwipeRectTransform.position.z), swipeDuration);
         }
 
         public void OnEndDrag(PointerEventData eventData)
