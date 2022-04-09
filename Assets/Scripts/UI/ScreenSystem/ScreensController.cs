@@ -41,7 +41,7 @@ namespace UI.ScreenSystem
                 Hide<T>(lastView);
             }
 
-            var uiView = (T)Instantiate(viewToShow, RootViews);
+            var uiView = (T) Instantiate(viewToShow, RootViews);
             uiView.OnShow();
             _showingView.Add(uiView);
 

@@ -15,17 +15,19 @@ MonoBehaviour:
   cellModels:
   - pieceIcon: {fileID: 21300000, guid: 51e2a399831333b478ec978ee598bf0e, type: 3}
     pieceFace: {fileID: 21300000, guid: 96cb520f731cdea488a423885d27bb05, type: 3}
-    pieceType: strawberry
     cellType: 1
   - pieceIcon: {fileID: 21300004, guid: 51e2a399831333b478ec978ee598bf0e, type: 3}
     pieceFace: {fileID: 21300000, guid: 96cb520f731cdea488a423885d27bb05, type: 3}
-    pieceType: watermelon
     cellType: 2
   - pieceIcon: {fileID: 21300014, guid: 51e2a399831333b478ec978ee598bf0e, type: 3}
     pieceFace: {fileID: 21300000, guid: 96cb520f731cdea488a423885d27bb05, type: 3}
-    pieceType: lemon
     cellType: 3
   - pieceIcon: {fileID: 21300016, guid: 51e2a399831333b478ec978ee598bf0e, type: 3}
     pieceFace: {fileID: 21300000, guid: 96cb520f731cdea488a423885d27bb05, type: 3}
-    pieceType: orange
     cellType: 4
+  isActiveCellsLevel:
+  - row: 000001010000
+  - row: 000101010100
+  - row: 010101010101
+  - row: 000101010100
+  - row: 000001010000

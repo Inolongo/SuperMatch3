@@ -1,14 +1,18 @@
-﻿using UI.ScreenSystem.Screens;
+﻿using ServerEmulator;
+using UI.ScreenSystem.Screens;
 using UnityEngine;
 
 namespace UI
 {
-    public class AppLoadingController: MonoBehaviour
+    public class AppLoadingController : MonoBehaviour
     {
         [SerializeField] private UISystem uiSystem;
 
+        private APIController _apiController;
+
         private void Awake()
         {
+            _apiController = new APIController();
             uiSystem.Initialize();
             LoadApplication();
         }
@@ -16,6 +20,7 @@ namespace UI
         private void LoadApplication()
         {
             var lobbyScreen = uiSystem.Show<LobbyScreen>();
+            lobbyScreen.Init(_apiController);
         }
     }
 }

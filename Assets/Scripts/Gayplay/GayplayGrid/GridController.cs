@@ -38,51 +38,60 @@ namespace Gayplay.GayplayGrid
 
         private void CreateGrid()
         {
-            for (var i = 0; i < RowCount; i++)
+            var rowCount = data.IsActiveCellRows.Count;
+            for (var rowNum = 0; rowNum < rowCount; rowNum++)
             {
-                var createdCells = new List<CellController>(ColumnCount);
-                for (var j = 0; j < ColumnCount; j++)
+                var columnCount = data.IsActiveCellRows[rowNum].Row.Count;
+                var createdCells = new List<CellController>(columnCount);
+                for (var columnNum = 0; columnNum < columnCount; columnNum++)
                 {
                     var tempModel = GetRandomModel();
-                    if (IsSafeHorizontal(createdCells, j, tempModel) &&
-                        IsSafeVertical(i, j, tempModel))
+                    if (IsSafeHorizontal(createdCells, columnNum, tempModel) &&
+                        IsSafeVertical(rowNum, columnNum, tempModel))
                     {
                         var piece = Instantiate(cellPrefab, cellContainer);
+                        tempModel.IsActive = GetIsCellActive(rowNum, columnNum, data.IsActiveCellRows);
                         piece.Init(tempModel);
                         createdCells.Add(piece);
                     }
                     else
                     {
-                        j -= 1;
+                        columnNum -= 1;
                     }
                 }
 
-                _gridRowCells[i] = createdCells;
+                _gridRowCells[rowNum] = createdCells;
             }
         }
 
-        private CellModel GetRandomModel()
+        private bool GetIsCellActive(int rowNum, int columnNum, List<IsActiveCellRow> list)
+        {
+            var row = list[rowNum].Row;
+            return row[columnNum];
+        }
+
+        private CellDataModel GetRandomModel()
         {
             var randomIndex = _random.Next(0, data.CellModels.Count);
             return data.CellModels[randomIndex];
         }
 
-        private bool IsSafeHorizontal(List<CellController> createdCells, int columnNum, CellModel tempModel)
+        private bool IsSafeHorizontal(List<CellController> createdCells, int columnNum, CellDataModel tempDataModel)
         {
             if (createdCells.Count <= 1) return true;
-            
+
             return createdCells[columnNum - 1].CellType != createdCells[columnNum - 2].CellType ||
-                   tempModel.CellType != createdCells[columnNum - 1].CellType;
+                   tempDataModel.CellType != createdCells[columnNum - 1].CellType;
         }
 
-        private bool IsSafeVertical(int rowNum, int columnNum, CellModel tempModel)
+        private bool IsSafeVertical(int rowNum, int columnNum, CellDataModel tempDataModel)
         {
             if (rowNum <= 1) return true;
-            
+
             var tempList1 = _gridRowCells[rowNum - 1];
             var tempList2 = _gridRowCells[rowNum - 2];
-            
-            return tempList1[columnNum].CellType != tempModel.CellType ||
+
+            return tempList1[columnNum].CellType != tempDataModel.CellType ||
                    tempList1[columnNum].CellType != tempList2[columnNum].CellType;
         }
     }

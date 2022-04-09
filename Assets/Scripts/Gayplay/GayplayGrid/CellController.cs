@@ -7,14 +7,14 @@ namespace Gayplay.GayplayGrid
     {
         [SerializeField] private CellView cellView;
         
-        public CellType CellType => _cellModel.CellType;
+        public CellType CellType => _cellDataModel.CellType;
         
-        private CellModel _cellModel;
+        private CellDataModel _cellDataModel;
 
-        public void Init(CellModel cellModel)
+        public void Init(CellDataModel cellDataModel)
         {
-            _cellModel = cellModel;
-            cellView.Init(cellModel);
+            _cellDataModel = cellDataModel;
+            cellView.Init(cellDataModel);
         }
     }
 }

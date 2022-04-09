@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gayplay.Data
@@ -6,8 +7,20 @@ namespace Gayplay.Data
     [CreateAssetMenu(fileName = "PiecesData", menuName = "ScriptableObjects/Pieces", order = 1)]
     public class PiecesData : ScriptableObject
     {
-        [SerializeField] private List<CellModel> cellModels;
+        [SerializeField] private List<CellDataModel> cellModels;
+        [SerializeField] private List<IsActiveCellRow> isActiveCellsLevel;
+        
+        public List<CellDataModel> CellModels => cellModels;
+        public List<IsActiveCellRow> IsActiveCellRows => isActiveCellsLevel;
 
-        public List<CellModel> CellModels => cellModels;
+
+    }
+    
+    [Serializable]
+    public struct IsActiveCellRow
+    {
+        [SerializeField] private List<bool> row;
+
+        public List<bool> Row => row;
     }
 }

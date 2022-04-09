@@ -10,7 +10,7 @@ namespace UI
         [SerializeField] private Transform rootViews;
         [SerializeField] private DialogsController dialogsController;
         [SerializeField] private ScreensController screenSystem;
-        
+
         public void Initialize()
         {
             dialogsController.Initialize(rootViews);
@@ -19,8 +19,8 @@ namespace UI
 
         public T Show<T>() where T : UIView, new()
         {
-            var view = new T();
-            switch (view)
+            // ReSharper disable once Unity.IncorrectMonoBehaviourInstantiation
+            switch (new T())
             {
                 case DialogBase _:
                     return dialogsController.Show<T>();
@@ -33,8 +33,8 @@ namespace UI
 
         public void Close<T>() where T : UIView, new()
         {
-            var view = new T();
-            switch (view)
+            // ReSharper disable once Unity.IncorrectMonoBehaviourInstantiation
+            switch (new T())
             {
                 case DialogBase _:
                     dialogsController.Close<T>();

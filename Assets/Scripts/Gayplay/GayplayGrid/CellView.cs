@@ -4,15 +4,28 @@ using UnityEngine.UI;
 
 namespace Gayplay.GayplayGrid
 {
+    [RequireComponent(typeof(CanvasGroup))]
     public class CellView : MonoBehaviour
     {
         [SerializeField] private Image icon;
         [SerializeField] private Image face;
 
-        public void Init(CellModel cellModel)
+        private CanvasGroup _canvasGroup;
+
+        private void Awake()
         {
-            icon.sprite = cellModel.PieceIcon;
-            face.sprite = cellModel.PieceFace;
+            _canvasGroup = GetComponent<CanvasGroup>();
+        }
+        public void Init(CellDataModel cellDataModel)
+        {
+            if (!cellDataModel.IsActive)
+            {
+                _canvasGroup.alpha = 0;
+                _canvasGroup.interactable = false;
+            }
+
+            icon.sprite = cellDataModel.PieceIcon;
+            face.sprite = cellDataModel.PieceFace;
         }
     }
 }
