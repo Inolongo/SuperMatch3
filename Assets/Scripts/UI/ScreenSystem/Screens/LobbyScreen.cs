@@ -1,5 +1,6 @@
 ﻿using Leaderboard;
 using ServerEmulator;
+using UI.DialogSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,8 @@ namespace UI.ScreenSystem.Screens
 {
     public class LobbyScreen : SwipeScreen
     {
-        [SerializeField] private Button openViewTest;
+        [SerializeField] private Button startButton;
+        [SerializeField] private Button settingsButton;
         [SerializeField] private FooterNooter footer;
         [SerializeField] private LobbySwipe swipe;
         [SerializeField] private LeaderboardController leaderboardController;
@@ -32,10 +34,16 @@ namespace UI.ScreenSystem.Screens
             InitializeLobbySwipe();
             InitializeLeaderboard();
 
-            openViewTest.onClick.AddListener(OnTestButtonClick);
+            startButton.onClick.AddListener(OnStartButtonClick);
+            settingsButton.onClick.AddListener(OnSettingsButtonClick);
         }
 
-        private void OnTestButtonClick()
+        private void OnSettingsButtonClick()
+        {
+            UISystem.Instance.Show<SettingsDialog>();
+        }
+
+        private void OnStartButtonClick()
         {
             UISystem.Instance.Show<GayplayScreen>();
         }
@@ -43,13 +51,16 @@ namespace UI.ScreenSystem.Screens
         public override void OnClose()
         {
             base.OnClose();
-            openViewTest.onClick.RemoveListener(OnTestButtonClick);
+            startButton.onClick.RemoveListener(OnStartButtonClick);
+            settingsButton.onClick.RemoveListener(OnSettingsButtonClick);
         }
 
         public override void OnHide()
         {
             base.OnHide();
-            openViewTest.onClick.RemoveListener(OnTestButtonClick);
+            startButton.onClick.RemoveListener(OnStartButtonClick);
+            settingsButton.onClick.RemoveListener(OnSettingsButtonClick);
+
         }
 
         public void Init(APIController apiController)

@@ -7,7 +7,7 @@ namespace UI.ScreenSystem
 {
     public class ScreensController : UIControllerBase
     {
-        private const string DialogPrefabsPath = "Views";
+        private const string DialogPrefabsPath = "Views/Screens";
 
         private List<ScreenBase> _screenPrefabs;
         private readonly List<UIView> _showingView = new List<UIView>();

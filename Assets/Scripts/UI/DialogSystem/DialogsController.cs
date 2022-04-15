@@ -7,7 +7,7 @@ namespace UI.DialogSystem
 {
     public class DialogsController : UIControllerBase
     {
-        private const string DialogPrefabsPath = "Views";
+        private const string DialogPrefabsPath = "Views/Dialogs";
         
         private List<DialogBase> _dialogPrefabs;
         private readonly List<UIView> _showingView = new List<UIView>();
@@ -35,11 +35,7 @@ namespace UI.DialogSystem
                 throw new Exception("Need add prefab type " + typeof(T) + "add in folder " + DialogPrefabsPath);
             }
 
-            if (_showingView.Count > 0)
-            {
-                var lastView = _showingView.Last();
-                Hide<T>(lastView);
-            }
+            TryHideLastShownView();
 
             var uiView = (T) Instantiate(viewToShow, RootViews);
             uiView.OnShow();
@@ -50,26 +46,45 @@ namespace UI.DialogSystem
 
         public override void Close<T>()
         {
-            switch (_showingView.Count)
+            if (_showingView.Count == 0)
             {
-                case 0:
-                    throw new Exception("No opened view");
-                case 1:
-                    throw new Exception("Can't close single view");
+                throw new Exception("No opened view");
+            }
+            
+            var uiView = _showingView.Last();
+            _showingView.Remove(uiView);
+            uiView.OnClose();
+            Destroy(uiView.gameObject);
+
+            TryShowLastHiddenView();
+        }
+
+        private bool TryHideLastShownView()
+        {
+            if (_showingView.Count > 0)
+            {
+                var uiView = _showingView.Last();
+                uiView.OnHide();
+                uiView.gameObject.SetActive(false);
+
+                return true;
             }
 
-            if (_showingView.Count > 1) 
+            return false;
+        }
+
+        private bool TryShowLastHiddenView()
+        {
+            if (_showingView.Count > 0)
             {
-                var previousView = _showingView.Last();
-                previousView.OnClose();
-                Destroy(previousView.gameObject);
+                var uiView = _showingView.Last();
+                uiView.OnShow();
+                uiView.gameObject.SetActive(true);
                 
-                _showingView.Remove(previousView);
+                return true;
             }
 
-            var viewToShow = _showingView.Last();
-            viewToShow.gameObject.SetActive(true);
-            viewToShow.OnShow();
+            return false;
         }
 
         protected override T Hide<T>(UIView viewToHide)

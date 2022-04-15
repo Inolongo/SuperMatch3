@@ -1,20 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.ScreenSystem.Screens
+namespace UI.DialogSystem
 {
-    public class GayplayScreen : ScreenBase
+    public class SettingsDialog: DialogBase
     {
         [SerializeField] private Button exitButton;
-
         public override void OnShow()
         {
             exitButton.onClick.AddListener(Close);
         }
 
-
         public override void OnHide()
         {
+            //UISystem.Instance.Close<SettingsDialog>();
         }
 
         public override void OnClose()
@@ -24,7 +23,7 @@ namespace UI.ScreenSystem.Screens
 
         protected override void Close()
         {
-            UISystem.Instance.Close<GayplayScreen>();
+            UISystem.Instance.Close<SettingsDialog>();
         }
     }
 }
