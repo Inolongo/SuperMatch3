@@ -119,6 +119,10 @@ namespace UI.ScreenSystem.Screens
                     MoveToPage(_currentPage + 1);
                 }
             }
+            else
+            {
+                _moveToPageTween = _rectTransform.DOMove(_lastPagePosition, swipeDuration);
+            }
         }
     }
 }
