@@ -42,6 +42,10 @@ namespace UI.ScreenSystem.Screens
             {
                 MoveLeft(pagePlaceDifference, page);
             }
+            else
+            {
+                _moveToPageTween = _rectTransform.DOMove(_lastPagePosition, swipeDuration);
+            }
         }
 
         private void MoveLeft(int pagePlaceDifference, LobbyPageType page)
@@ -121,7 +125,7 @@ namespace UI.ScreenSystem.Screens
             }
             else
             {
-                _moveToPageTween = _rectTransform.DOMove(_lastPagePosition, swipeDuration);
+                MoveToPage(_currentPage);
             }
         }
     }
