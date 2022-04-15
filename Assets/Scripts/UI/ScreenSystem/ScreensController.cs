@@ -19,7 +19,7 @@ namespace UI.ScreenSystem
             _screenPrefabs = Resources.LoadAll<ScreenBase>(DialogPrefabsPath).ToList();
         }
 
-        public override T Show<T>()
+        public override T Show<T>(Action<UIView> beforeShown)
         {
             UIView viewToShow = null;
             foreach (var view in _screenPrefabs)
@@ -42,6 +42,7 @@ namespace UI.ScreenSystem
             }
 
             var uiView = (T) Instantiate(viewToShow, RootViews);
+            beforeShown?.Invoke(uiView);
             uiView.OnShow();
             _showingView.Add(uiView);
 

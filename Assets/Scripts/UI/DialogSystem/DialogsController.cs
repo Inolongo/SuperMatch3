@@ -19,7 +19,7 @@ namespace UI.DialogSystem
             _dialogPrefabs = Resources.LoadAll<DialogBase>(DialogPrefabsPath).ToList();
         }
 
-        public override T Show<T>()
+        public override T Show<T>(Action<UIView> beforeShown)
         {
             UIView viewToShow = null;
             foreach (var view in _dialogPrefabs)
@@ -38,6 +38,7 @@ namespace UI.DialogSystem
             TryHideLastShownView();
 
             var uiView = (T) Instantiate(viewToShow, RootViews);
+            beforeShown?.Invoke(uiView);
             uiView.OnShow();
             _showingView.Add(uiView);
             

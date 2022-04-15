@@ -19,8 +19,7 @@ namespace UI
 
         private void LoadApplication()
         {
-            var lobbyScreen = uiSystem.Show<LobbyScreen>();
-            lobbyScreen.Init(_apiController);
+            uiSystem.Show<LobbyScreen>((view ) => (view as LobbyScreen)!.Init(_apiController));
         }
     }
 }

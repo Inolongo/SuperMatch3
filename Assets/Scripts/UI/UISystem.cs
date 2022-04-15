@@ -17,15 +17,15 @@ namespace UI
             screenSystem.Initialize(rootViews);
         }
 
-        public T Show<T>() where T : UIView, new()
+        public T Show<T>(Action<UIView> beforeShown = null) where T : UIView, new()
         {
             // ReSharper disable once Unity.IncorrectMonoBehaviourInstantiation
             switch (new T())
             {
                 case DialogBase _:
-                    return dialogsController.Show<T>();
+                    return dialogsController.Show<T>(beforeShown);
                 case ScreenBase _:
-                    return screenSystem.Show<T>();
+                    return screenSystem.Show<T>(beforeShown);
                 default:
                     throw new Exception("Incorrect type: " + typeof(T));
             }

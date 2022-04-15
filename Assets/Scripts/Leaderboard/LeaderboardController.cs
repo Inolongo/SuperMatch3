@@ -10,7 +10,7 @@ namespace Leaderboard
     public class LeaderboardController : MonoBehaviour
     {
         [SerializeField] private LeaderboardRowView rowPrefab;
-        [SerializeField] private Transform leaderboardTransform;
+        [SerializeField] private Transform content;
 
         private APIController _apiController;
         private List<LeaderboardModel> _listLeaderboardModel;
@@ -27,7 +27,7 @@ namespace Leaderboard
         {
             foreach (var model in _listLeaderboardModel)
             {
-                var leaderboardRowView = Instantiate(rowPrefab, leaderboardTransform);
+                var leaderboardRowView = Instantiate(rowPrefab, content);
                 leaderboardRowView.Init(model.Name, model.Score);
             }
         }

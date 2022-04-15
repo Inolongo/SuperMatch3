@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace UI
 {
@@ -10,7 +11,7 @@ namespace UI
         {
             RootViews = rootView;
         }
-        public abstract T Show<T>() where T : UIView;
+        public abstract T Show<T>(Action<UIView> action) where T : UIView;
         public abstract void Close<T>() where T : UIView;
         protected abstract T Hide<T>(UIView viewToHide) where T : UIView;
     }
