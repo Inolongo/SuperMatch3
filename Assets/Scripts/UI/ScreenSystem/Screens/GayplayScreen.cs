@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UI.DialogSystem;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.ScreenSystem.Screens
@@ -9,7 +10,12 @@ namespace UI.ScreenSystem.Screens
 
         public override void OnShow()
         {
-            exitButton.onClick.AddListener(Close);
+            exitButton.onClick.AddListener(OnExitButtonClick);
+        }
+
+        private void OnExitButtonClick()
+        {
+           UISystem.Instance.Show<ConfirmationDialog>();
         }
 
 
