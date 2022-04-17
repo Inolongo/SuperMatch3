@@ -83,8 +83,6 @@ namespace UI.ScreenSystem.Screens
         {
             var endPosition = new Vector3(_lastPagePosition.x - pagePlaceDifference * _pageWidth,
                 _lastPagePosition.y, _lastPagePosition.z);
-            Debug.Log("last position" + _lastPagePosition);
-            Debug.Log("end position" + endPosition);
 
             if (_moveToPageTween != null)
             {
@@ -118,7 +116,6 @@ namespace UI.ScreenSystem.Screens
         {
             var positionDelta = eventData.position.x - _swipeStartPositionX;
             var isSwipeToLeft = positionDelta > 0;
-            Debug.Log("delta:" + Mathf.Abs(positionDelta));
             if (Mathf.Abs(positionDelta) > swipeBlock)
             {
                 if (isSwipeToLeft)
