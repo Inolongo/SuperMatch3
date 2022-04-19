@@ -47,6 +47,9 @@ TextureImporter:
   - first:
       213: 21300028
     second: ingame_grid_bg_01_b_2
+  - first:
+      213: 2877471580529523173
+    second: 
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -69,6 +72,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -77,9 +81,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 1
     aniso: 16
-    mipBias: -100
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -139,7 +143,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 0
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -160,7 +164,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 0
+      internalID: 21300012
       vertices: []
       indices: 
       edges: []
@@ -181,7 +185,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 0
+      internalID: 21300028
       vertices: []
       indices: 
       edges: []
@@ -223,7 +227,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 0
+      internalID: 2877471580529523173
       vertices: []
       indices: 
       edges: []
@@ -244,7 +248,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 0
+      internalID: 2877471580529523173
       vertices: []
       indices: 
       edges: []
@@ -265,7 +269,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 0
+      internalID: 2877471580529523173
       vertices: []
       indices: 
       edges: []
@@ -286,7 +290,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 0
+      internalID: 2877471580529523173
       vertices: []
       indices: 
       edges: []
@@ -307,7 +311,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 0
+      internalID: 2877471580529523173
       vertices: []
       indices: 
       edges: []
@@ -322,6 +326,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      ingame_grid_bg_01_b_1: 21300012
+      : 2877471580529523173
+      ingame_grid_bg_01_b_0: 21300010
+      ingame_grid_bg_01_b_2: 21300028
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

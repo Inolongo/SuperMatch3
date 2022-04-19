@@ -8,9 +8,14 @@ namespace UI.ScreenSystem.Screens
     {
         [SerializeField] private Button exitButton;
 
-        public override void OnShow()
+        public override void OnShown()
         {
             exitButton.onClick.AddListener(OnExitButtonClick);
+        }
+
+        public override void OnHidden()
+        {
+            
         }
 
         private void OnExitButtonClick()
@@ -18,12 +23,7 @@ namespace UI.ScreenSystem.Screens
            UISystem.Instance.Show<ConfirmationDialog>();
         }
 
-
-        public override void OnHide()
-        {
-        }
-
-        public override void OnClose()
+        public override void OnClosed()
         {
             exitButton.onClick.RemoveListener(Close);
         }

@@ -39,6 +39,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -47,9 +48,9 @@ TextureImporter:
   maxTextureSize: 256
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 1
     aniso: 16
-    mipBias: -100
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -262,6 +263,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      : 2877471580529523173
+      sprite_eye_atlas_02_0: 21300000
+      sprite_eye_atlas_02_1: 21300002
+      sprite_eye_atlas_02_3: 21300006
+      sprite_eye_atlas_02_2: 21300004
   spritePackingTag: InGame_0
   pSDRemoveMatte: 1
   pSDShowRemoveMatteOption: 1

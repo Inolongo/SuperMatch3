@@ -43,7 +43,7 @@ namespace UI.ScreenSystem
 
             var uiView = (T) Instantiate(viewToShow, RootViews);
             beforeShown?.Invoke(uiView);
-            uiView.OnShow();
+            uiView.OnShown();
             _showingView.Add(uiView);
 
             return uiView;
@@ -62,7 +62,7 @@ namespace UI.ScreenSystem
             if (_showingView.Count > 1)
             {
                 var previousView = _showingView.Last();
-                previousView.OnClose();
+                previousView.OnClosed();
                 Destroy(previousView.gameObject);
 
                 _showingView.Remove(previousView);
@@ -70,13 +70,13 @@ namespace UI.ScreenSystem
 
             var viewToShow = _showingView.Last();
             viewToShow.gameObject.SetActive(true);
-            viewToShow.OnShow();
+            viewToShow.OnShown();
         }
 
         protected override T Hide<T>(UIView viewToHide)
         {
             viewToHide.gameObject.SetActive(false);
-            viewToHide.OnHide();
+            viewToHide.OnHidden();
 
             return viewToHide as T;
         }

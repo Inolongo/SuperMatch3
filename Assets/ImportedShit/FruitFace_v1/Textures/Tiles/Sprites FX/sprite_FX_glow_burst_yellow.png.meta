@@ -99,6 +99,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -107,9 +108,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 1
     aniso: 0
-    mipBias: -100
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -688,6 +689,32 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      sprite_FX_glow_burst_yellow_2: 21300004
+      sprite_FX_glow_burst_yellow_5: 21300010
+      sprite_FX_glow_burst_yellow_6: 21300012
+      sprite_FX_glow_burst_yellow_12: 21300024
+      sprite_FX_glow_burst_yellow_18: 21300036
+      sprite_FX_glow_burst_yellow_16: 21300032
+      sprite_FX_glow_burst_yellow_15: 21300030
+      sprite_FX_glow_burst_yellow_13: 21300026
+      sprite_FX_glow_burst_yellow_14: 21300028
+      sprite_FX_glow_burst_yellow_24: 21300048
+      sprite_FX_glow_burst_yellow_0: 21300000
+      sprite_FX_glow_burst_yellow_17: 21300034
+      sprite_FX_glow_burst_yellow_21: 21300042
+      sprite_FX_glow_burst_yellow_22: 21300044
+      sprite_FX_glow_burst_yellow_19: 21300038
+      sprite_FX_glow_burst_yellow_9: 21300018
+      sprite_FX_glow_burst_yellow_23: 21300046
+      sprite_FX_glow_burst_yellow_1: 21300002
+      sprite_FX_glow_burst_yellow_3: 21300006
+      sprite_FX_glow_burst_yellow_8: 21300016
+      sprite_FX_glow_burst_yellow_7: 21300014
+      sprite_FX_glow_burst_yellow_4: 21300008
+      sprite_FX_glow_burst_yellow_10: 21300020
+      sprite_FX_glow_burst_yellow_20: 21300040
+      sprite_FX_glow_burst_yellow_11: 21300022
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

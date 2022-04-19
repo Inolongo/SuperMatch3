@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UI.ScreenSystem.Screens;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.DialogSystem
@@ -6,18 +7,22 @@ namespace UI.DialogSystem
     public class SettingsDialog: DialogBase
     {
         [SerializeField] private Button exitButton;
-        public override void OnShow()
+        
+        public override void OnShown()
         {
+            base.OnShown();
             exitButton.onClick.AddListener(Close);
         }
 
-        public override void OnHide()
+        public override void OnHidden()
         {
+            base.OnHidden();
             //UISystem.Instance.Close<SettingsDialog>();
         }
 
-        public override void OnClose()
+        public override void OnClosed()
         {
+            base.OnClosed();
             exitButton.onClick.RemoveListener(Close);
         }
 

@@ -69,6 +69,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -77,9 +78,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 1
     aniso: 16
-    mipBias: -100
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -484,6 +485,22 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      sprite_fruit_face_atlas_01_12: 21300024
+      sprite_fruit_face_atlas_01_4: 21300008
+      sprite_fruit_face_atlas_01_13: 21300026
+      sprite_fruit_face_atlas_01_10: 21300020
+      sprite_fruit_face_atlas_01_5: 21300010
+      sprite_fruit_face_atlas_01_2: 21300004
+      sprite_fruit_face_atlas_01_1: 21300002
+      sprite_fruit_face_atlas_01_9: 21300018
+      sprite_fruit_face_atlas_01_11: 21300022
+      sprite_fruit_face_atlas_01_0: 21300000
+      sprite_fruit_face_atlas_01_8: 21300016
+      sprite_fruit_face_atlas_01_6: 21300012
+      sprite_fruit_face_atlas_01_7: 21300014
+      sprite_fruit_face_atlas_01_14: 21300028
+      sprite_fruit_face_atlas_01_3: 21300006
   spritePackingTag: 
   pSDRemoveMatte: 1
   pSDShowRemoveMatteOption: 1

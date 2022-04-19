@@ -99,6 +99,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -107,9 +108,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 1
     aniso: 0
-    mipBias: -100
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -688,6 +689,32 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      sprite_FX_glow_burst_green_0: 21300000
+      sprite_FX_glow_burst_green_5: 21300010
+      sprite_FX_glow_burst_green_6: 21300012
+      sprite_FX_glow_burst_green_23: 21300046
+      sprite_FX_glow_burst_green_1: 21300002
+      sprite_FX_glow_burst_green_18: 21300036
+      sprite_FX_glow_burst_green_19: 21300038
+      sprite_FX_glow_burst_green_15: 21300030
+      sprite_FX_glow_burst_green_2: 21300004
+      sprite_FX_glow_burst_green_11: 21300022
+      sprite_FX_glow_burst_green_14: 21300028
+      sprite_FX_glow_burst_green_16: 21300032
+      sprite_FX_glow_burst_green_8: 21300016
+      sprite_FX_glow_burst_green_17: 21300034
+      sprite_FX_glow_burst_green_3: 21300006
+      sprite_FX_glow_burst_green_24: 21300048
+      sprite_FX_glow_burst_green_22: 21300044
+      sprite_FX_glow_burst_green_13: 21300026
+      sprite_FX_glow_burst_green_21: 21300042
+      sprite_FX_glow_burst_green_9: 21300018
+      sprite_FX_glow_burst_green_12: 21300024
+      sprite_FX_glow_burst_green_7: 21300014
+      sprite_FX_glow_burst_green_10: 21300020
+      sprite_FX_glow_burst_green_4: 21300008
+      sprite_FX_glow_burst_green_20: 21300040
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

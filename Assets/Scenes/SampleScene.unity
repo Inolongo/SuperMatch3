@@ -491,6 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040ab6e528224b27972bb896995b85de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationDuration: 2
 --- !u!4 &1904528128
 Transform:
   m_ObjectHideFlags: 0

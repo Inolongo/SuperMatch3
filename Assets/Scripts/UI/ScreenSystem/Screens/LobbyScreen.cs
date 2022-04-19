@@ -26,9 +26,9 @@ namespace UI.ScreenSystem.Screens
             swipe.MoveToPage(LobbyPageType.Home);
         }
 
-        public override void OnShow()
+        public override void OnShown()
         {
-            base.OnShow();
+            base.OnShown();
 
             InitializeFooter();
             InitializeLobbySwipe();
@@ -48,16 +48,16 @@ namespace UI.ScreenSystem.Screens
             UISystem.Instance.Show<GayplayScreen>();
         }
 
-        public override void OnClose()
+        public override void OnClosed()
         {
-            base.OnClose();
+            base.OnClosed();
             startButton.onClick.RemoveListener(OnStartButtonClick);
             settingsButton.onClick.RemoveListener(OnSettingsButtonClick);
         }
 
-        public override void OnHide()
+        public override void OnHidden()
         {
-            base.OnHide();
+            base.OnHidden();
             startButton.onClick.RemoveListener(OnStartButtonClick);
             settingsButton.onClick.RemoveListener(OnSettingsButtonClick);
 

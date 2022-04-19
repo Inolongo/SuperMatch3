@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
+using UI.AnimationSystem;
+using UI.ScreenSystem.Screens;
 using UnityEngine;
 
 namespace UI.DialogSystem
@@ -10,13 +13,15 @@ namespace UI.DialogSystem
         private const string DialogPrefabsPath = "Views/Dialogs";
         
         private List<DialogBase> _dialogPrefabs;
-        private readonly List<UIView> _showingView = new List<UIView>();
-
+        private readonly List<UIView> _showingView = new();
+        
         public override void Initialize(Transform rootViews)
         {
             base.Initialize(rootViews);
             
             _dialogPrefabs = Resources.LoadAll<DialogBase>(DialogPrefabsPath).ToList();
+            
+
         }
 
         public override T Show<T>(Action<UIView> beforeShown)
@@ -38,8 +43,11 @@ namespace UI.DialogSystem
             TryHideLastShownView();
 
             var uiView = (T) Instantiate(viewToShow, RootViews);
+            
             beforeShown?.Invoke(uiView);
-            uiView.OnShow();
+            uiView.OnShown();
+            uiView.ViewAnimator.StartOpenAnimation();
+
             _showingView.Add(uiView);
             
             return uiView;
@@ -54,8 +62,10 @@ namespace UI.DialogSystem
             
             var uiView = _showingView.Last();
             _showingView.Remove(uiView);
-            uiView.OnClose();
-            Destroy(uiView.gameObject);
+            
+            uiView.OnClosed();
+            uiView.ViewAnimator.StartCloseAnimationDimaHuiSosi();
+            uiView.ViewAnimator.CloseAnimationCompleted += () => { Destroy(uiView.gameObject); };
 
             TryShowLastHiddenView();
         }
@@ -65,7 +75,7 @@ namespace UI.DialogSystem
             if (_showingView.Count > 0)
             {
                 var uiView = _showingView.Last();
-                uiView.OnHide();
+                uiView.OnHidden();
                 uiView.gameObject.SetActive(false);
 
                 return true;
@@ -79,7 +89,7 @@ namespace UI.DialogSystem
             if (_showingView.Count > 0)
             {
                 var uiView = _showingView.Last();
-                uiView.OnShow();
+                uiView.OnShown();
                 uiView.gameObject.SetActive(true);
                 
                 return true;
@@ -91,7 +101,7 @@ namespace UI.DialogSystem
         protected override T Hide<T>(UIView viewToHide)
         {
             viewToHide.gameObject.SetActive(false);
-            viewToHide.OnHide();
+            viewToHide.OnHidden();
             
             return viewToHide as T;
         }

@@ -2,15 +2,16 @@
 {
     public class Screen: ScreenBase
     {
-        public override void OnShow()
+        public override void OnShown()
         {
         }
 
-        public override void OnHide()
+        public override void OnHidden()
         {
+            
         }
 
-        public override void OnClose()
+        public override void OnClosed()
         {
         }
 

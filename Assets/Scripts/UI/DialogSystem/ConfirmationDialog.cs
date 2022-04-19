@@ -9,11 +9,15 @@ namespace UI.DialogSystem
         [SerializeField] private Button closeButton;
         [SerializeField] private Button noButton;
         [SerializeField] private Button yesButton;
-        public override void OnShow()
+        public override void OnShown()
         {
             closeButton.onClick.AddListener(OnNoButtonClick);
             noButton.onClick.AddListener(OnNoButtonClick);
             yesButton.onClick.AddListener(OnExitButtonClick);
+        }
+
+        public override void OnHidden()
+        {
         }
 
         private void OnNoButtonClick()
@@ -27,12 +31,8 @@ namespace UI.DialogSystem
             UISystem.Instance.Close<GayplayScreen>();
         }
 
-        public override void OnHide()
-        {
-            
-        }
 
-        public override void OnClose()
+        public override void OnClosed()
         {
             closeButton.onClick.RemoveListener(OnExitButtonClick);
             yesButton.onClick.RemoveListener(OnExitButtonClick);
