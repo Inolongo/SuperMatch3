@@ -7,9 +7,6 @@ namespace Gayplay.GayplayGrid
 {
     public class GridController : MonoBehaviour
     {
-        private const int RowCount = 4;
-        private const int ColumnCount = 4;
-
         [SerializeField] private CellController cellPrefab;
         [SerializeField] private Transform cellContainer;
 

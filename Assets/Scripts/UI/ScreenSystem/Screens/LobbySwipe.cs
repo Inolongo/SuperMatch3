@@ -30,7 +30,7 @@ namespace UI.ScreenSystem.Screens
             _lobbySwipeSizeFitter.SetSwiperSize(screenRectTransform, _lobbySwipeRectTransform, PageCount);
             _pageWidth = _lobbySwipeRectTransform.rect.width / pageCount;
             _currentPage = LobbyPageType.Home;
-            _lastPagePosition = _lobbySwipeRectTransform.position;
+            _lastPagePosition = _lobbySwipeRectTransform.localPosition;
         }
 
         public void MoveToPage(LobbyPageType page)
@@ -96,7 +96,7 @@ namespace UI.ScreenSystem.Screens
 
         private void OnMoveToPageComplete()
         {
-            _lastPagePosition = _lobbySwipeRectTransform.position;
+            _lastPagePosition = _lobbySwipeRectTransform.localPosition;
         }
 
         public void OnBeginDrag(PointerEventData eventData)
