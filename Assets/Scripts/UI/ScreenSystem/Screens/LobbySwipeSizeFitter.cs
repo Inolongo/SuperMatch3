@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace UI.ScreenSystem.Screens
 {
     [RequireComponent(typeof(RectTransform))]
-    [ExecuteInEditMode]
-    public class LobbySwipeSizeFitter : UIBehaviour
+    public class LobbySwipeSizeFitter : MonoBehaviour
     {
         public void SetSwiperSize(RectTransform screen,  RectTransform lobbySwipeRectTransform, int allPagesCount)
         {
