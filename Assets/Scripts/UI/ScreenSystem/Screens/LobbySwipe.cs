@@ -49,7 +49,7 @@ namespace UI.ScreenSystem.Screens
             }
             else
             {
-                _moveToPageTween = _lobbySwipeRectTransform.DOMove(_lastPagePosition, swipeDuration);
+                _moveToPageTween = _lobbySwipeRectTransform.DOLocalMove(_lastPagePosition, swipeDuration);
             }
         }
 
@@ -102,7 +102,7 @@ namespace UI.ScreenSystem.Screens
         public void OnBeginDrag(PointerEventData eventData)
         {
             _swipeStartPositionX = eventData.position.x;
-            _distanceBetweenRectAndDragX = _swipeStartPositionX - _lobbySwipeRectTransform.position.x;
+            _distanceBetweenRectAndDragX = _swipeStartPositionX - _lobbySwipeRectTransform.localPosition.x;
         }
 
         public void OnDrag(PointerEventData eventData)
