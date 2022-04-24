@@ -11,6 +11,8 @@ namespace UI.DialogSystem
         [SerializeField] private Button yesButton;
         public override void OnShown()
         {
+            base.OnShown();
+            
             closeButton.onClick.AddListener(OnNoButtonClick);
             noButton.onClick.AddListener(OnNoButtonClick);
             yesButton.onClick.AddListener(OnExitButtonClick);

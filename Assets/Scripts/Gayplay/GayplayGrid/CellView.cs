@@ -9,21 +9,18 @@ namespace Gayplay.GayplayGrid
     {
         [SerializeField] private Image icon;
         [SerializeField] private Image face;
-
-        private CanvasGroup _canvasGroup;
+        
+        private RectTransform _rectTransform;
 
         private void Awake()
         {
-            _canvasGroup = GetComponent<CanvasGroup>();
+            _rectTransform = GetComponent<RectTransform>();
         }
-        public void Init(CellDataModel cellDataModel)
+        public void Init(CellDataModel cellDataModel, RectTransform decoyRectTransform)
         {
-            if (!cellDataModel.IsActive)
-            {
-                _canvasGroup.alpha = 0;
-                _canvasGroup.interactable = false;
-            }
-
+            _rectTransform.offsetMax = new Vector2( decoyRectTransform.rect.width / 2, decoyRectTransform.rect.height / 2);
+            _rectTransform.offsetMin = new Vector2( -decoyRectTransform.rect.width / 2, -decoyRectTransform.rect.height / 2);
+            _rectTransform.localPosition = decoyRectTransform.localPosition;
             icon.sprite = cellDataModel.PieceIcon;
             face.sprite = cellDataModel.PieceFace;
         }
