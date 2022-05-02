@@ -12,8 +12,6 @@ namespace Gayplay.Data
         
         public List<CellDataModel> CellModels => cellModels;
         public List<IsActiveCellRow> IsActiveCellRows => isActiveCellsLevel;
-
-
     }
     
     [Serializable]

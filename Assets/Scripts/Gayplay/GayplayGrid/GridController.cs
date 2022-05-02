@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DG.Tweening;
 using Gayplay.Data;
 using UnityEngine;
 using Random = System.Random;
@@ -13,14 +14,14 @@ namespace Gayplay.GayplayGrid
         [SerializeField] private Transform cellContainer;
         [SerializeField] private Transform decoyGrid;
 
-        private PiecesData data;
+        private PiecesData _data;
 
-        private readonly Dictionary<int, List<CellController>> _gridRowCells =
-            new Dictionary<int, List<CellController>>();
+        private readonly Dictionary<int, List<CellController>> _gridRowCells = new();
 
         private readonly Dictionary<int, List<RectTransform>> _decoyDictionary = new();
 
-        private readonly Random _random = new Random();
+        private readonly Random _random = new();
+        private Tweener _doLocalMove;
 
         private void Start()
         {
@@ -49,15 +50,15 @@ namespace Gayplay.GayplayGrid
 
         private void InitData()
         {
-            data = Resources.Load<PiecesData>("GameplayData/FirstLevel");
+            _data = Resources.Load<PiecesData>("GameplayData/FirstLevel");
         }
 
         private void CreateGrid()
         {
-            var rowCount = data.IsActiveCellRows.Count;
+            var rowCount = _data.IsActiveCellRows.Count;
             for (var rowNum = 0; rowNum < rowCount; rowNum++)
             {
-                var columnCount = data.IsActiveCellRows[rowNum].Row.Count;
+                var columnCount = _data.IsActiveCellRows[rowNum].Row.Count;
                 var createdCells = new List<CellController>(columnCount);
 
                 for (var columnNum = 0; columnNum < columnCount; columnNum++)
@@ -67,12 +68,13 @@ namespace Gayplay.GayplayGrid
 
                     if (IsSafeHorizontal(createdCells, randomModel.CellType) && IsSafeVertical(randomModel))
                     {
-                        if (GetIsCellActive(rowNum, columnNum, data.IsActiveCellRows))
+                        if (GetIsCellActive(rowNum, columnNum, _data.IsActiveCellRows))
                         {
                             var decoyRectTransform = _decoyDictionary[rowNum][columnNum];
                             var piece = Instantiate(cellPrefab, cellContainer);
                             piece.Init(randomModel, decoyRectTransform);
                             createdCells.Add(piece);
+                            piece.name = "piece " + "R: " + rowNum + "C: " + columnNum;
 
                             piece.CellSwiped += OnCellSwiped;
                         }
@@ -93,38 +95,29 @@ namespace Gayplay.GayplayGrid
             switch (swipeDirection)
             {
                 case SwipeDirection.Up:
-                    if (rowNum > 1)
-                    {
-                        var ukeCell = GetCell(rowNum - 1, columnNum);
-                        SwipeCells(semeCell, ukeCell);
-                    }
-                    
+                {
+                    var ukeCell = GetCell(rowNum - 1, columnNum);
+                    SwipeCells(semeCell, ukeCell);
                     break;
+                }
                 case SwipeDirection.Down:
-                    if (rowNum < _gridRowCells.Count - 1)
-                    {
-                        var ukeCell = GetCell(rowNum + 1, columnNum);
-                        SwipeCells(semeCell, ukeCell);
-
-                    }
+                {
+                    var ukeCell = GetCell(rowNum + 1, columnNum);
+                    SwipeCells(semeCell, ukeCell);
                     break;
+                }
                 case SwipeDirection.Left:
-
-                    if (columnNum > 1)
-                    {
-                        var ukeCell = GetCell(rowNum, columnNum - 1);
-                        SwipeCells(semeCell, ukeCell);
-
-                    }
+                {
+                    var ukeCell = GetCell(rowNum, columnNum - 1);
+                    SwipeCells(semeCell, ukeCell);
                     break;
+                }
                 case SwipeDirection.Right:
-                    if (columnNum < _gridRowCells[rowNum].Count - 1)
-                    {
-                        var ukeCell = GetCell(rowNum, columnNum + 1);
-                        SwipeCells(semeCell, ukeCell);
-                    }
-                    
+                {
+                    var ukeCell = GetCell(rowNum, columnNum + 1);
+                    SwipeCells(semeCell, ukeCell);
                     break;
+                }
                 default:
                     throw new ArgumentOutOfRangeException(nameof(swipeDirection), swipeDirection, null);
             }
@@ -145,42 +138,164 @@ namespace Gayplay.GayplayGrid
             throw new Exception("no bitches???");
         }
 
+        //ToDo: fix list bugs there is some shit
         private void SwipeCells(CellController semeCell, CellController ukeCell)
         {
-            var tempPosition = ukeCell.transform.localPosition;
             var semeRow = _gridRowCells[semeCell.CellDataModel.RowColumnPair.RowNum];
             var ukeRow = _gridRowCells[ukeCell.CellDataModel.RowColumnPair.RowNum];
 
-            for (var i = 0; i < semeRow.Count; i++)
+            var tempUke = ukeCell.CellDataModel.RowColumnPair;
+            ukeCell.CellDataModel.ChangeRowColumn(semeCell.CellDataModel.RowColumnPair);
+            semeCell.CellDataModel.ChangeRowColumn(tempUke);
+
+            var semeIndex = semeRow.IndexOf(semeCell);
+            var ukeIndex = ukeRow.IndexOf(ukeCell);
+
+            semeRow.Remove(semeCell);
+            semeRow.Insert(semeIndex, ukeCell);
+
+            ukeRow.Remove(ukeCell);
+            ukeRow.Insert(ukeIndex, semeCell);
+            
+            var tempPosition = ukeCell.transform.localPosition;
+            
+            ukeCell.transform.DOLocalMove(semeCell.transform.localPosition, 0.2f);
+            _doLocalMove = semeCell.transform.DOLocalMove(tempPosition, 0.2f);
+            _doLocalMove.onComplete += () => OnCellSwipeMoveComplete(semeCell, ukeCell);
+        }
+
+        private void OnCellSwipeMoveComplete(CellController semeCell, CellController ukeCell)
+        {
+            if (TryMatch(semeCell, out var matchedCells))
             {
-                if (semeRow[i].CellDataModel.RowColumnPair.ColumnNum == semeCell.CellDataModel.RowColumnPair.ColumnNum)
+                foreach (var rowColumnPair in matchedCells)
                 {
-                    for (var j = 0; j < ukeRow.Count; j++)
+                    Destroy(_gridRowCells[rowColumnPair.RowNum][rowColumnPair.ColumnNum].gameObject);
+                }
+            }
+            else
+            {
+                var tempPosition = ukeCell.transform.localPosition;
+
+                ukeCell.transform.DOLocalMove(semeCell.transform.localPosition, 0.2f);
+                _doLocalMove = semeCell.transform.DOLocalMove(tempPosition, 0.2f);
+            }
+        }
+
+
+        private bool TryMatch(CellController semeCell, out List<RowColumnPair> matchedCells)
+        {
+            matchedCells = new List<RowColumnPair>();
+            var horizontalMatch = GetSameNearHorizontalCells(semeCell);
+            if (horizontalMatch.Count >= 2)
+            {
+                matchedCells.AddRange(horizontalMatch);
+            }
+
+            var verticalMatch = GetSameNearVerticalCells(semeCell);
+            if (verticalMatch.Count >= 2)
+            {
+                matchedCells.AddRange(verticalMatch);
+            }
+
+            return matchedCells.Count != 0;
+        }
+
+
+        private List<RowColumnPair> GetSameNearHorizontalCells(CellController semeCell)
+        {
+            var columnNum = semeCell.CellDataModel.RowColumnPair.ColumnNum;
+            var rowNum = semeCell.CellDataModel.RowColumnPair.RowNum;
+            var row = _gridRowCells[rowNum];
+            
+            List<RowColumnPair> potancevalnyList = new();
+            
+            for (int i = columnNum + 1; i < row.Count; i++)
+            {
+                if (row[i].CellDataModel.CellType == semeCell.CellType)
+                {
+                    potancevalnyList.Add(row[i].CellDataModel.RowColumnPair);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            for (int i = columnNum -1 ; i > 0; i--)
+            {
+                if (row[i].CellDataModel.CellType == semeCell.CellType)
+                {
+                    potancevalnyList.Add(row[i].CellDataModel.RowColumnPair);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return potancevalnyList;
+        }
+
+
+        private List<RowColumnPair> GetSameNearVerticalCells(CellController semeCell)
+        {
+            var columnNum = semeCell.CellDataModel.RowColumnPair.ColumnNum;
+            var rowNum = semeCell.CellDataModel.RowColumnPair.RowNum;
+            var columnList = GetColumnList(columnNum);
+            List<RowColumnPair> potancevalnyList = new();
+            
+            for (int i = rowNum; i < columnList.Count; i++)
+            {
+                if (columnList[i].CellDataModel.CellType == semeCell.CellType)
+                {
+                    potancevalnyList.Add(columnList[i].CellDataModel.RowColumnPair);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            for (int i = rowNum -1 ; i > 0; i--)
+            {
+                if (columnList[i].CellDataModel.CellType == semeCell.CellType)
+                {
+                    potancevalnyList.Add(columnList[i].CellDataModel.RowColumnPair);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return potancevalnyList;
+
+        }
+
+
+        private List<CellController> GetColumnList(int columnNum)
+        {
+            List<CellController> columnList = new(); 
+            foreach (var key in _gridRowCells.Keys)
+            {
+                foreach (var value in _gridRowCells[key])
+                {
+                    if (value.CellDataModel.RowColumnPair.ColumnNum == columnNum)
                     {
-                        var uke = ukeRow[j];
-                        if (uke.CellDataModel.RowColumnPair.ColumnNum == ukeCell.CellDataModel.RowColumnPair.ColumnNum)
-                        {
-                            var tempUke = uke.CellDataModel.RowColumnPair;
-                            uke.CellDataModel.ChangeRowColumn(semeCell.CellDataModel.RowColumnPair);
-                            semeCell.CellDataModel.ChangeRowColumn(ukeCell.CellDataModel.RowColumnPair);
-                            
-                            (semeRow[i], ukeRow[j]) = (ukeRow[j], semeRow[i]);
-                            
-                        }
+                        columnList.Add(value);
+                        break;
                     }
                 }
             }
 
-            semeCell.transform.localPosition = ukeCell.transform.localPosition;
-            ukeCell.transform.localPosition = tempPosition;
+            return columnList;
         }
 
         private void CreateGridDecoy()
         {
-            var rowCount = data.IsActiveCellRows.Count;
+            var rowCount = _data.IsActiveCellRows.Count;
             for (var rowNum = 0; rowNum < rowCount; rowNum++)
             {
-                var columnCount = data.IsActiveCellRows[rowNum].Row.Count;
+                var columnCount = _data.IsActiveCellRows[rowNum].Row.Count;
                 var createdCells = new List<RectTransform>(columnCount);
                 for (var columnNum = 0; columnNum < columnCount; columnNum++)
                 {
@@ -202,14 +317,15 @@ namespace Gayplay.GayplayGrid
 
         private CellDataModel GetRandomModel()
         {
-            var randomIndex = _random.Next(0, data.CellModels.Count);
-            return data.CellModels[randomIndex];
+            var randomIndex = _random.Next(0, _data.CellModels.Count);
+            var foundModel = _data.CellModels[randomIndex];
+            return new CellDataModel(foundModel.PieceIcon, foundModel.PieceFace, foundModel.CellType, foundModel.RowColumnPair);
         }
 
         private bool IsSafeHorizontal(List<CellController> createdCells, CellType typeCellToCreat)
         {
             var count = createdCells.Count;
-            if (count <= 2) return true;
+            if (count < 2) return true;
 
             if (createdCells[count - 1].CellType == typeCellToCreat)
             {
@@ -226,7 +342,7 @@ namespace Gayplay.GayplayGrid
         {
             if (cellModelToCreat.RowColumnPair.RowNum <= 1) return true;
 
-            CellDataModel lastCellMode = default;
+            CellDataModel lastCellMode = null;
 
             foreach (var cellController in _gridRowCells[cellModelToCreat.RowColumnPair.RowNum - 1])
             {
@@ -236,6 +352,11 @@ namespace Gayplay.GayplayGrid
 
                     break;
                 }
+            }
+
+            if (lastCellMode == null)
+            {
+                return true;
             }
 
             if (lastCellMode.CellType != cellModelToCreat.CellType) return true;

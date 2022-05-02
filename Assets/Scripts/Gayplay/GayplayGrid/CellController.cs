@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace Gayplay.GayplayGrid
 {
-    public class CellController : MonoBehaviour, IDragHandler,IBeginDragHandler, IEndDragHandler
+    public class CellController : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
         [SerializeField] private CellView cellView;
 
@@ -35,37 +35,43 @@ namespace Gayplay.GayplayGrid
 
             var horizontalSwipe = _swipeEndPosition.x - _swipeStartPosition.x;
             var verticalSwipe = _swipeEndPosition.y - _swipeStartPosition.y;
-
-            switch (verticalSwipe)
+            if (Math.Abs(horizontalSwipe) < 10)
             {
-                case > 0:
-                    CellSwiped?.Invoke(SwipeDirection.Up, CellDataModel.RowColumnPair.RowNum, CellDataModel.RowColumnPair.ColumnNum);
-                    break;
-                case < 0:
-                    CellSwiped?.Invoke(SwipeDirection.Down, CellDataModel.RowColumnPair.RowNum, CellDataModel.RowColumnPair.ColumnNum);
-                    break;
+                switch (verticalSwipe)
+                {
+                    case > 0:
+                        CellSwiped?.Invoke(SwipeDirection.Up, CellDataModel.RowColumnPair.RowNum,
+                            CellDataModel.RowColumnPair.ColumnNum);
+                        break;
+                    case < 0:
+                        CellSwiped?.Invoke(SwipeDirection.Down, CellDataModel.RowColumnPair.RowNum,
+                            CellDataModel.RowColumnPair.ColumnNum);
+                        break;
+                }
             }
 
-            switch (horizontalSwipe)
+            if (Math.Abs(verticalSwipe) < 10)
             {
-                case < 0:
-                    CellSwiped?.Invoke(SwipeDirection.Left, CellDataModel.RowColumnPair.RowNum, CellDataModel.RowColumnPair.ColumnNum);
-                    break;
-                case > 0:
-                    CellSwiped?.Invoke(SwipeDirection.Right, CellDataModel.RowColumnPair.RowNum, CellDataModel.RowColumnPair.ColumnNum);
-                    break;
+                switch (horizontalSwipe)
+                {
+                    case < 0:
+                        CellSwiped?.Invoke(SwipeDirection.Left, CellDataModel.RowColumnPair.RowNum,
+                            CellDataModel.RowColumnPair.ColumnNum);
+                        break;
+                    case > 0:
+                        CellSwiped?.Invoke(SwipeDirection.Right, CellDataModel.RowColumnPair.RowNum,
+                            CellDataModel.RowColumnPair.ColumnNum);
+                        break;
+                }
             }
         }
 
         public void SwipeCell(Enum swipeDirection)
         {
-            
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            
-            
         }
     }
 }

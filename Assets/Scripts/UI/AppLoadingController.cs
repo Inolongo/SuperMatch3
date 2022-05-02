@@ -15,6 +15,7 @@ namespace UI
             _apiController = new APIController();
             uiSystem.Initialize();
             LoadApplication();
+            Application.targetFrameRate = 60;
         }
 
         private void LoadApplication()

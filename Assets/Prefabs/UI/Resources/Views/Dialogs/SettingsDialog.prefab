@@ -52,10 +52,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a12fa7fac52e7d4796032f4e02cf3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDuration: 3
+  animationDuration: 0.5
   contentToAnimation: {fileID: 5989565882164852569}
-  openingCurve: 24
-  endingCurve: 24
+  openingCurve: 27
+  endingCurve: 26
 --- !u!114 &3528466017759662772
 MonoBehaviour:
   m_ObjectHideFlags: 0

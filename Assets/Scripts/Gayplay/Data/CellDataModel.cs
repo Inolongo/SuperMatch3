@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Gayplay.Data
 {
     [Serializable]
-    public struct CellDataModel
+    public class CellDataModel
     {
         [SerializeField] private Sprite pieceIcon;
         [SerializeField] private Sprite pieceFace;
@@ -24,6 +24,14 @@ namespace Gayplay.Data
         
         public void ChangeRowColumn(RowColumnPair rowColumnPair)
         {
+            RowColumnPair = new RowColumnPair(rowColumnPair);
+        }
+
+        public CellDataModel(Sprite pieceIcon, Sprite pieceFace, CellType cellType, RowColumnPair rowColumnPair)
+        {
+            this.pieceIcon = pieceIcon;
+            this.pieceFace = pieceFace;
+            this.cellType = cellType;
             RowColumnPair = new RowColumnPair(rowColumnPair);
         }
     }
