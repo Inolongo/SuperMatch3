@@ -35,7 +35,9 @@ namespace Gayplay.GayplayGrid
 
             var horizontalSwipe = _swipeEndPosition.x - _swipeStartPosition.x;
             var verticalSwipe = _swipeEndPosition.y - _swipeStartPosition.y;
-            if (Math.Abs(horizontalSwipe) < 10)
+            Debug.Log("verticalSwipe" + verticalSwipe);
+            Debug.Log("horizontalSwipe" + horizontalSwipe);
+            if (Math.Abs(verticalSwipe) - Math.Abs(horizontalSwipe) > 20)
             {
                 switch (verticalSwipe)
                 {
@@ -50,7 +52,7 @@ namespace Gayplay.GayplayGrid
                 }
             }
 
-            if (Math.Abs(verticalSwipe) < 10)
+            if (Math.Abs(verticalSwipe) - Math.Abs(horizontalSwipe) < -20)
             {
                 switch (horizontalSwipe)
                 {
@@ -72,6 +74,11 @@ namespace Gayplay.GayplayGrid
 
         public void OnDrag(PointerEventData eventData)
         {
+        }
+
+        public void DeleteCell()
+        {
+            GetComponent<CanvasGroup>().alpha = 0;
         }
     }
 }

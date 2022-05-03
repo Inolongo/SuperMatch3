@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Gayplay.Data;
@@ -92,6 +93,7 @@ namespace Gayplay.GayplayGrid
         private void OnCellSwiped(SwipeDirection swipeDirection, int rowNum, int columnNum)
         {
             var semeCell = GetCell(rowNum, columnNum);
+            Debug.Log("OnCellSwiped dir " +swipeDirection);
             switch (swipeDirection)
             {
                 case SwipeDirection.Up:
@@ -141,6 +143,7 @@ namespace Gayplay.GayplayGrid
         //ToDo: fix list bugs there is some shit
         private void SwipeCells(CellController semeCell, CellController ukeCell)
         {
+            Debug.Log("zaletel v SwipeCells");
             var semeRow = _gridRowCells[semeCell.CellDataModel.RowColumnPair.RowNum];
             var ukeRow = _gridRowCells[ukeCell.CellDataModel.RowColumnPair.RowNum];
 
@@ -156,9 +159,9 @@ namespace Gayplay.GayplayGrid
 
             ukeRow.Remove(ukeCell);
             ukeRow.Insert(ukeIndex, semeCell);
-            
+
             var tempPosition = ukeCell.transform.localPosition;
-            
+
             ukeCell.transform.DOLocalMove(semeCell.transform.localPosition, 0.2f);
             _doLocalMove = semeCell.transform.DOLocalMove(tempPosition, 0.2f);
             _doLocalMove.onComplete += () => OnCellSwipeMoveComplete(semeCell, ukeCell);
@@ -170,7 +173,14 @@ namespace Gayplay.GayplayGrid
             {
                 foreach (var rowColumnPair in matchedCells)
                 {
-                    Destroy(_gridRowCells[rowColumnPair.RowNum][rowColumnPair.ColumnNum].gameObject);
+                    var gridRowCell = _gridRowCells[rowColumnPair.RowNum];
+                    foreach (var cellController in gridRowCell)
+                    {
+                        if (cellController.CellDataModel.RowColumnPair.ColumnNum == rowColumnPair.ColumnNum)
+                        {
+                            cellController.DeleteCell();
+                        }
+                    }
                 }
             }
             else
@@ -198,20 +208,26 @@ namespace Gayplay.GayplayGrid
                 matchedCells.AddRange(verticalMatch);
             }
 
-            return matchedCells.Count != 0;
+            matchedCells.Add(semeCell.CellDataModel.RowColumnPair);
+
+            return matchedCells.Count > 1;
         }
 
 
         private List<RowColumnPair> GetSameNearHorizontalCells(CellController semeCell)
         {
-            var columnNum = semeCell.CellDataModel.RowColumnPair.ColumnNum;
             var rowNum = semeCell.CellDataModel.RowColumnPair.RowNum;
             var row = _gridRowCells[rowNum];
-            
+
+            var columnCount = row[row.Count - 1].CellDataModel.RowColumnPair.ColumnNum;
+            var semeIndex = row.IndexOf(semeCell);
+
+
             List<RowColumnPair> potancevalnyList = new();
-            
-            for (int i = columnNum + 1; i < row.Count; i++)
+            for (int i = semeIndex + 1; i < columnCount; i++)
             {
+                if (i >= row.Count) break;
+
                 if (row[i].CellDataModel.CellType == semeCell.CellType)
                 {
                     potancevalnyList.Add(row[i].CellDataModel.RowColumnPair);
@@ -221,7 +237,8 @@ namespace Gayplay.GayplayGrid
                     break;
                 }
             }
-            for (int i = columnNum -1 ; i > 0; i--)
+
+            for (int i = semeIndex - 1; i >= 0; i--)
             {
                 if (row[i].CellDataModel.CellType == semeCell.CellType)
                 {
@@ -243,9 +260,15 @@ namespace Gayplay.GayplayGrid
             var rowNum = semeCell.CellDataModel.RowColumnPair.RowNum;
             var columnList = GetColumnList(columnNum);
             List<RowColumnPair> potancevalnyList = new();
-            
-            for (int i = rowNum; i < columnList.Count; i++)
+            var semeIndex = columnList.IndexOf(semeCell);
+            var rowCount = columnList[columnList.Count - 1].CellDataModel.RowColumnPair.RowNum;
+
+            for (int i = semeIndex + 1; i < rowCount; i++)
             {
+                if (i >= columnList.Count - 1 )
+                {
+                    break;
+                }
                 if (columnList[i].CellDataModel.CellType == semeCell.CellType)
                 {
                     potancevalnyList.Add(columnList[i].CellDataModel.RowColumnPair);
@@ -255,7 +278,9 @@ namespace Gayplay.GayplayGrid
                     break;
                 }
             }
-            for (int i = rowNum -1 ; i > 0; i--)
+
+
+            for (int i = semeIndex - 1; i >= 0; i--)
             {
                 if (columnList[i].CellDataModel.CellType == semeCell.CellType)
                 {
@@ -268,13 +293,12 @@ namespace Gayplay.GayplayGrid
             }
 
             return potancevalnyList;
-
         }
 
 
         private List<CellController> GetColumnList(int columnNum)
         {
-            List<CellController> columnList = new(); 
+            List<CellController> columnList = new();
             foreach (var key in _gridRowCells.Keys)
             {
                 foreach (var value in _gridRowCells[key])
@@ -319,7 +343,8 @@ namespace Gayplay.GayplayGrid
         {
             var randomIndex = _random.Next(0, _data.CellModels.Count);
             var foundModel = _data.CellModels[randomIndex];
-            return new CellDataModel(foundModel.PieceIcon, foundModel.PieceFace, foundModel.CellType, foundModel.RowColumnPair);
+            return new CellDataModel(foundModel.PieceIcon, foundModel.PieceFace, foundModel.CellType,
+                foundModel.RowColumnPair);
         }
 
         private bool IsSafeHorizontal(List<CellController> createdCells, CellType typeCellToCreat)
