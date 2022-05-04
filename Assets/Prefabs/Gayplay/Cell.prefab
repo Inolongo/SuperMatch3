@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellView: {fileID: 989012282773525263}
+  func: 26
 --- !u!225 &7182475558281793217
 CanvasGroup:
   m_ObjectHideFlags: 0

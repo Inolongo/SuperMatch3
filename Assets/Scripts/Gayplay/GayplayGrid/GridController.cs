@@ -143,23 +143,23 @@ namespace Gayplay.GayplayGrid
         //ToDo: fix list bugs there is some shit
         private void SwipeCells(CellController semeCell, CellController ukeCell)
         {
-            Debug.Log("zaletel v SwipeCells");
-            var semeRow = _gridRowCells[semeCell.CellDataModel.RowColumnPair.RowNum];
-            var ukeRow = _gridRowCells[ukeCell.CellDataModel.RowColumnPair.RowNum];
-
-            var tempUke = ukeCell.CellDataModel.RowColumnPair;
-            ukeCell.CellDataModel.ChangeRowColumn(semeCell.CellDataModel.RowColumnPair);
-            semeCell.CellDataModel.ChangeRowColumn(tempUke);
-
-            var semeIndex = semeRow.IndexOf(semeCell);
-            var ukeIndex = ukeRow.IndexOf(ukeCell);
-
-            semeRow.Remove(semeCell);
-            semeRow.Insert(semeIndex, ukeCell);
-
-            ukeRow.Remove(ukeCell);
-            ukeRow.Insert(ukeIndex, semeCell);
-
+            // Debug.Log("zaletel v SwipeCells");
+            // var semeRow = _gridRowCells[semeCell.CellDataModel.RowColumnPair.RowNum];
+            // var ukeRow = _gridRowCells[ukeCell.CellDataModel.RowColumnPair.RowNum];
+            //
+            // var tempUke = ukeCell.CellDataModel.RowColumnPair;
+            // ukeCell.CellDataModel.ChangeRowColumn(semeCell.CellDataModel.RowColumnPair);
+            // semeCell.CellDataModel.ChangeRowColumn(tempUke);
+            //
+            // var semeIndex = semeRow.IndexOf(semeCell);
+            // var ukeIndex = ukeRow.IndexOf(ukeCell);
+            //
+            // semeRow.Remove(semeCell);
+            // semeRow.Insert(semeIndex, ukeCell);
+            //
+            // ukeRow.Remove(ukeCell);
+            // ukeRow.Insert(ukeIndex, semeCell);
+            ChangeCellsLists(semeCell, ukeCell);
             var tempPosition = ukeCell.transform.localPosition;
 
             ukeCell.transform.DOLocalMove(semeCell.transform.localPosition, 0.2f);
@@ -169,7 +169,7 @@ namespace Gayplay.GayplayGrid
 
         private void OnCellSwipeMoveComplete(CellController semeCell, CellController ukeCell)
         {
-            if (TryMatch(semeCell, out var matchedCells))
+            if (TryMatch(semeCell, ukeCell, out var matchedCells))
             {
                 foreach (var rowColumnPair in matchedCells)
                 {
@@ -185,6 +185,8 @@ namespace Gayplay.GayplayGrid
             }
             else
             {
+                ChangeCellsLists(semeCell, ukeCell);
+
                 var tempPosition = ukeCell.transform.localPosition;
 
                 ukeCell.transform.DOLocalMove(semeCell.transform.localPosition, 0.2f);
@@ -192,25 +194,56 @@ namespace Gayplay.GayplayGrid
             }
         }
 
+        private void ChangeCellsLists(CellController semeCell, CellController ukeCell)
+        {
+            var semeRow = _gridRowCells[semeCell.CellDataModel.RowColumnPair.RowNum];
+            var ukeRow = _gridRowCells[ukeCell.CellDataModel.RowColumnPair.RowNum];
 
-        private bool TryMatch(CellController semeCell, out List<RowColumnPair> matchedCells)
+            var tempUke = ukeCell.CellDataModel.RowColumnPair;
+            ukeCell.CellDataModel.ChangeRowColumn(semeCell.CellDataModel.RowColumnPair);
+            semeCell.CellDataModel.ChangeRowColumn(tempUke);
+
+            var semeIndex = semeRow.IndexOf(semeCell);
+            var ukeIndex = ukeRow.IndexOf(ukeCell);
+
+            semeRow.Remove(semeCell);
+            semeRow.Insert(semeIndex, ukeCell);
+
+            ukeRow.Remove(ukeCell);
+            ukeRow.Insert(ukeIndex, semeCell);
+        }
+
+
+        private bool TryMatch(CellController semeCell, CellController ukeCell, out List<RowColumnPair> matchedCells)
         {
             matchedCells = new List<RowColumnPair>();
-            var horizontalMatch = GetSameNearHorizontalCells(semeCell);
+            matchedCells.AddRange(GetMatchedList(semeCell));
+            matchedCells.AddRange(GetMatchedList(ukeCell));
+            
+            return matchedCells.Count > 1;
+        }
+
+        private List<RowColumnPair> GetMatchedList(CellController cell)
+        {
+            var matchedCells = new List<RowColumnPair>();
+            var horizontalMatch = GetSameNearHorizontalCells(cell);
             if (horizontalMatch.Count >= 2)
             {
                 matchedCells.AddRange(horizontalMatch);
             }
 
-            var verticalMatch = GetSameNearVerticalCells(semeCell);
+            var verticalMatch = GetSameNearVerticalCells(cell);
             if (verticalMatch.Count >= 2)
             {
                 matchedCells.AddRange(verticalMatch);
             }
 
-            matchedCells.Add(semeCell.CellDataModel.RowColumnPair);
+            if (matchedCells.Count > 0)
+            {
+                matchedCells.Add(cell.CellDataModel.RowColumnPair);
+            }
 
-            return matchedCells.Count > 1;
+            return matchedCells;
         }
 
 
@@ -224,7 +257,7 @@ namespace Gayplay.GayplayGrid
 
 
             List<RowColumnPair> potancevalnyList = new();
-            for (int i = semeIndex + 1; i < columnCount; i++)
+            for (int i = semeIndex + 1; i <= columnCount; i++)
             {
                 if (i >= row.Count) break;
 
@@ -263,9 +296,9 @@ namespace Gayplay.GayplayGrid
             var semeIndex = columnList.IndexOf(semeCell);
             var rowCount = columnList[columnList.Count - 1].CellDataModel.RowColumnPair.RowNum;
 
-            for (int i = semeIndex + 1; i < rowCount; i++)
+            for (int i = semeIndex + 1; i <= rowCount; i++)
             {
-                if (i >= columnList.Count - 1 )
+                if (i >= columnList.Count)
                 {
                     break;
                 }

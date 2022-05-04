@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using Gayplay.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,6 +9,7 @@ namespace Gayplay.GayplayGrid
     public class CellController : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
         [SerializeField] private CellView cellView;
+        [SerializeField] private Ease func;
 
         public CellType CellType => CellDataModel.CellType;
 
@@ -78,7 +80,7 @@ namespace Gayplay.GayplayGrid
 
         public void DeleteCell()
         {
-            GetComponent<CanvasGroup>().alpha = 0;
+            transform.DOScale(Vector3.zero, 0.2f).SetEase(func);
         }
     }
 }
