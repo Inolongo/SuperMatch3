@@ -39,3 +39,5 @@ Analytics/*.tsv
 remote_config_data
 TableStates/
 .DS_Store
+
+*.apk
