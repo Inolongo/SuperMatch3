@@ -81,6 +81,7 @@ namespace Gayplay.GayplayGrid
         public void DeleteCell()
         {
             transform.DOScale(Vector3.zero, 0.2f).SetEase(func);
+            
         }
     }
 }

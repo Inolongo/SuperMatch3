@@ -368,69 +368,71 @@ extern void GridController_GetCell_m40E8D4037C9D0807033686095812BF50AB153F50 (vo
 extern void GridController_SwipeCells_mF7556B682C66EA76EFD55D1458C6606EC1E7D476 (void);
 // 0x000000C0 System.Void Gayplay.GayplayGrid.GridController::OnCellSwipeMoveComplete(Gayplay.GayplayGrid.CellController,Gayplay.GayplayGrid.CellController)
 extern void GridController_OnCellSwipeMoveComplete_m9D5116DF7D0F39158228585F51E8FDAC1C24E146 (void);
-// 0x000000C1 System.Boolean Gayplay.GayplayGrid.GridController::TryMatch(Gayplay.GayplayGrid.CellController,Gayplay.GayplayGrid.CellController,System.Collections.Generic.List`1<Gayplay.Data.RowColumnPair>&)
+// 0x000000C1 System.Void Gayplay.GayplayGrid.GridController::ChangeCellsLists(Gayplay.GayplayGrid.CellController,Gayplay.GayplayGrid.CellController)
+extern void GridController_ChangeCellsLists_mF8BD6D84535991BF5A3A83B32F30105B29A8B712 (void);
+// 0x000000C2 System.Boolean Gayplay.GayplayGrid.GridController::TryMatch(Gayplay.GayplayGrid.CellController,Gayplay.GayplayGrid.CellController,System.Collections.Generic.List`1<Gayplay.Data.RowColumnPair>&)
 extern void GridController_TryMatch_m365F33BB4E5CF881AFC537F1E60C13A99F9F54EE (void);
-// 0x000000C2 System.Collections.Generic.List`1<Gayplay.Data.RowColumnPair> Gayplay.GayplayGrid.GridController::GetMatchedList(Gayplay.GayplayGrid.CellController)
+// 0x000000C3 System.Collections.Generic.List`1<Gayplay.Data.RowColumnPair> Gayplay.GayplayGrid.GridController::GetMatchedList(Gayplay.GayplayGrid.CellController)
 extern void GridController_GetMatchedList_m258DCFDBA11D511B7B8191BFA7E1FD80497DD06F (void);
-// 0x000000C3 System.Collections.Generic.List`1<Gayplay.Data.RowColumnPair> Gayplay.GayplayGrid.GridController::GetSameNearHorizontalCells(Gayplay.GayplayGrid.CellController)
+// 0x000000C4 System.Collections.Generic.List`1<Gayplay.Data.RowColumnPair> Gayplay.GayplayGrid.GridController::GetSameNearHorizontalCells(Gayplay.GayplayGrid.CellController)
 extern void GridController_GetSameNearHorizontalCells_m7B0449B24A471750153AEECF646D4BE347A68632 (void);
-// 0x000000C4 System.Collections.Generic.List`1<Gayplay.Data.RowColumnPair> Gayplay.GayplayGrid.GridController::GetSameNearVerticalCells(Gayplay.GayplayGrid.CellController)
+// 0x000000C5 System.Collections.Generic.List`1<Gayplay.Data.RowColumnPair> Gayplay.GayplayGrid.GridController::GetSameNearVerticalCells(Gayplay.GayplayGrid.CellController)
 extern void GridController_GetSameNearVerticalCells_m912E799E2EB1C1C25DF53CAC86ABDED76DA94D68 (void);
-// 0x000000C5 System.Collections.Generic.List`1<Gayplay.GayplayGrid.CellController> Gayplay.GayplayGrid.GridController::GetColumnList(System.Int32)
+// 0x000000C6 System.Collections.Generic.List`1<Gayplay.GayplayGrid.CellController> Gayplay.GayplayGrid.GridController::GetColumnList(System.Int32)
 extern void GridController_GetColumnList_mAD0C53FF5CB928E5493E7103C2E68256139DF668 (void);
-// 0x000000C6 System.Void Gayplay.GayplayGrid.GridController::CreateGridDecoy()
+// 0x000000C7 System.Void Gayplay.GayplayGrid.GridController::CreateGridDecoy()
 extern void GridController_CreateGridDecoy_m8099494C55BCEA7706E72D585F6CE1EC22F0C844 (void);
-// 0x000000C7 System.Boolean Gayplay.GayplayGrid.GridController::GetIsCellActive(System.Int32,System.Int32,System.Collections.Generic.List`1<Gayplay.Data.IsActiveCellRow>)
+// 0x000000C8 System.Boolean Gayplay.GayplayGrid.GridController::GetIsCellActive(System.Int32,System.Int32,System.Collections.Generic.List`1<Gayplay.Data.IsActiveCellRow>)
 extern void GridController_GetIsCellActive_mAC844A284D4CFA8100C3D7C308264B21867725D2 (void);
-// 0x000000C8 Gayplay.Data.CellDataModel Gayplay.GayplayGrid.GridController::GetRandomModel()
+// 0x000000C9 Gayplay.Data.CellDataModel Gayplay.GayplayGrid.GridController::GetRandomModel()
 extern void GridController_GetRandomModel_m399667ECE2C3E0664057864661E5D1087A65B83E (void);
-// 0x000000C9 System.Boolean Gayplay.GayplayGrid.GridController::IsSafeHorizontal(System.Collections.Generic.List`1<Gayplay.GayplayGrid.CellController>,Gayplay.Data.CellType)
+// 0x000000CA System.Boolean Gayplay.GayplayGrid.GridController::IsSafeHorizontal(System.Collections.Generic.List`1<Gayplay.GayplayGrid.CellController>,Gayplay.Data.CellType)
 extern void GridController_IsSafeHorizontal_m97F3E515FBD682CFF6C79FE93479300A7CAD417B (void);
-// 0x000000CA System.Boolean Gayplay.GayplayGrid.GridController::IsSafeVertical(Gayplay.Data.CellDataModel)
+// 0x000000CB System.Boolean Gayplay.GayplayGrid.GridController::IsSafeVertical(Gayplay.Data.CellDataModel)
 extern void GridController_IsSafeVertical_m2849002D019BA066C5FFC94CC65DAFAE6135177C (void);
-// 0x000000CB System.Void Gayplay.GayplayGrid.GridController::.ctor()
+// 0x000000CC System.Void Gayplay.GayplayGrid.GridController::.ctor()
 extern void GridController__ctor_m335424AE0979306B90EC37A54CC08715A6D88BA6 (void);
-// 0x000000CC System.Void Gayplay.GayplayGrid.GridController/<Initialize>d__9::MoveNext()
+// 0x000000CD System.Void Gayplay.GayplayGrid.GridController/<Initialize>d__9::MoveNext()
 extern void U3CInitializeU3Ed__9_MoveNext_m65CF18D66A599E58BA49B55B5C767F1C81E68511 (void);
-// 0x000000CD System.Void Gayplay.GayplayGrid.GridController/<Initialize>d__9::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+// 0x000000CE System.Void Gayplay.GayplayGrid.GridController/<Initialize>d__9::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
 extern void U3CInitializeU3Ed__9_SetStateMachine_m91EAC1951ECA12C115E77A25D2214D6ABBE2B79C (void);
-// 0x000000CE System.Void Gayplay.GayplayGrid.GridController/<?????????????????>d__10::MoveNext()
+// 0x000000CF System.Void Gayplay.GayplayGrid.GridController/<?????????????????>d__10::MoveNext()
 extern void U3CU410U430U430U428U435U441U442U44CU41AU430U434U440U43EU43EU43EU43EU432U3Ed__10_MoveNext_m7866F164C1F57BF290FC8A278CB340F7C73FAF91 (void);
-// 0x000000CF System.Void Gayplay.GayplayGrid.GridController/<?????????????????>d__10::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+// 0x000000D0 System.Void Gayplay.GayplayGrid.GridController/<?????????????????>d__10::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
 extern void U3CU410U430U430U428U435U441U442U44CU41AU430U434U440U43EU43EU43EU43EU432U3Ed__10_SetStateMachine_mB5C0130DD862B0A1F906B9911B689ECDAF72C5CC (void);
-// 0x000000D0 System.Void Gayplay.GayplayGrid.GridController/<>c__DisplayClass15_0::.ctor()
+// 0x000000D1 System.Void Gayplay.GayplayGrid.GridController/<>c__DisplayClass15_0::.ctor()
 extern void U3CU3Ec__DisplayClass15_0__ctor_m51A24CAFC685F69722F884A4D7190EB88246060B (void);
-// 0x000000D1 System.Void Gayplay.GayplayGrid.GridController/<>c__DisplayClass15_0::<SwipeCells>b__0()
+// 0x000000D2 System.Void Gayplay.GayplayGrid.GridController/<>c__DisplayClass15_0::<SwipeCells>b__0()
 extern void U3CU3Ec__DisplayClass15_0_U3CSwipeCellsU3Eb__0_m259524E09F46C25FD8472AE4944A0AFEA49982E8 (void);
-// 0x000000D2 UnityEngine.Sprite Gayplay.Data.CellDataModel::get_PieceIcon()
+// 0x000000D3 UnityEngine.Sprite Gayplay.Data.CellDataModel::get_PieceIcon()
 extern void CellDataModel_get_PieceIcon_mBFA7ACDC37F0E4CFD397300B2AD62BC765786DD6 (void);
-// 0x000000D3 UnityEngine.Sprite Gayplay.Data.CellDataModel::get_PieceFace()
+// 0x000000D4 UnityEngine.Sprite Gayplay.Data.CellDataModel::get_PieceFace()
 extern void CellDataModel_get_PieceFace_m8ED1EFC3AA9C8D224EFCAD8DE6376A7A4F920878 (void);
-// 0x000000D4 Gayplay.Data.CellType Gayplay.Data.CellDataModel::get_CellType()
+// 0x000000D5 Gayplay.Data.CellType Gayplay.Data.CellDataModel::get_CellType()
 extern void CellDataModel_get_CellType_mC6D7BF13983A65C7F90888ED03AA7FD176A6ADC0 (void);
-// 0x000000D5 Gayplay.Data.RowColumnPair Gayplay.Data.CellDataModel::get_RowColumnPair()
+// 0x000000D6 Gayplay.Data.RowColumnPair Gayplay.Data.CellDataModel::get_RowColumnPair()
 extern void CellDataModel_get_RowColumnPair_m9785E6C8E231D1D907DA3AC67DEFC2E7C8821132 (void);
-// 0x000000D6 System.Void Gayplay.Data.CellDataModel::set_RowColumnPair(Gayplay.Data.RowColumnPair)
+// 0x000000D7 System.Void Gayplay.Data.CellDataModel::set_RowColumnPair(Gayplay.Data.RowColumnPair)
 extern void CellDataModel_set_RowColumnPair_m248DF9AD163AF29069A497F68F4429890FB2D742 (void);
-// 0x000000D7 System.Void Gayplay.Data.CellDataModel::ChangeRowColumn(System.Int32,System.Int32)
+// 0x000000D8 System.Void Gayplay.Data.CellDataModel::ChangeRowColumn(System.Int32,System.Int32)
 extern void CellDataModel_ChangeRowColumn_m4C033DE29A020252A0DDD235D7400CE924D9D861 (void);
-// 0x000000D8 System.Void Gayplay.Data.CellDataModel::ChangeRowColumn(Gayplay.Data.RowColumnPair)
+// 0x000000D9 System.Void Gayplay.Data.CellDataModel::ChangeRowColumn(Gayplay.Data.RowColumnPair)
 extern void CellDataModel_ChangeRowColumn_m4A067DFB79BD7C634EA44922D5B309D4C8E3115A (void);
-// 0x000000D9 System.Void Gayplay.Data.CellDataModel::.ctor(UnityEngine.Sprite,UnityEngine.Sprite,Gayplay.Data.CellType,Gayplay.Data.RowColumnPair)
+// 0x000000DA System.Void Gayplay.Data.CellDataModel::.ctor(UnityEngine.Sprite,UnityEngine.Sprite,Gayplay.Data.CellType,Gayplay.Data.RowColumnPair)
 extern void CellDataModel__ctor_mD7F937D4D85C5F3BBABE4E7BC171A5F81ADDA640 (void);
-// 0x000000DA System.Collections.Generic.List`1<Gayplay.Data.CellDataModel> Gayplay.Data.PiecesData::get_CellModels()
+// 0x000000DB System.Collections.Generic.List`1<Gayplay.Data.CellDataModel> Gayplay.Data.PiecesData::get_CellModels()
 extern void PiecesData_get_CellModels_m49903412EFC245BED382875474D64014850A3608 (void);
-// 0x000000DB System.Collections.Generic.List`1<Gayplay.Data.IsActiveCellRow> Gayplay.Data.PiecesData::get_IsActiveCellRows()
+// 0x000000DC System.Collections.Generic.List`1<Gayplay.Data.IsActiveCellRow> Gayplay.Data.PiecesData::get_IsActiveCellRows()
 extern void PiecesData_get_IsActiveCellRows_m1688C3619A8BD1A8C0547839D2705D70BA33DABF (void);
-// 0x000000DC System.Void Gayplay.Data.PiecesData::.ctor()
+// 0x000000DD System.Void Gayplay.Data.PiecesData::.ctor()
 extern void PiecesData__ctor_mC2F62EF9DC4D1A21A3638B1BB1DA3F0B2FCEAE6A (void);
-// 0x000000DD System.Collections.Generic.List`1<System.Boolean> Gayplay.Data.IsActiveCellRow::get_Row()
+// 0x000000DE System.Collections.Generic.List`1<System.Boolean> Gayplay.Data.IsActiveCellRow::get_Row()
 extern void IsActiveCellRow_get_Row_m4278E1CED75DB67BA329D8E678F01D9D50B5265B (void);
-// 0x000000DE System.Void Gayplay.Data.RowColumnPair::.ctor(System.Int32,System.Int32)
+// 0x000000DF System.Void Gayplay.Data.RowColumnPair::.ctor(System.Int32,System.Int32)
 extern void RowColumnPair__ctor_mD48F1095734AC945D2989A304F976040BE3DFCC6 (void);
-// 0x000000DF System.Void Gayplay.Data.RowColumnPair::.ctor(Gayplay.Data.RowColumnPair)
+// 0x000000E0 System.Void Gayplay.Data.RowColumnPair::.ctor(Gayplay.Data.RowColumnPair)
 extern void RowColumnPair__ctor_mD7963764130A29C3B9DD94C0F2FC148A0F35A572 (void);
-static Il2CppMethodPointer s_methodPointers[223] = 
+static Il2CppMethodPointer s_methodPointers[224] = 
 {
 	NULL,
 	NULL,
@@ -624,6 +626,7 @@ static Il2CppMethodPointer s_methodPointers[223] =
 	GridController_GetCell_m40E8D4037C9D0807033686095812BF50AB153F50,
 	GridController_SwipeCells_mF7556B682C66EA76EFD55D1458C6606EC1E7D476,
 	GridController_OnCellSwipeMoveComplete_m9D5116DF7D0F39158228585F51E8FDAC1C24E146,
+	GridController_ChangeCellsLists_mF8BD6D84535991BF5A3A83B32F30105B29A8B712,
 	GridController_TryMatch_m365F33BB4E5CF881AFC537F1E60C13A99F9F54EE,
 	GridController_GetMatchedList_m258DCFDBA11D511B7B8191BFA7E1FD80497DD06F,
 	GridController_GetSameNearHorizontalCells_m7B0449B24A471750153AEECF646D4BE347A68632,
@@ -685,15 +688,15 @@ static Il2CppTokenAdjustorThunkPair s_adjustorThunks[17] =
 	{ 0x060000A5, U3CInitU3Ed__4_SetStateMachine_m93E2F0C88CC8BF1601E1173D238A8F05670AF5B1_AdjustorThunk },
 	{ 0x060000A6, U3CInitDataU3Ed__6_MoveNext_m397512C77CC572CA1C3976B282062AD0CAC0374B_AdjustorThunk },
 	{ 0x060000A7, U3CInitDataU3Ed__6_SetStateMachine_m3BB38CE2AA87396D8559F1383B349387B7469DFF_AdjustorThunk },
-	{ 0x060000CC, U3CInitializeU3Ed__9_MoveNext_m65CF18D66A599E58BA49B55B5C767F1C81E68511_AdjustorThunk },
-	{ 0x060000CD, U3CInitializeU3Ed__9_SetStateMachine_m91EAC1951ECA12C115E77A25D2214D6ABBE2B79C_AdjustorThunk },
-	{ 0x060000CE, U3CU410U430U430U428U435U441U442U44CU41AU430U434U440U43EU43EU43EU43EU432U3Ed__10_MoveNext_m7866F164C1F57BF290FC8A278CB340F7C73FAF91_AdjustorThunk },
-	{ 0x060000CF, U3CU410U430U430U428U435U441U442U44CU41AU430U434U440U43EU43EU43EU43EU432U3Ed__10_SetStateMachine_mB5C0130DD862B0A1F906B9911B689ECDAF72C5CC_AdjustorThunk },
-	{ 0x060000DD, IsActiveCellRow_get_Row_m4278E1CED75DB67BA329D8E678F01D9D50B5265B_AdjustorThunk },
-	{ 0x060000DE, RowColumnPair__ctor_mD48F1095734AC945D2989A304F976040BE3DFCC6_AdjustorThunk },
-	{ 0x060000DF, RowColumnPair__ctor_mD7963764130A29C3B9DD94C0F2FC148A0F35A572_AdjustorThunk },
+	{ 0x060000CD, U3CInitializeU3Ed__9_MoveNext_m65CF18D66A599E58BA49B55B5C767F1C81E68511_AdjustorThunk },
+	{ 0x060000CE, U3CInitializeU3Ed__9_SetStateMachine_m91EAC1951ECA12C115E77A25D2214D6ABBE2B79C_AdjustorThunk },
+	{ 0x060000CF, U3CU410U430U430U428U435U441U442U44CU41AU430U434U440U43EU43EU43EU43EU432U3Ed__10_MoveNext_m7866F164C1F57BF290FC8A278CB340F7C73FAF91_AdjustorThunk },
+	{ 0x060000D0, U3CU410U430U430U428U435U441U442U44CU41AU430U434U440U43EU43EU43EU43EU432U3Ed__10_SetStateMachine_mB5C0130DD862B0A1F906B9911B689ECDAF72C5CC_AdjustorThunk },
+	{ 0x060000DE, IsActiveCellRow_get_Row_m4278E1CED75DB67BA329D8E678F01D9D50B5265B_AdjustorThunk },
+	{ 0x060000DF, RowColumnPair__ctor_mD48F1095734AC945D2989A304F976040BE3DFCC6_AdjustorThunk },
+	{ 0x060000E0, RowColumnPair__ctor_mD7963764130A29C3B9DD94C0F2FC148A0F35A572_AdjustorThunk },
 };
-static const int32_t s_InvokerIndices[223] = 
+static const int32_t s_InvokerIndices[224] = 
 {
 	0,
 	0,
@@ -887,6 +890,7 @@ static const int32_t s_InvokerIndices[223] =
 	1189,
 	1347,
 	1347,
+	1347,
 	711,
 	1691,
 	1691,
@@ -988,7 +992,7 @@ IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	223,
+	224,
 	s_methodPointers,
 	17,
 	s_adjustorThunks,

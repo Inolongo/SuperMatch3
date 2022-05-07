@@ -487,7 +487,6 @@ IL2CPP_EXTERN_C RuntimeClass* UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A96
 IL2CPP_EXTERN_C RuntimeClass* Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C String_t* _stringLiteral0021D7A0F048EBF51ACB04099B14A1C7E529A7C1;
 IL2CPP_EXTERN_C String_t* _stringLiteral02DD41F20468CBC71075125705C08624167E9970;
-IL2CPP_EXTERN_C String_t* _stringLiteral0E6D0CDF7578EE47090E678E54028B6A11B73B7A;
 IL2CPP_EXTERN_C String_t* _stringLiteral30588E463698153F606AFF77820910C54D8BF8F5;
 IL2CPP_EXTERN_C String_t* _stringLiteral309C0B14F409B8D9F62ADD3CED0B72E73896C9C2;
 IL2CPP_EXTERN_C String_t* _stringLiteral41DE2A09F7B0EA3311F6DCA274E12D452BACD852;
@@ -5099,23 +5098,8 @@ inline bool Enumerator_MoveNext_m22BAAF3D6EDE0C06BE52D8F96BB96D4C0604CCDB (Enume
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Exception__ctor_m9B2BD92CD68916245A75109105D9071C9D430E7F (Exception_t* __this, String_t* ___message0, const RuntimeMethod* method) ;
 // System.Void Gayplay.GayplayGrid.GridController/<>c__DisplayClass15_0::.ctor()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass15_0__ctor_m51A24CAFC685F69722F884A4D7190EB88246060B (U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* __this, const RuntimeMethod* method) ;
-// System.Void Gayplay.Data.CellDataModel::ChangeRowColumn(Gayplay.Data.RowColumnPair)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CellDataModel_ChangeRowColumn_m4A067DFB79BD7C634EA44922D5B309D4C8E3115A (CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* __this, RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 ___rowColumnPair0, const RuntimeMethod* method) ;
-// System.Int32 System.Collections.Generic.List`1<Gayplay.GayplayGrid.CellController>::IndexOf(T)
-inline int32_t List_1_IndexOf_mA369DF38E90F2E4F0C7AEB72FD534A5E1C6498FA (List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* __this, CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* ___item0, const RuntimeMethod* method)
-{
-	return ((  int32_t (*) (List_1_tDBA89B0E21BAC58CFBD3C1F76E4668E3B562761A*, /*Unity.IL2CPP.Metadata.__Il2CppFullySharedGenericType*/Il2CppFullySharedGenericAny, const RuntimeMethod*))List_1_IndexOf_m1FFA888B47CE3256B0AC301302FAD79AAAFC0818_gshared)((List_1_tDBA89B0E21BAC58CFBD3C1F76E4668E3B562761A*)__this, (Il2CppFullySharedGenericAny)___item0, method);
-}
-// System.Boolean System.Collections.Generic.List`1<Gayplay.GayplayGrid.CellController>::Remove(T)
-inline bool List_1_Remove_m1603646C70A4505252783AD906EB5001C7090767 (List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* __this, CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* ___item0, const RuntimeMethod* method)
-{
-	return ((  bool (*) (List_1_tDBA89B0E21BAC58CFBD3C1F76E4668E3B562761A*, /*Unity.IL2CPP.Metadata.__Il2CppFullySharedGenericType*/Il2CppFullySharedGenericAny, const RuntimeMethod*))List_1_Remove_m9BCE8CEF94E6F2BF8624D65214FF4F3CA686D60C_gshared)((List_1_tDBA89B0E21BAC58CFBD3C1F76E4668E3B562761A*)__this, (Il2CppFullySharedGenericAny)___item0, method);
-}
-// System.Void System.Collections.Generic.List`1<Gayplay.GayplayGrid.CellController>::Insert(System.Int32,T)
-inline void List_1_Insert_mECA51441789AFB325211C594E1083C2A333C4FE7 (List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* __this, int32_t ___index0, CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* ___item1, const RuntimeMethod* method)
-{
-	((  void (*) (List_1_tDBA89B0E21BAC58CFBD3C1F76E4668E3B562761A*, int32_t, /*Unity.IL2CPP.Metadata.__Il2CppFullySharedGenericType*/Il2CppFullySharedGenericAny, const RuntimeMethod*))List_1_Insert_mB8862677E04375531A30F3EC07AC2372FCE61F55_gshared)((List_1_tDBA89B0E21BAC58CFBD3C1F76E4668E3B562761A*)__this, ___index0, (Il2CppFullySharedGenericAny)___item1, method);
-}
+// System.Void Gayplay.GayplayGrid.GridController::ChangeCellsLists(Gayplay.GayplayGrid.CellController,Gayplay.GayplayGrid.CellController)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void GridController_ChangeCellsLists_mF8BD6D84535991BF5A3A83B32F30105B29A8B712 (GridController_t4689C8E563477AA619E7539B707422DDDB1D44DE* __this, CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* ___semeCell0, CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* ___ukeCell1, const RuntimeMethod* method) ;
 // System.Boolean Gayplay.GayplayGrid.GridController::TryMatch(Gayplay.GayplayGrid.CellController,Gayplay.GayplayGrid.CellController,System.Collections.Generic.List`1<Gayplay.Data.RowColumnPair>&)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool GridController_TryMatch_m365F33BB4E5CF881AFC537F1E60C13A99F9F54EE (GridController_t4689C8E563477AA619E7539B707422DDDB1D44DE* __this, CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* ___semeCell0, CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* ___ukeCell1, List_1_t999E15DA2ACA2A14C82F7CE20DA94155232C4747** ___matchedCells2, const RuntimeMethod* method) ;
 // System.Collections.Generic.List`1/Enumerator<T> System.Collections.Generic.List`1<Gayplay.Data.RowColumnPair>::GetEnumerator()
@@ -5143,6 +5127,23 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CellController_DeleteCell_m6584614863F26
 inline bool Enumerator_MoveNext_m049A9570C42AF7B6F207232E2585EC5DF099DB41 (Enumerator_t2AC8563AF9A95BB530FBD7DB3B4E8E9A8ED490F5* __this, const RuntimeMethod* method)
 {
 	return ((  bool (*) (Enumerator_tF5AC6CD19D283FBD724440520CEE68FE2602F7AF*, const RuntimeMethod*))Enumerator_MoveNext_m8D8E5E878AF0A88A535AB1AB5BA4F23E151A678A_gshared)((Enumerator_tF5AC6CD19D283FBD724440520CEE68FE2602F7AF*)__this, method);
+}
+// System.Void Gayplay.Data.CellDataModel::ChangeRowColumn(Gayplay.Data.RowColumnPair)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CellDataModel_ChangeRowColumn_m4A067DFB79BD7C634EA44922D5B309D4C8E3115A (CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* __this, RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 ___rowColumnPair0, const RuntimeMethod* method) ;
+// System.Int32 System.Collections.Generic.List`1<Gayplay.GayplayGrid.CellController>::IndexOf(T)
+inline int32_t List_1_IndexOf_mA369DF38E90F2E4F0C7AEB72FD534A5E1C6498FA (List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* __this, CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* ___item0, const RuntimeMethod* method)
+{
+	return ((  int32_t (*) (List_1_tDBA89B0E21BAC58CFBD3C1F76E4668E3B562761A*, /*Unity.IL2CPP.Metadata.__Il2CppFullySharedGenericType*/Il2CppFullySharedGenericAny, const RuntimeMethod*))List_1_IndexOf_m1FFA888B47CE3256B0AC301302FAD79AAAFC0818_gshared)((List_1_tDBA89B0E21BAC58CFBD3C1F76E4668E3B562761A*)__this, (Il2CppFullySharedGenericAny)___item0, method);
+}
+// System.Boolean System.Collections.Generic.List`1<Gayplay.GayplayGrid.CellController>::Remove(T)
+inline bool List_1_Remove_m1603646C70A4505252783AD906EB5001C7090767 (List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* __this, CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* ___item0, const RuntimeMethod* method)
+{
+	return ((  bool (*) (List_1_tDBA89B0E21BAC58CFBD3C1F76E4668E3B562761A*, /*Unity.IL2CPP.Metadata.__Il2CppFullySharedGenericType*/Il2CppFullySharedGenericAny, const RuntimeMethod*))List_1_Remove_m9BCE8CEF94E6F2BF8624D65214FF4F3CA686D60C_gshared)((List_1_tDBA89B0E21BAC58CFBD3C1F76E4668E3B562761A*)__this, (Il2CppFullySharedGenericAny)___item0, method);
+}
+// System.Void System.Collections.Generic.List`1<Gayplay.GayplayGrid.CellController>::Insert(System.Int32,T)
+inline void List_1_Insert_mECA51441789AFB325211C594E1083C2A333C4FE7 (List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* __this, int32_t ___index0, CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* ___item1, const RuntimeMethod* method)
+{
+	((  void (*) (List_1_tDBA89B0E21BAC58CFBD3C1F76E4668E3B562761A*, int32_t, /*Unity.IL2CPP.Metadata.__Il2CppFullySharedGenericType*/Il2CppFullySharedGenericAny, const RuntimeMethod*))List_1_Insert_mB8862677E04375531A30F3EC07AC2372FCE61F55_gshared)((List_1_tDBA89B0E21BAC58CFBD3C1F76E4668E3B562761A*)__this, ___index0, (Il2CppFullySharedGenericAny)___item1, method);
 }
 // System.Void System.Collections.Generic.List`1<Gayplay.Data.RowColumnPair>::.ctor()
 inline void List_1__ctor_m80607AFF236D0863B82BA8176B7EC910A418151B (List_1_t999E15DA2ACA2A14C82F7CE20DA94155232C4747* __this, const RuntimeMethod* method)
@@ -10615,25 +10616,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void GridController_SwipeCells_mF7556B682C66E
 	static bool s_Il2CppMethodInitialized;
 	if (!s_Il2CppMethodInitialized)
 	{
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Dictionary_2_get_Item_m18254036D42ED9C42EAB566684E9979C9C625D62_RuntimeMethod_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&List_1_IndexOf_mA369DF38E90F2E4F0C7AEB72FD534A5E1C6498FA_RuntimeMethod_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&List_1_Insert_mECA51441789AFB325211C594E1083C2A333C4FE7_RuntimeMethod_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&List_1_Remove_m1603646C70A4505252783AD906EB5001C7090767_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&U3CU3Ec__DisplayClass15_0_U3CSwipeCellsU3Eb__0_m259524E09F46C25FD8472AE4944A0AFEA49982E8_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4_il2cpp_TypeInfo_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral0E6D0CDF7578EE47090E678E54028B6A11B73B7A);
 		s_Il2CppMethodInitialized = true;
 	}
 	U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* V_0 = NULL;
-	List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* V_1 = NULL;
-	RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 V_2;
-	memset((&V_2), 0, sizeof(V_2));
-	int32_t V_3 = 0;
-	int32_t V_4 = 0;
-	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_5;
-	memset((&V_5), 0, sizeof(V_5));
+	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_1;
+	memset((&V_1), 0, sizeof(V_1));
 	{
 		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_0 = (U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4*)il2cpp_codegen_object_new(U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4_il2cpp_TypeInfo_var);
 		NullCheck(L_0);
@@ -10653,183 +10643,69 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void GridController_SwipeCells_mF7556B682C66E
 		NullCheck(L_4);
 		L_4->___ukeCell_2 = L_5;
 		Il2CppCodeGenWriteBarrier((void**)(&L_4->___ukeCell_2), (void*)L_5);
-		// Debug.Log("zaletel v SwipeCells");
-		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
-		Debug_Log_m86567BCF22BBE7809747817453CACA0E41E68219(_stringLiteral0E6D0CDF7578EE47090E678E54028B6A11B73B7A, NULL);
-		// var semeRow = _gridRowCells[semeCell.CellDataModel.RowColumnPair.RowNum];
-		Dictionary_2_tD3721D21E992626DF66E69805F3629DA8202E925* L_6 = __this->____gridRowCells_8;
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_7 = V_0;
-		NullCheck(L_7);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_8 = L_7->___semeCell_1;
-		NullCheck(L_8);
-		CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* L_9;
-		L_9 = CellController_get_CellDataModel_m5F7DB19EEE3AC70E7DB82B71ABE9DE4A4284710E_inline(L_8, NULL);
-		NullCheck(L_9);
-		RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 L_10;
-		L_10 = CellDataModel_get_RowColumnPair_m9785E6C8E231D1D907DA3AC67DEFC2E7C8821132_inline(L_9, NULL);
-		int32_t L_11 = L_10.___RowNum_1;
+		// ChangeCellsLists(semeCell, ukeCell);
+		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_6 = V_0;
 		NullCheck(L_6);
-		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_12;
-		L_12 = Dictionary_2_get_Item_m18254036D42ED9C42EAB566684E9979C9C625D62(L_6, L_11, Dictionary_2_get_Item_m18254036D42ED9C42EAB566684E9979C9C625D62_RuntimeMethod_var);
-		// var ukeRow = _gridRowCells[ukeCell.CellDataModel.RowColumnPair.RowNum];
-		Dictionary_2_tD3721D21E992626DF66E69805F3629DA8202E925* L_13 = __this->____gridRowCells_8;
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_7 = L_6->___semeCell_1;
+		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_8 = V_0;
+		NullCheck(L_8);
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_9 = L_8->___ukeCell_2;
+		GridController_ChangeCellsLists_mF8BD6D84535991BF5A3A83B32F30105B29A8B712(__this, L_7, L_9, NULL);
+		// var tempPosition = ukeCell.transform.localPosition;
+		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_10 = V_0;
+		NullCheck(L_10);
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_11 = L_10->___ukeCell_2;
+		NullCheck(L_11);
+		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_12;
+		L_12 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_11, NULL);
+		NullCheck(L_12);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_13;
+		L_13 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_12, NULL);
+		V_1 = L_13;
+		// ukeCell.transform.DOLocalMove(semeCell.transform.localPosition, 0.2f);
 		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_14 = V_0;
 		NullCheck(L_14);
 		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_15 = L_14->___ukeCell_2;
 		NullCheck(L_15);
-		CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* L_16;
-		L_16 = CellController_get_CellDataModel_m5F7DB19EEE3AC70E7DB82B71ABE9DE4A4284710E_inline(L_15, NULL);
-		NullCheck(L_16);
-		RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 L_17;
-		L_17 = CellDataModel_get_RowColumnPair_m9785E6C8E231D1D907DA3AC67DEFC2E7C8821132_inline(L_16, NULL);
-		int32_t L_18 = L_17.___RowNum_1;
-		NullCheck(L_13);
-		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_19;
-		L_19 = Dictionary_2_get_Item_m18254036D42ED9C42EAB566684E9979C9C625D62(L_13, L_18, Dictionary_2_get_Item_m18254036D42ED9C42EAB566684E9979C9C625D62_RuntimeMethod_var);
-		V_1 = L_19;
-		// var tempUke = ukeCell.CellDataModel.RowColumnPair;
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_20 = V_0;
-		NullCheck(L_20);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_21 = L_20->___ukeCell_2;
-		NullCheck(L_21);
-		CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* L_22;
-		L_22 = CellController_get_CellDataModel_m5F7DB19EEE3AC70E7DB82B71ABE9DE4A4284710E_inline(L_21, NULL);
-		NullCheck(L_22);
-		RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 L_23;
-		L_23 = CellDataModel_get_RowColumnPair_m9785E6C8E231D1D907DA3AC67DEFC2E7C8821132_inline(L_22, NULL);
-		V_2 = L_23;
-		// ukeCell.CellDataModel.ChangeRowColumn(semeCell.CellDataModel.RowColumnPair);
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_24 = V_0;
-		NullCheck(L_24);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_25 = L_24->___ukeCell_2;
-		NullCheck(L_25);
-		CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* L_26;
-		L_26 = CellController_get_CellDataModel_m5F7DB19EEE3AC70E7DB82B71ABE9DE4A4284710E_inline(L_25, NULL);
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_27 = V_0;
-		NullCheck(L_27);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_28 = L_27->___semeCell_1;
-		NullCheck(L_28);
-		CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* L_29;
-		L_29 = CellController_get_CellDataModel_m5F7DB19EEE3AC70E7DB82B71ABE9DE4A4284710E_inline(L_28, NULL);
-		NullCheck(L_29);
-		RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 L_30;
-		L_30 = CellDataModel_get_RowColumnPair_m9785E6C8E231D1D907DA3AC67DEFC2E7C8821132_inline(L_29, NULL);
-		NullCheck(L_26);
-		CellDataModel_ChangeRowColumn_m4A067DFB79BD7C634EA44922D5B309D4C8E3115A(L_26, L_30, NULL);
-		// semeCell.CellDataModel.ChangeRowColumn(tempUke);
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_31 = V_0;
-		NullCheck(L_31);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_32 = L_31->___semeCell_1;
-		NullCheck(L_32);
-		CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* L_33;
-		L_33 = CellController_get_CellDataModel_m5F7DB19EEE3AC70E7DB82B71ABE9DE4A4284710E_inline(L_32, NULL);
-		RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 L_34 = V_2;
-		NullCheck(L_33);
-		CellDataModel_ChangeRowColumn_m4A067DFB79BD7C634EA44922D5B309D4C8E3115A(L_33, L_34, NULL);
-		// var semeIndex = semeRow.IndexOf(semeCell);
-		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_35 = L_12;
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_36 = V_0;
-		NullCheck(L_36);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_37 = L_36->___semeCell_1;
-		NullCheck(L_35);
-		int32_t L_38;
-		L_38 = List_1_IndexOf_mA369DF38E90F2E4F0C7AEB72FD534A5E1C6498FA(L_35, L_37, List_1_IndexOf_mA369DF38E90F2E4F0C7AEB72FD534A5E1C6498FA_RuntimeMethod_var);
-		V_3 = L_38;
-		// var ukeIndex = ukeRow.IndexOf(ukeCell);
-		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_39 = V_1;
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_40 = V_0;
-		NullCheck(L_40);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_41 = L_40->___ukeCell_2;
-		NullCheck(L_39);
-		int32_t L_42;
-		L_42 = List_1_IndexOf_mA369DF38E90F2E4F0C7AEB72FD534A5E1C6498FA(L_39, L_41, List_1_IndexOf_mA369DF38E90F2E4F0C7AEB72FD534A5E1C6498FA_RuntimeMethod_var);
-		V_4 = L_42;
-		// semeRow.Remove(semeCell);
-		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_43 = L_35;
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_44 = V_0;
-		NullCheck(L_44);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_45 = L_44->___semeCell_1;
-		NullCheck(L_43);
-		bool L_46;
-		L_46 = List_1_Remove_m1603646C70A4505252783AD906EB5001C7090767(L_43, L_45, List_1_Remove_m1603646C70A4505252783AD906EB5001C7090767_RuntimeMethod_var);
-		// semeRow.Insert(semeIndex, ukeCell);
-		int32_t L_47 = V_3;
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_48 = V_0;
-		NullCheck(L_48);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_49 = L_48->___ukeCell_2;
-		NullCheck(L_43);
-		List_1_Insert_mECA51441789AFB325211C594E1083C2A333C4FE7(L_43, L_47, L_49, List_1_Insert_mECA51441789AFB325211C594E1083C2A333C4FE7_RuntimeMethod_var);
-		// ukeRow.Remove(ukeCell);
-		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_50 = V_1;
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_51 = V_0;
-		NullCheck(L_51);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_52 = L_51->___ukeCell_2;
-		NullCheck(L_50);
-		bool L_53;
-		L_53 = List_1_Remove_m1603646C70A4505252783AD906EB5001C7090767(L_50, L_52, List_1_Remove_m1603646C70A4505252783AD906EB5001C7090767_RuntimeMethod_var);
-		// ukeRow.Insert(ukeIndex, semeCell);
-		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_54 = V_1;
-		int32_t L_55 = V_4;
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_56 = V_0;
-		NullCheck(L_56);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_57 = L_56->___semeCell_1;
-		NullCheck(L_54);
-		List_1_Insert_mECA51441789AFB325211C594E1083C2A333C4FE7(L_54, L_55, L_57, List_1_Insert_mECA51441789AFB325211C594E1083C2A333C4FE7_RuntimeMethod_var);
-		// var tempPosition = ukeCell.transform.localPosition;
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_58 = V_0;
-		NullCheck(L_58);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_59 = L_58->___ukeCell_2;
-		NullCheck(L_59);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_60;
-		L_60 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_59, NULL);
-		NullCheck(L_60);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_61;
-		L_61 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_60, NULL);
-		V_5 = L_61;
-		// ukeCell.transform.DOLocalMove(semeCell.transform.localPosition, 0.2f);
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_62 = V_0;
-		NullCheck(L_62);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_63 = L_62->___ukeCell_2;
-		NullCheck(L_63);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_64;
-		L_64 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_63, NULL);
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_65 = V_0;
-		NullCheck(L_65);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_66 = L_65->___semeCell_1;
-		NullCheck(L_66);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_67;
-		L_67 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_66, NULL);
-		NullCheck(L_67);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_68;
-		L_68 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_67, NULL);
-		TweenerCore_3_tCD82DFC45FB71C681FA8659EA63A7D7D16BFFE77* L_69;
-		L_69 = ShortcutExtensions_DOLocalMove_mF5E1C871CE07EA143E72E39BD30F3B45AE51A3DD(L_64, L_68, (0.200000003f), (bool)0, NULL);
+		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_16;
+		L_16 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_15, NULL);
+		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_17 = V_0;
+		NullCheck(L_17);
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_18 = L_17->___semeCell_1;
+		NullCheck(L_18);
+		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_19;
+		L_19 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_18, NULL);
+		NullCheck(L_19);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_20;
+		L_20 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_19, NULL);
+		TweenerCore_3_tCD82DFC45FB71C681FA8659EA63A7D7D16BFFE77* L_21;
+		L_21 = ShortcutExtensions_DOLocalMove_mF5E1C871CE07EA143E72E39BD30F3B45AE51A3DD(L_16, L_20, (0.200000003f), (bool)0, NULL);
 		// _doLocalMove = semeCell.transform.DOLocalMove(tempPosition, 0.2f);
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_70 = V_0;
-		NullCheck(L_70);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_71 = L_70->___semeCell_1;
-		NullCheck(L_71);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_72;
-		L_72 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_71, NULL);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_73 = V_5;
-		TweenerCore_3_tCD82DFC45FB71C681FA8659EA63A7D7D16BFFE77* L_74;
-		L_74 = ShortcutExtensions_DOLocalMove_mF5E1C871CE07EA143E72E39BD30F3B45AE51A3DD(L_72, L_73, (0.200000003f), (bool)0, NULL);
-		__this->____doLocalMove_11 = L_74;
-		Il2CppCodeGenWriteBarrier((void**)(&__this->____doLocalMove_11), (void*)L_74);
+		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_22 = V_0;
+		NullCheck(L_22);
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_23 = L_22->___semeCell_1;
+		NullCheck(L_23);
+		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_24;
+		L_24 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_23, NULL);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_25 = V_1;
+		TweenerCore_3_tCD82DFC45FB71C681FA8659EA63A7D7D16BFFE77* L_26;
+		L_26 = ShortcutExtensions_DOLocalMove_mF5E1C871CE07EA143E72E39BD30F3B45AE51A3DD(L_24, L_25, (0.200000003f), (bool)0, NULL);
+		__this->____doLocalMove_11 = L_26;
+		Il2CppCodeGenWriteBarrier((void**)(&__this->____doLocalMove_11), (void*)L_26);
 		// _doLocalMove.onComplete += () => OnCellSwipeMoveComplete(semeCell, ukeCell);
-		Tweener_tD38633F1A42EDF47A73CE3BF1894D946E830E140* L_75 = __this->____doLocalMove_11;
-		Tweener_tD38633F1A42EDF47A73CE3BF1894D946E830E140* L_76 = L_75;
-		NullCheck(L_76);
-		TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24* L_77 = ((Tween_t8CB06EBC48A5B6F5065C490E4F4909C18CE7983C*)L_76)->___onComplete_18;
-		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_78 = V_0;
-		TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24* L_79 = (TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24*)il2cpp_codegen_object_new(TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24_il2cpp_TypeInfo_var);
-		NullCheck(L_79);
-		TweenCallback__ctor_m68CC9304423CBDE43001F9B1413B5DAAF70DB621(L_79, L_78, (intptr_t)((void*)U3CU3Ec__DisplayClass15_0_U3CSwipeCellsU3Eb__0_m259524E09F46C25FD8472AE4944A0AFEA49982E8_RuntimeMethod_var), NULL);
-		Delegate_t* L_80;
-		L_80 = Delegate_Combine_m8B9D24CED35033C7FC56501DFE650F5CB7FF012C(L_77, L_79, NULL);
-		NullCheck(L_76);
-		((Tween_t8CB06EBC48A5B6F5065C490E4F4909C18CE7983C*)L_76)->___onComplete_18 = ((TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24*)CastclassSealed((RuntimeObject*)L_80, TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24_il2cpp_TypeInfo_var));
-		Il2CppCodeGenWriteBarrier((void**)(&((Tween_t8CB06EBC48A5B6F5065C490E4F4909C18CE7983C*)L_76)->___onComplete_18), (void*)((TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24*)CastclassSealed((RuntimeObject*)L_80, TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24_il2cpp_TypeInfo_var)));
+		Tweener_tD38633F1A42EDF47A73CE3BF1894D946E830E140* L_27 = __this->____doLocalMove_11;
+		Tweener_tD38633F1A42EDF47A73CE3BF1894D946E830E140* L_28 = L_27;
+		NullCheck(L_28);
+		TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24* L_29 = ((Tween_t8CB06EBC48A5B6F5065C490E4F4909C18CE7983C*)L_28)->___onComplete_18;
+		U3CU3Ec__DisplayClass15_0_t12C153CEA807196454A47FA3A6436908CC7408D4* L_30 = V_0;
+		TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24* L_31 = (TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24*)il2cpp_codegen_object_new(TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24_il2cpp_TypeInfo_var);
+		NullCheck(L_31);
+		TweenCallback__ctor_m68CC9304423CBDE43001F9B1413B5DAAF70DB621(L_31, L_30, (intptr_t)((void*)U3CU3Ec__DisplayClass15_0_U3CSwipeCellsU3Eb__0_m259524E09F46C25FD8472AE4944A0AFEA49982E8_RuntimeMethod_var), NULL);
+		Delegate_t* L_32;
+		L_32 = Delegate_Combine_m8B9D24CED35033C7FC56501DFE650F5CB7FF012C(L_29, L_31, NULL);
+		NullCheck(L_28);
+		((Tween_t8CB06EBC48A5B6F5065C490E4F4909C18CE7983C*)L_28)->___onComplete_18 = ((TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24*)CastclassSealed((RuntimeObject*)L_32, TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24_il2cpp_TypeInfo_var));
+		Il2CppCodeGenWriteBarrier((void**)(&((Tween_t8CB06EBC48A5B6F5065C490E4F4909C18CE7983C*)L_28)->___onComplete_18), (void*)((TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24*)CastclassSealed((RuntimeObject*)L_32, TweenCallback_t7C8B8A38E7B30905FF1B83C943256EF23617BB24_il2cpp_TypeInfo_var)));
 		// }
 		return;
 	}
@@ -10991,7 +10867,7 @@ IL_007b_1:
 				}
 			}
 			{
-				goto IL_00d7;
+				goto IL_00df;
 			}
 		}// end try (depth: 1)
 		catch(Il2CppExceptionWrapper& e)
@@ -11002,43 +10878,164 @@ IL_007b_1:
 
 IL_0094:
 	{
+		// ChangeCellsLists(semeCell, ukeCell);
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_21 = ___semeCell0;
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_22 = ___ukeCell1;
+		GridController_ChangeCellsLists_mF8BD6D84535991BF5A3A83B32F30105B29A8B712(__this, L_21, L_22, NULL);
 		// var tempPosition = ukeCell.transform.localPosition;
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_21 = ___ukeCell1;
-		NullCheck(L_21);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_22;
-		L_22 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_21, NULL);
-		NullCheck(L_22);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_23;
-		L_23 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_22, NULL);
-		V_5 = L_23;
-		// ukeCell.transform.DOLocalMove(semeCell.transform.localPosition, 0.2f);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_24 = ___ukeCell1;
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_23 = ___ukeCell1;
+		NullCheck(L_23);
+		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_24;
+		L_24 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_23, NULL);
 		NullCheck(L_24);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_25;
-		L_25 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_24, NULL);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_26 = ___semeCell0;
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_25;
+		L_25 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_24, NULL);
+		V_5 = L_25;
+		// ukeCell.transform.DOLocalMove(semeCell.transform.localPosition, 0.2f);
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_26 = ___ukeCell1;
 		NullCheck(L_26);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_27;
 		L_27 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_26, NULL);
-		NullCheck(L_27);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_28;
-		L_28 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_27, NULL);
-		TweenerCore_3_tCD82DFC45FB71C681FA8659EA63A7D7D16BFFE77* L_29;
-		L_29 = ShortcutExtensions_DOLocalMove_mF5E1C871CE07EA143E72E39BD30F3B45AE51A3DD(L_25, L_28, (0.200000003f), (bool)0, NULL);
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_28 = ___semeCell0;
+		NullCheck(L_28);
+		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_29;
+		L_29 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_28, NULL);
+		NullCheck(L_29);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_30;
+		L_30 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_29, NULL);
+		TweenerCore_3_tCD82DFC45FB71C681FA8659EA63A7D7D16BFFE77* L_31;
+		L_31 = ShortcutExtensions_DOLocalMove_mF5E1C871CE07EA143E72E39BD30F3B45AE51A3DD(L_27, L_30, (0.200000003f), (bool)0, NULL);
 		// _doLocalMove = semeCell.transform.DOLocalMove(tempPosition, 0.2f);
-		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_30 = ___semeCell0;
-		NullCheck(L_30);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_31;
-		L_31 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_30, NULL);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_32 = V_5;
-		TweenerCore_3_tCD82DFC45FB71C681FA8659EA63A7D7D16BFFE77* L_33;
-		L_33 = ShortcutExtensions_DOLocalMove_mF5E1C871CE07EA143E72E39BD30F3B45AE51A3DD(L_31, L_32, (0.200000003f), (bool)0, NULL);
-		__this->____doLocalMove_11 = L_33;
-		Il2CppCodeGenWriteBarrier((void**)(&__this->____doLocalMove_11), (void*)L_33);
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_32 = ___semeCell0;
+		NullCheck(L_32);
+		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_33;
+		L_33 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_32, NULL);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_34 = V_5;
+		TweenerCore_3_tCD82DFC45FB71C681FA8659EA63A7D7D16BFFE77* L_35;
+		L_35 = ShortcutExtensions_DOLocalMove_mF5E1C871CE07EA143E72E39BD30F3B45AE51A3DD(L_33, L_34, (0.200000003f), (bool)0, NULL);
+		__this->____doLocalMove_11 = L_35;
+		Il2CppCodeGenWriteBarrier((void**)(&__this->____doLocalMove_11), (void*)L_35);
 	}
 
-IL_00d7:
+IL_00df:
 	{
+		// }
+		return;
+	}
+}
+// System.Void Gayplay.GayplayGrid.GridController::ChangeCellsLists(Gayplay.GayplayGrid.CellController,Gayplay.GayplayGrid.CellController)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void GridController_ChangeCellsLists_mF8BD6D84535991BF5A3A83B32F30105B29A8B712 (GridController_t4689C8E563477AA619E7539B707422DDDB1D44DE* __this, CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* ___semeCell0, CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* ___ukeCell1, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Dictionary_2_get_Item_m18254036D42ED9C42EAB566684E9979C9C625D62_RuntimeMethod_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&List_1_IndexOf_mA369DF38E90F2E4F0C7AEB72FD534A5E1C6498FA_RuntimeMethod_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&List_1_Insert_mECA51441789AFB325211C594E1083C2A333C4FE7_RuntimeMethod_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&List_1_Remove_m1603646C70A4505252783AD906EB5001C7090767_RuntimeMethod_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* V_0 = NULL;
+	RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 V_1;
+	memset((&V_1), 0, sizeof(V_1));
+	int32_t V_2 = 0;
+	int32_t V_3 = 0;
+	{
+		// var semeRow = _gridRowCells[semeCell.CellDataModel.RowColumnPair.RowNum];
+		Dictionary_2_tD3721D21E992626DF66E69805F3629DA8202E925* L_0 = __this->____gridRowCells_8;
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_1 = ___semeCell0;
+		NullCheck(L_1);
+		CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* L_2;
+		L_2 = CellController_get_CellDataModel_m5F7DB19EEE3AC70E7DB82B71ABE9DE4A4284710E_inline(L_1, NULL);
+		NullCheck(L_2);
+		RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 L_3;
+		L_3 = CellDataModel_get_RowColumnPair_m9785E6C8E231D1D907DA3AC67DEFC2E7C8821132_inline(L_2, NULL);
+		int32_t L_4 = L_3.___RowNum_1;
+		NullCheck(L_0);
+		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_5;
+		L_5 = Dictionary_2_get_Item_m18254036D42ED9C42EAB566684E9979C9C625D62(L_0, L_4, Dictionary_2_get_Item_m18254036D42ED9C42EAB566684E9979C9C625D62_RuntimeMethod_var);
+		// var ukeRow = _gridRowCells[ukeCell.CellDataModel.RowColumnPair.RowNum];
+		Dictionary_2_tD3721D21E992626DF66E69805F3629DA8202E925* L_6 = __this->____gridRowCells_8;
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_7 = ___ukeCell1;
+		NullCheck(L_7);
+		CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* L_8;
+		L_8 = CellController_get_CellDataModel_m5F7DB19EEE3AC70E7DB82B71ABE9DE4A4284710E_inline(L_7, NULL);
+		NullCheck(L_8);
+		RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 L_9;
+		L_9 = CellDataModel_get_RowColumnPair_m9785E6C8E231D1D907DA3AC67DEFC2E7C8821132_inline(L_8, NULL);
+		int32_t L_10 = L_9.___RowNum_1;
+		NullCheck(L_6);
+		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_11;
+		L_11 = Dictionary_2_get_Item_m18254036D42ED9C42EAB566684E9979C9C625D62(L_6, L_10, Dictionary_2_get_Item_m18254036D42ED9C42EAB566684E9979C9C625D62_RuntimeMethod_var);
+		V_0 = L_11;
+		// var tempUke = ukeCell.CellDataModel.RowColumnPair;
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_12 = ___ukeCell1;
+		NullCheck(L_12);
+		CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* L_13;
+		L_13 = CellController_get_CellDataModel_m5F7DB19EEE3AC70E7DB82B71ABE9DE4A4284710E_inline(L_12, NULL);
+		NullCheck(L_13);
+		RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 L_14;
+		L_14 = CellDataModel_get_RowColumnPair_m9785E6C8E231D1D907DA3AC67DEFC2E7C8821132_inline(L_13, NULL);
+		V_1 = L_14;
+		// ukeCell.CellDataModel.ChangeRowColumn(semeCell.CellDataModel.RowColumnPair);
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_15 = ___ukeCell1;
+		NullCheck(L_15);
+		CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* L_16;
+		L_16 = CellController_get_CellDataModel_m5F7DB19EEE3AC70E7DB82B71ABE9DE4A4284710E_inline(L_15, NULL);
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_17 = ___semeCell0;
+		NullCheck(L_17);
+		CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* L_18;
+		L_18 = CellController_get_CellDataModel_m5F7DB19EEE3AC70E7DB82B71ABE9DE4A4284710E_inline(L_17, NULL);
+		NullCheck(L_18);
+		RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 L_19;
+		L_19 = CellDataModel_get_RowColumnPair_m9785E6C8E231D1D907DA3AC67DEFC2E7C8821132_inline(L_18, NULL);
+		NullCheck(L_16);
+		CellDataModel_ChangeRowColumn_m4A067DFB79BD7C634EA44922D5B309D4C8E3115A(L_16, L_19, NULL);
+		// semeCell.CellDataModel.ChangeRowColumn(tempUke);
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_20 = ___semeCell0;
+		NullCheck(L_20);
+		CellDataModel_tC9A937B695DAB3939D06BF9785A0B6E912B60431* L_21;
+		L_21 = CellController_get_CellDataModel_m5F7DB19EEE3AC70E7DB82B71ABE9DE4A4284710E_inline(L_20, NULL);
+		RowColumnPair_tBDE91A416F4CA2532DBB16A6BA844B1BAF0F7DF8 L_22 = V_1;
+		NullCheck(L_21);
+		CellDataModel_ChangeRowColumn_m4A067DFB79BD7C634EA44922D5B309D4C8E3115A(L_21, L_22, NULL);
+		// var semeIndex = semeRow.IndexOf(semeCell);
+		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_23 = L_5;
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_24 = ___semeCell0;
+		NullCheck(L_23);
+		int32_t L_25;
+		L_25 = List_1_IndexOf_mA369DF38E90F2E4F0C7AEB72FD534A5E1C6498FA(L_23, L_24, List_1_IndexOf_mA369DF38E90F2E4F0C7AEB72FD534A5E1C6498FA_RuntimeMethod_var);
+		V_2 = L_25;
+		// var ukeIndex = ukeRow.IndexOf(ukeCell);
+		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_26 = V_0;
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_27 = ___ukeCell1;
+		NullCheck(L_26);
+		int32_t L_28;
+		L_28 = List_1_IndexOf_mA369DF38E90F2E4F0C7AEB72FD534A5E1C6498FA(L_26, L_27, List_1_IndexOf_mA369DF38E90F2E4F0C7AEB72FD534A5E1C6498FA_RuntimeMethod_var);
+		V_3 = L_28;
+		// semeRow.Remove(semeCell);
+		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_29 = L_23;
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_30 = ___semeCell0;
+		NullCheck(L_29);
+		bool L_31;
+		L_31 = List_1_Remove_m1603646C70A4505252783AD906EB5001C7090767(L_29, L_30, List_1_Remove_m1603646C70A4505252783AD906EB5001C7090767_RuntimeMethod_var);
+		// semeRow.Insert(semeIndex, ukeCell);
+		int32_t L_32 = V_2;
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_33 = ___ukeCell1;
+		NullCheck(L_29);
+		List_1_Insert_mECA51441789AFB325211C594E1083C2A333C4FE7(L_29, L_32, L_33, List_1_Insert_mECA51441789AFB325211C594E1083C2A333C4FE7_RuntimeMethod_var);
+		// ukeRow.Remove(ukeCell);
+		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_34 = V_0;
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_35 = ___ukeCell1;
+		NullCheck(L_34);
+		bool L_36;
+		L_36 = List_1_Remove_m1603646C70A4505252783AD906EB5001C7090767(L_34, L_35, List_1_Remove_m1603646C70A4505252783AD906EB5001C7090767_RuntimeMethod_var);
+		// ukeRow.Insert(ukeIndex, semeCell);
+		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_37 = V_0;
+		int32_t L_38 = V_3;
+		CellController_t98B7438815F5E8362FE356C66897A3452D5870B8* L_39 = ___semeCell0;
+		NullCheck(L_37);
+		List_1_Insert_mECA51441789AFB325211C594E1083C2A333C4FE7(L_37, L_38, L_39, List_1_Insert_mECA51441789AFB325211C594E1083C2A333C4FE7_RuntimeMethod_var);
 		// }
 		return;
 	}
@@ -11260,7 +11257,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR List_1_t999E15DA2ACA2A14C82F7CE20DA94155232C4
 		NullCheck(L_17);
 		List_1__ctor_m80607AFF236D0863B82BA8176B7EC910A418151B(L_17, List_1__ctor_m80607AFF236D0863B82BA8176B7EC910A418151B_RuntimeMethod_var);
 		V_4 = L_17;
-		// for (int i = semeIndex + 1; i < columnCount; i++)
+		// for (int i = semeIndex + 1; i <= columnCount; i++)
 		int32_t L_18 = V_3;
 		V_5 = ((int32_t)il2cpp_codegen_add(L_18, 1));
 		goto IL_0095;
@@ -11317,17 +11314,17 @@ IL_0052:
 		L_34 = CellDataModel_get_RowColumnPair_m9785E6C8E231D1D907DA3AC67DEFC2E7C8821132_inline(L_33, NULL);
 		NullCheck(L_29);
 		List_1_Add_m3C90703C072EED6200A4EC9FC2160302607844A8_inline(L_29, L_34, List_1_Add_m3C90703C072EED6200A4EC9FC2160302607844A8_RuntimeMethod_var);
-		// for (int i = semeIndex + 1; i < columnCount; i++)
+		// for (int i = semeIndex + 1; i <= columnCount; i++)
 		int32_t L_35 = V_5;
 		V_5 = ((int32_t)il2cpp_codegen_add(L_35, 1));
 	}
 
 IL_0095:
 	{
-		// for (int i = semeIndex + 1; i < columnCount; i++)
+		// for (int i = semeIndex + 1; i <= columnCount; i++)
 		int32_t L_36 = V_5;
 		int32_t L_37 = V_2;
-		if ((((int32_t)L_36) < ((int32_t)L_37)))
+		if ((((int32_t)L_36) <= ((int32_t)L_37)))
 		{
 			goto IL_0052;
 		}
@@ -11476,23 +11473,23 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR List_1_t999E15DA2ACA2A14C82F7CE20DA94155232C4
 		L_18 = CellDataModel_get_RowColumnPair_m9785E6C8E231D1D907DA3AC67DEFC2E7C8821132_inline(L_17, NULL);
 		int32_t L_19 = L_18.___RowNum_1;
 		V_4 = L_19;
-		// for (int i = semeIndex + 1; i < rowCount; i++)
+		// for (int i = semeIndex + 1; i <= rowCount; i++)
 		int32_t L_20 = V_3;
 		V_5 = ((int32_t)il2cpp_codegen_add(L_20, 1));
-		goto IL_009d;
+		goto IL_009b;
 	}
 
 IL_0059:
 	{
-		// if (i >= columnList.Count - 1 )
+		// if (i >= columnList.Count)
 		int32_t L_21 = V_5;
 		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_22 = V_1;
 		NullCheck(L_22);
 		int32_t L_23;
 		L_23 = List_1_get_Count_mA352FAE2891C6AAA2B6B7ACDD8732BB71D2D0EF6_inline(L_22, List_1_get_Count_mA352FAE2891C6AAA2B6B7ACDD8732BB71D2D0EF6_RuntimeMethod_var);
-		if ((((int32_t)L_21) >= ((int32_t)((int32_t)il2cpp_codegen_subtract(L_23, 1)))))
+		if ((((int32_t)L_21) >= ((int32_t)L_23)))
 		{
-			goto IL_00a3;
+			goto IL_00a1;
 		}
 	}
 	{
@@ -11514,7 +11511,7 @@ IL_0059:
 		L_30 = CellController_get_CellType_m5554E07D5F846A156A35DDF08C544664A8E98383(L_29, NULL);
 		if ((!(((uint32_t)L_28) == ((uint32_t)L_30))))
 		{
-			goto IL_00a3;
+			goto IL_00a1;
 		}
 	}
 	{
@@ -11533,31 +11530,31 @@ IL_0059:
 		L_36 = CellDataModel_get_RowColumnPair_m9785E6C8E231D1D907DA3AC67DEFC2E7C8821132_inline(L_35, NULL);
 		NullCheck(L_31);
 		List_1_Add_m3C90703C072EED6200A4EC9FC2160302607844A8_inline(L_31, L_36, List_1_Add_m3C90703C072EED6200A4EC9FC2160302607844A8_RuntimeMethod_var);
-		// for (int i = semeIndex + 1; i < rowCount; i++)
+		// for (int i = semeIndex + 1; i <= rowCount; i++)
 		int32_t L_37 = V_5;
 		V_5 = ((int32_t)il2cpp_codegen_add(L_37, 1));
 	}
 
-IL_009d:
+IL_009b:
 	{
-		// for (int i = semeIndex + 1; i < rowCount; i++)
+		// for (int i = semeIndex + 1; i <= rowCount; i++)
 		int32_t L_38 = V_5;
 		int32_t L_39 = V_4;
-		if ((((int32_t)L_38) < ((int32_t)L_39)))
+		if ((((int32_t)L_38) <= ((int32_t)L_39)))
 		{
 			goto IL_0059;
 		}
 	}
 
-IL_00a3:
+IL_00a1:
 	{
 		// for (int i = semeIndex - 1; i >= 0; i--)
 		int32_t L_40 = V_3;
 		V_6 = ((int32_t)il2cpp_codegen_subtract(L_40, 1));
-		goto IL_00e2;
+		goto IL_00e0;
 	}
 
-IL_00aa:
+IL_00a8:
 	{
 		// if (columnList[i].CellDataModel.CellType == semeCell.CellType)
 		List_1_t5EC5E273C368CF1E5927A72F2317204C3A5FFA99* L_41 = V_1;
@@ -11577,7 +11574,7 @@ IL_00aa:
 		L_47 = CellController_get_CellType_m5554E07D5F846A156A35DDF08C544664A8E98383(L_46, NULL);
 		if ((!(((uint32_t)L_45) == ((uint32_t)L_47))))
 		{
-			goto IL_00e7;
+			goto IL_00e5;
 		}
 	}
 	{
@@ -11601,17 +11598,17 @@ IL_00aa:
 		V_6 = ((int32_t)il2cpp_codegen_subtract(L_54, 1));
 	}
 
-IL_00e2:
+IL_00e0:
 	{
 		// for (int i = semeIndex - 1; i >= 0; i--)
 		int32_t L_55 = V_6;
 		if ((((int32_t)L_55) >= ((int32_t)0)))
 		{
-			goto IL_00aa;
+			goto IL_00a8;
 		}
 	}
 
-IL_00e7:
+IL_00e5:
 	{
 		// return potancevalnyList;
 		List_1_t999E15DA2ACA2A14C82F7CE20DA94155232C4747* L_56 = V_2;

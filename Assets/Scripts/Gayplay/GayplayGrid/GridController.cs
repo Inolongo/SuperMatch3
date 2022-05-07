@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Gayplay.Data;
@@ -15,6 +14,8 @@ namespace Gayplay.GayplayGrid
         [SerializeField] private Transform cellContainer;
         [SerializeField] private Transform decoyGrid;
 
+        public event Action<CellController> CellCreated;
+        
         private PiecesData _data;
 
         private readonly Dictionary<int, List<CellController>> _gridRowCells = new();
@@ -22,14 +23,12 @@ namespace Gayplay.GayplayGrid
         private readonly Dictionary<int, List<RectTransform>> _decoyDictionary = new();
 
         private readonly Random _random = new();
+
         private Tweener _doLocalMove;
 
-        private void Start()
-        {
-            Initialize();
-        }
+     
 
-        private async void Initialize()
+        public async Task Initialize()
         {
             InitData();
             CreateGridDecoy();
@@ -54,282 +53,12 @@ namespace Gayplay.GayplayGrid
             _data = Resources.Load<PiecesData>("GameplayData/FirstLevel");
         }
 
-        private void CreateGrid()
+        public List<CellController> GetRowByNum(int rowNum)
         {
-            var rowCount = _data.IsActiveCellRows.Count;
-            for (var rowNum = 0; rowNum < rowCount; rowNum++)
-            {
-                var columnCount = _data.IsActiveCellRows[rowNum].Row.Count;
-                var createdCells = new List<CellController>(columnCount);
-
-                for (var columnNum = 0; columnNum < columnCount; columnNum++)
-                {
-                    var randomModel = GetRandomModel();
-                    randomModel.ChangeRowColumn(rowNum, columnNum);
-
-                    if (IsSafeHorizontal(createdCells, randomModel.CellType) && IsSafeVertical(randomModel))
-                    {
-                        if (GetIsCellActive(rowNum, columnNum, _data.IsActiveCellRows))
-                        {
-                            var decoyRectTransform = _decoyDictionary[rowNum][columnNum];
-                            var piece = Instantiate(cellPrefab, cellContainer);
-                            piece.Init(randomModel, decoyRectTransform);
-                            createdCells.Add(piece);
-                            piece.name = "piece " + "R: " + rowNum + "C: " + columnNum;
-
-                            piece.CellSwiped += OnCellSwiped;
-                        }
-                    }
-                    else
-                    {
-                        columnNum -= 1;
-                    }
-                }
-
-                _gridRowCells[rowNum] = createdCells;
-            }
+            return _gridRowCells[rowNum];
         }
 
-        private void OnCellSwiped(SwipeDirection swipeDirection, int rowNum, int columnNum)
-        {
-            var semeCell = GetCell(rowNum, columnNum);
-            Debug.Log("OnCellSwiped dir " +swipeDirection);
-            switch (swipeDirection)
-            {
-                case SwipeDirection.Up:
-                {
-                    var ukeCell = GetCell(rowNum - 1, columnNum);
-                    SwipeCells(semeCell, ukeCell);
-                    break;
-                }
-                case SwipeDirection.Down:
-                {
-                    var ukeCell = GetCell(rowNum + 1, columnNum);
-                    SwipeCells(semeCell, ukeCell);
-                    break;
-                }
-                case SwipeDirection.Left:
-                {
-                    var ukeCell = GetCell(rowNum, columnNum - 1);
-                    SwipeCells(semeCell, ukeCell);
-                    break;
-                }
-                case SwipeDirection.Right:
-                {
-                    var ukeCell = GetCell(rowNum, columnNum + 1);
-                    SwipeCells(semeCell, ukeCell);
-                    break;
-                }
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(swipeDirection), swipeDirection, null);
-            }
-
-            GetCell(rowNum, columnNum);
-        }
-
-        private CellController GetCell(int rowNum, int columnNum)
-        {
-            foreach (var cellController in _gridRowCells[rowNum])
-            {
-                if (cellController.CellDataModel.RowColumnPair.ColumnNum == columnNum)
-                {
-                    return cellController;
-                }
-            }
-
-            throw new Exception("no bitches???");
-        }
-
-        //ToDo: fix list bugs there is some shit
-        private void SwipeCells(CellController semeCell, CellController ukeCell)
-        {
-            // Debug.Log("zaletel v SwipeCells");
-            // var semeRow = _gridRowCells[semeCell.CellDataModel.RowColumnPair.RowNum];
-            // var ukeRow = _gridRowCells[ukeCell.CellDataModel.RowColumnPair.RowNum];
-            //
-            // var tempUke = ukeCell.CellDataModel.RowColumnPair;
-            // ukeCell.CellDataModel.ChangeRowColumn(semeCell.CellDataModel.RowColumnPair);
-            // semeCell.CellDataModel.ChangeRowColumn(tempUke);
-            //
-            // var semeIndex = semeRow.IndexOf(semeCell);
-            // var ukeIndex = ukeRow.IndexOf(ukeCell);
-            //
-            // semeRow.Remove(semeCell);
-            // semeRow.Insert(semeIndex, ukeCell);
-            //
-            // ukeRow.Remove(ukeCell);
-            // ukeRow.Insert(ukeIndex, semeCell);
-            ChangeCellsLists(semeCell, ukeCell);
-            var tempPosition = ukeCell.transform.localPosition;
-
-            ukeCell.transform.DOLocalMove(semeCell.transform.localPosition, 0.2f);
-            _doLocalMove = semeCell.transform.DOLocalMove(tempPosition, 0.2f);
-            _doLocalMove.onComplete += () => OnCellSwipeMoveComplete(semeCell, ukeCell);
-        }
-
-        private void OnCellSwipeMoveComplete(CellController semeCell, CellController ukeCell)
-        {
-            if (TryMatch(semeCell, ukeCell, out var matchedCells))
-            {
-                foreach (var rowColumnPair in matchedCells)
-                {
-                    var gridRowCell = _gridRowCells[rowColumnPair.RowNum];
-                    foreach (var cellController in gridRowCell)
-                    {
-                        if (cellController.CellDataModel.RowColumnPair.ColumnNum == rowColumnPair.ColumnNum)
-                        {
-                            cellController.DeleteCell();
-                        }
-                    }
-                }
-            }
-            else
-            {
-                ChangeCellsLists(semeCell, ukeCell);
-
-                var tempPosition = ukeCell.transform.localPosition;
-
-                ukeCell.transform.DOLocalMove(semeCell.transform.localPosition, 0.2f);
-                _doLocalMove = semeCell.transform.DOLocalMove(tempPosition, 0.2f);
-            }
-        }
-
-        private void ChangeCellsLists(CellController semeCell, CellController ukeCell)
-        {
-            var semeRow = _gridRowCells[semeCell.CellDataModel.RowColumnPair.RowNum];
-            var ukeRow = _gridRowCells[ukeCell.CellDataModel.RowColumnPair.RowNum];
-
-            var tempUke = ukeCell.CellDataModel.RowColumnPair;
-            ukeCell.CellDataModel.ChangeRowColumn(semeCell.CellDataModel.RowColumnPair);
-            semeCell.CellDataModel.ChangeRowColumn(tempUke);
-
-            var semeIndex = semeRow.IndexOf(semeCell);
-            var ukeIndex = ukeRow.IndexOf(ukeCell);
-
-            semeRow.Remove(semeCell);
-            semeRow.Insert(semeIndex, ukeCell);
-
-            ukeRow.Remove(ukeCell);
-            ukeRow.Insert(ukeIndex, semeCell);
-        }
-
-
-        private bool TryMatch(CellController semeCell, CellController ukeCell, out List<RowColumnPair> matchedCells)
-        {
-            matchedCells = new List<RowColumnPair>();
-            matchedCells.AddRange(GetMatchedList(semeCell));
-            matchedCells.AddRange(GetMatchedList(ukeCell));
-            
-            return matchedCells.Count > 1;
-        }
-
-        private List<RowColumnPair> GetMatchedList(CellController cell)
-        {
-            var matchedCells = new List<RowColumnPair>();
-            var horizontalMatch = GetSameNearHorizontalCells(cell);
-            if (horizontalMatch.Count >= 2)
-            {
-                matchedCells.AddRange(horizontalMatch);
-            }
-
-            var verticalMatch = GetSameNearVerticalCells(cell);
-            if (verticalMatch.Count >= 2)
-            {
-                matchedCells.AddRange(verticalMatch);
-            }
-
-            if (matchedCells.Count > 0)
-            {
-                matchedCells.Add(cell.CellDataModel.RowColumnPair);
-            }
-
-            return matchedCells;
-        }
-
-
-        private List<RowColumnPair> GetSameNearHorizontalCells(CellController semeCell)
-        {
-            var rowNum = semeCell.CellDataModel.RowColumnPair.RowNum;
-            var row = _gridRowCells[rowNum];
-
-            var columnCount = row[row.Count - 1].CellDataModel.RowColumnPair.ColumnNum;
-            var semeIndex = row.IndexOf(semeCell);
-
-
-            List<RowColumnPair> potancevalnyList = new();
-            for (int i = semeIndex + 1; i <= columnCount; i++)
-            {
-                if (i >= row.Count) break;
-
-                if (row[i].CellDataModel.CellType == semeCell.CellType)
-                {
-                    potancevalnyList.Add(row[i].CellDataModel.RowColumnPair);
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            for (int i = semeIndex - 1; i >= 0; i--)
-            {
-                if (row[i].CellDataModel.CellType == semeCell.CellType)
-                {
-                    potancevalnyList.Add(row[i].CellDataModel.RowColumnPair);
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            return potancevalnyList;
-        }
-
-
-        private List<RowColumnPair> GetSameNearVerticalCells(CellController semeCell)
-        {
-            var columnNum = semeCell.CellDataModel.RowColumnPair.ColumnNum;
-            var rowNum = semeCell.CellDataModel.RowColumnPair.RowNum;
-            var columnList = GetColumnList(columnNum);
-            List<RowColumnPair> potancevalnyList = new();
-            var semeIndex = columnList.IndexOf(semeCell);
-            var rowCount = columnList[columnList.Count - 1].CellDataModel.RowColumnPair.RowNum;
-
-            for (int i = semeIndex + 1; i <= rowCount; i++)
-            {
-                if (i >= columnList.Count)
-                {
-                    break;
-                }
-                if (columnList[i].CellDataModel.CellType == semeCell.CellType)
-                {
-                    potancevalnyList.Add(columnList[i].CellDataModel.RowColumnPair);
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-
-            for (int i = semeIndex - 1; i >= 0; i--)
-            {
-                if (columnList[i].CellDataModel.CellType == semeCell.CellType)
-                {
-                    potancevalnyList.Add(columnList[i].CellDataModel.RowColumnPair);
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            return potancevalnyList;
-        }
-
-
-        private List<CellController> GetColumnList(int columnNum)
+        public List<CellController> GetColumnList(int columnNum)
         {
             List<CellController> columnList = new();
             foreach (var key in _gridRowCells.Keys)
@@ -347,6 +76,30 @@ namespace Gayplay.GayplayGrid
             return columnList;
         }
 
+        public CellController GetCell(int rowNum, int columnNum)
+        {
+            foreach (var cellController in _gridRowCells[rowNum])
+            {
+                if (cellController.CellDataModel.RowColumnPair.ColumnNum == columnNum)
+                {
+                    return cellController;
+                }
+            }
+
+            throw new Exception("no bitches???");
+        }
+        
+        public void SwipeCells(CellController semeCell, CellController ukeCell, Action<CellController, CellController> onSwipeCompleted = null)
+        {
+            SwapCellsInLists(semeCell, ukeCell);
+            var tempPosition = ukeCell.transform.localPosition;
+
+            ukeCell.transform.DOLocalMove(semeCell.transform.localPosition, 0.2f);
+            _doLocalMove = semeCell.transform.DOLocalMove(tempPosition, 0.2f);
+            
+            _doLocalMove.onComplete += () => onSwipeCompleted?.Invoke(semeCell, ukeCell); ;
+        }
+
         private void CreateGridDecoy()
         {
             var rowCount = _data.IsActiveCellRows.Count;
@@ -357,7 +110,7 @@ namespace Gayplay.GayplayGrid
                 for (var columnNum = 0; columnNum < columnCount; columnNum++)
                 {
                     var cellDecoy = new GameObject().AddComponent<RectTransform>();
-                    cellDecoy.name = "Pidor";
+                    cellDecoy.name = "Pidor R: " + rowNum + "; C: " + columnNum;
                     cellDecoy.SetParent(decoyGrid);
                     createdCells.Add(cellDecoy);
                 }
@@ -366,10 +119,40 @@ namespace Gayplay.GayplayGrid
             }
         }
 
-        private bool GetIsCellActive(int rowNum, int columnNum, List<IsActiveCellRow> list)
+        private void CreateGrid() 
         {
-            var row = list[rowNum].Row;
-            return row[columnNum];
+            var rowCount = _data.IsActiveCellRows.Count;
+            for (var rowNum = 0; rowNum < rowCount; rowNum++)
+            {
+                var columnCount = _data.IsActiveCellRows[rowNum].Row.Count;
+                var createdCells = new List<CellController>(columnCount);
+
+                for (var columnNum = 0; columnNum < columnCount; columnNum++)
+                {
+                    var randomModel = GetRandomModel();
+                    randomModel.ChangeRowColumn(rowNum, columnNum);
+
+                    if (IsSafeHorizontal(createdCells, randomModel.CellType) && IsSafeVertical(randomModel))
+                    {
+                        if (GetIsCellActive(rowNum, columnNum, _data.IsActiveCellRows))
+                        {
+                            var decoyRectTransform = _decoyDictionary[rowNum][columnNum];
+                            var cellController = Instantiate(cellPrefab, cellContainer);
+                            cellController.Init(randomModel, decoyRectTransform);
+                            createdCells.Add(cellController);
+                            cellController.name = "piece " + "R: " + rowNum + "C: " + columnNum;
+                            
+                            CellCreated?.Invoke(cellController);
+                        }
+                    }
+                    else
+                    {
+                        columnNum -= 1;
+                    }
+                }
+
+                _gridRowCells[rowNum] = createdCells;
+            }
         }
 
         private CellDataModel GetRandomModel()
@@ -433,8 +216,33 @@ namespace Gayplay.GayplayGrid
 
             if (previousCellMode.CellType != cellModelToCreat.CellType) return true;
 
-
             return false;
+        }
+
+        private bool GetIsCellActive(int rowNum, int columnNum, List<IsActiveCellRow> list)
+        {
+            var row = list[rowNum].Row;
+            return row[columnNum];
+        }
+
+
+        private void SwapCellsInLists(CellController semeCell, CellController ukeCell)
+        {
+            var semeRow = _gridRowCells[semeCell.CellDataModel.RowColumnPair.RowNum];
+            var ukeRow = _gridRowCells[ukeCell.CellDataModel.RowColumnPair.RowNum];
+
+            var tempUke = ukeCell.CellDataModel.RowColumnPair;
+            ukeCell.CellDataModel.ChangeRowColumn(semeCell.CellDataModel.RowColumnPair);
+            semeCell.CellDataModel.ChangeRowColumn(tempUke);
+
+            var semeIndex = semeRow.IndexOf(semeCell);
+            var ukeIndex = ukeRow.IndexOf(ukeCell);
+
+            semeRow.Remove(semeCell);
+            semeRow.Insert(semeIndex, ukeCell);
+
+            ukeRow.Remove(ukeCell);
+            ukeRow.Insert(ukeIndex, semeCell);
         }
     }
 }
