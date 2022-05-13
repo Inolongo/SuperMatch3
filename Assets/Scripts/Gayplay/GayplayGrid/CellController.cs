@@ -14,12 +14,19 @@ namespace Gayplay.GayplayGrid
         public CellType CellType => CellDataModel.CellType;
 
         public CellDataModel CellDataModel { get; private set; }
+        public CellModel CellModel { get; private set; }
 
         private Vector2 _swipeStartPosition;
         private Vector2 _swipeEndPosition;
 
         public Action<SwipeDirection, int, int> CellSwiped;
 
+        public void Init(CellModel cellDataModel, Vector2 size)
+        {
+            CellModel = cellDataModel;
+            cellView.Init(CellModel);
+        }
+        
         public void Init(CellDataModel cellDataModel, RectTransform decoyRectTransform)
         {
             CellDataModel = cellDataModel;
