@@ -23,6 +23,7 @@ namespace Gayplay.GayplayGrid
         public void Init(CellDataModel cellDataModel, RectTransform decoyRectTransform)
         {
             CellDataModel = cellDataModel;
+            cellDataModel.IsMatched = false;
             cellView.Init(cellDataModel, decoyRectTransform);
         }
 
@@ -37,8 +38,7 @@ namespace Gayplay.GayplayGrid
 
             var horizontalSwipe = _swipeEndPosition.x - _swipeStartPosition.x;
             var verticalSwipe = _swipeEndPosition.y - _swipeStartPosition.y;
-            Debug.Log("verticalSwipe" + verticalSwipe);
-            Debug.Log("horizontalSwipe" + horizontalSwipe);
+    
             if (Math.Abs(verticalSwipe) - Math.Abs(horizontalSwipe) > 20)
             {
                 switch (verticalSwipe)
@@ -69,11 +69,7 @@ namespace Gayplay.GayplayGrid
                 }
             }
         }
-
-        public void SwipeCell(Enum swipeDirection)
-        {
-        }
-
+        
         public void OnDrag(PointerEventData eventData)
         {
         }
@@ -81,7 +77,7 @@ namespace Gayplay.GayplayGrid
         public void DeleteCell()
         {
             transform.DOScale(Vector3.zero, 0.2f).SetEase(func);
-            
+            CellDataModel.IsMatched = true;
         }
     }
 }

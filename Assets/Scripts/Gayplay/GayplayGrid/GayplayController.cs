@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Gayplay.Data;
 using UnityEngine;
 
@@ -22,40 +23,56 @@ namespace Gayplay.GayplayGrid
 
         private void OnCellSwiped(SwipeDirection swipeDirection, int rowNum, int columnNum)
         {
-            var semeCell = _gridController.GetCell(rowNum, columnNum);
-            Debug.Log("OnCellSwiped dir " + swipeDirection);
+            if (!_gridController.TryGetCell(rowNum, columnNum, out var semeCell))
+            {
+                throw new Exception("Can't find cell by row num = " + rowNum + "column num = " + columnNum);
+            }
+
+            var ukeRowNum = -1;
+            var ukeColumnNum = -1;
+
             switch (swipeDirection)
             {
                 case SwipeDirection.Up:
                 {
-                    var ukeCell = _gridController.GetCell(rowNum - 1, columnNum);
-                    _gridController.SwipeCells(semeCell, ukeCell, OnCellSwipeAnimationCompleted);
+                    ukeRowNum = rowNum - 1;
+                    ukeColumnNum = columnNum;
                     break;
                 }
                 case SwipeDirection.Down:
                 {
-                    var ukeCell = _gridController.GetCell(rowNum + 1, columnNum);
-                    _gridController.SwipeCells(semeCell, ukeCell, OnCellSwipeAnimationCompleted);
+                    ukeRowNum = rowNum + 1;
+                    ukeColumnNum = columnNum;
                     break;
                 }
                 case SwipeDirection.Left:
                 {
-                    var ukeCell = _gridController.GetCell(rowNum, columnNum - 1);
-                    _gridController.SwipeCells(semeCell, ukeCell, OnCellSwipeAnimationCompleted);
+                    ukeRowNum = rowNum;
+                    ukeColumnNum = columnNum - 1;
                     break;
                 }
                 case SwipeDirection.Right:
                 {
-                    var ukeCell = _gridController.GetCell(rowNum, columnNum + 1);
-                    _gridController.SwipeCells(semeCell, ukeCell, OnCellSwipeAnimationCompleted);
+                    ukeRowNum = rowNum;
+                    ukeColumnNum = columnNum + 1;
                     break;
                 }
                 default:
                     throw new ArgumentOutOfRangeException(nameof(swipeDirection), swipeDirection, null);
             }
+            
+            
+            if (_gridController.TryGetCell(ukeRowNum, ukeColumnNum, out var ukeCell))
+            {
+                _gridController.SwipeCells(semeCell, ukeCell, OnCellSwipeAnimationCompleted);
+            }
+            else
+            {
+                throw new Exception("Can't find cell by row num = " + rowNum + "column num = " + columnNum);
+            }
         }
 
-        private void OnCellSwipeAnimationCompleted(CellController semeCell, CellController ukeCell)
+        private async void OnCellSwipeAnimationCompleted(CellController semeCell, CellController ukeCell)
         {
             if (TryMatch(semeCell, ukeCell, out var matchedCells))
             {
@@ -68,10 +85,12 @@ namespace Gayplay.GayplayGrid
                         if (cellController.CellDataModel.RowColumnPair.ColumnNum == rowColumnPair.ColumnNum)
                         {
                             cellController.DeleteCell();
-                            //ToDo: remove cell in array
                         }
                     }
                 }
+
+                await Task.Delay(300);
+                _gridController.DeleteMatchedCellsIfNeedAsync();
             }
             else
             {
@@ -159,7 +178,7 @@ namespace Gayplay.GayplayGrid
             List<RowColumnPair> potancevalnyList = new();
 
             var columnNum = semeCell.CellDataModel.RowColumnPair.ColumnNum;
-            var columnList = _gridController.GetColumnList(columnNum);
+            var columnList = _gridController.GetColumn(columnNum);
             var semeIndex = columnList.IndexOf(semeCell);
             var rowCount = columnList[columnList.Count - 1].CellDataModel.RowColumnPair.RowNum;
 

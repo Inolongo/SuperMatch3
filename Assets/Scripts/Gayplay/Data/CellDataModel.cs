@@ -9,6 +9,17 @@ namespace Gayplay.Data
         [SerializeField] private Sprite pieceIcon;
         [SerializeField] private Sprite pieceFace;
         [SerializeField] private CellType cellType;
+        private bool _isMatched;
+
+        public bool IsMatched
+        {
+            get => _isMatched;
+            set
+            {
+                Debug.Log("Set is matched value = " + value + " | Row = " + RowColumnPair.RowNum + ";  Column = " + RowColumnPair.ColumnNum);
+                _isMatched = value;
+            }
+        }
 
         public Sprite PieceIcon => pieceIcon;
         public Sprite PieceFace => pieceFace;
