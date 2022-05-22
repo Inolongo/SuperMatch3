@@ -8,17 +8,26 @@ namespace Gayplay.GayplayGrid
         public bool IsEmpty { get; }
         public Sprite PieceIcon { get; }
         public Sprite PieceFace { get; }
-
         public CellType CellType { get; }
+        public Vector2 Size { get; }
 
-        public Vector2 CellSize { get; }
-        public CellModel(bool isEmpty, Sprite pieceIcon, Sprite pieceFace, CellType cellType, Vector2 cellSize)
+        public CellPositionInGrid CellPositionInGrid;
+
+        public CellModel
+        (
+            bool isEmpty,
+            Sprite pieceIcon,
+            Sprite pieceFace,
+            CellType cellType,
+            Vector2 cellSize
+        )
         {
-            CellSize = cellSize;
+            Size = cellSize;
             PieceFace = pieceFace;
             PieceIcon = pieceIcon;
             IsEmpty = isEmpty;
             CellType = cellType;
+            CellPositionInGrid = new CellPositionInGrid(-1, -1);
         }
     }
 }

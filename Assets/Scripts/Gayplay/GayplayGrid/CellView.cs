@@ -1,4 +1,5 @@
-﻿using Gayplay.Data;
+﻿using System;
+using Gayplay.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,31 +10,35 @@ namespace Gayplay.GayplayGrid
     {
         [SerializeField] private Image icon;
         [SerializeField] private Image face;
-        
-        private RectTransform _rectTransform;
-        private CanvasGroup _canvasGroup;
-        
-        private void Awake()
+        [SerializeField] private RectTransform rectTransform;
+        [SerializeField] private CanvasGroup canvasGroup;
+
+        #if UNITY_EDITOR
+        private void OnValidate()
         {
-            _canvasGroup = GetComponent<CanvasGroup>();
-            _rectTransform = GetComponent<RectTransform>();
+            canvasGroup = GetComponent<CanvasGroup>();
+            rectTransform = GetComponent<RectTransform>();
         }
+        #endif
+        
         public void Init(CellDataModel cellDataModel, RectTransform decoyRectTransform)
         {
-            _rectTransform.offsetMax = new Vector2( decoyRectTransform.rect.width / 2, decoyRectTransform.rect.height / 2);
-            _rectTransform.offsetMin = new Vector2( -decoyRectTransform.rect.width / 2, -decoyRectTransform.rect.height / 2);
-            _rectTransform.localPosition = decoyRectTransform.localPosition;
+            rectTransform.offsetMax =
+                new Vector2(decoyRectTransform.rect.width / 2, decoyRectTransform.rect.height / 2);
+            rectTransform.offsetMin =
+                new Vector2(-decoyRectTransform.rect.width / 2, -decoyRectTransform.rect.height / 2);
+            rectTransform.localPosition = decoyRectTransform.localPosition;
             icon.sprite = cellDataModel.PieceIcon;
             face.sprite = cellDataModel.PieceFace;
         }
 
         public void Init(CellModel cellModel)
         {
-            SetSize(cellModel.CellSize);
-            
+            SetSize(cellModel.Size);
+
             if (cellModel.IsEmpty)
             {
-                _canvasGroup.alpha = 0;
+                canvasGroup.alpha = 0;
             }
             else
             {
@@ -44,8 +49,8 @@ namespace Gayplay.GayplayGrid
 
         private void SetSize(Vector2 size)
         {
-            _rectTransform.offsetMax = new Vector2( size.x / 2, size.y / 2);
-            _rectTransform.offsetMin = new Vector2( -size.x / 2, -size.y / 2);
+            rectTransform.offsetMax = new Vector2(size.x / 2, size.y / 2);
+            rectTransform.offsetMin = new Vector2(-size.x / 2, -size.y / 2);
         }
     }
 }

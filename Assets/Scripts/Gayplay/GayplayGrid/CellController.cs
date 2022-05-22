@@ -11,27 +11,23 @@ namespace Gayplay.GayplayGrid
         [SerializeField] private CellView cellView;
         [SerializeField] private Ease func;
 
-        public CellType CellType => CellDataModel.CellType;
+        public CellType CellType => CellModel.CellType;
 
-        public CellDataModel CellDataModel { get; private set; }
         public CellModel CellModel { get; private set; }
 
         private Vector2 _swipeStartPosition;
         private Vector2 _swipeEndPosition;
+        public event Action<SwipeDirection, CellModel> CellSwiped;
 
-        public Action<SwipeDirection, int, int> CellSwiped;
-
-        public void Init(CellModel cellDataModel, Vector2 size)
+        public void Init(CellModel cellDataModel)
         {
             CellModel = cellDataModel;
             cellView.Init(CellModel);
         }
-        
-        public void Init(CellDataModel cellDataModel, RectTransform decoyRectTransform)
+
+        public void SmoothMove(Vector3 endPosition)
         {
-            CellDataModel = cellDataModel;
-            cellDataModel.IsMatched = false;
-            cellView.Init(cellDataModel, decoyRectTransform);
+            
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -45,18 +41,18 @@ namespace Gayplay.GayplayGrid
 
             var horizontalSwipe = _swipeEndPosition.x - _swipeStartPosition.x;
             var verticalSwipe = _swipeEndPosition.y - _swipeStartPosition.y;
-    
+
+            var swipeDuration = SwipeDirection.None;
+
             if (Math.Abs(verticalSwipe) - Math.Abs(horizontalSwipe) > 20)
             {
                 switch (verticalSwipe)
                 {
                     case > 0:
-                        CellSwiped?.Invoke(SwipeDirection.Up, CellDataModel.RowColumnPair.RowNum,
-                            CellDataModel.RowColumnPair.ColumnNum);
+                        swipeDuration = SwipeDirection.Up;
                         break;
                     case < 0:
-                        CellSwiped?.Invoke(SwipeDirection.Down, CellDataModel.RowColumnPair.RowNum,
-                            CellDataModel.RowColumnPair.ColumnNum);
+                        swipeDuration = SwipeDirection.Down;
                         break;
                 }
             }
@@ -66,15 +62,15 @@ namespace Gayplay.GayplayGrid
                 switch (horizontalSwipe)
                 {
                     case < 0:
-                        CellSwiped?.Invoke(SwipeDirection.Left, CellDataModel.RowColumnPair.RowNum,
-                            CellDataModel.RowColumnPair.ColumnNum);
+                        swipeDuration = SwipeDirection.Left;
                         break;
                     case > 0:
-                        CellSwiped?.Invoke(SwipeDirection.Right, CellDataModel.RowColumnPair.RowNum,
-                            CellDataModel.RowColumnPair.ColumnNum);
+                        swipeDuration = SwipeDirection.Right;
                         break;
                 }
             }
+            
+            CellSwiped?.Invoke(swipeDuration, CellModel);
         }
         
         public void OnDrag(PointerEventData eventData)
@@ -84,7 +80,6 @@ namespace Gayplay.GayplayGrid
         public void DeleteCell()
         {
             transform.DOScale(Vector3.zero, 0.2f).SetEase(func);
-            CellDataModel.IsMatched = true;
         }
     }
 }

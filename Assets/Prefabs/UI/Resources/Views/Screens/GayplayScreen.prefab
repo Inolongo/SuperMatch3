@@ -312,7 +312,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exitButton: {fileID: 2127168563414666328}
   gayplayController: {fileID: 2999305902783549026}
-  gridController: {fileID: 5815496315014696643}
+  gridController: {fileID: 690969583057812994}
+  levelData: {fileID: 11400000, guid: bf8b57a723e4e97439d14dd5c7fd1bf4, type: 2}
 --- !u!114 &4110976606698731318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,7 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7787025823178759501}
   m_Layer: 5
-  m_Name: CellContainer
+  m_Name: Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -403,74 +404,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5361407800599291304}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &7722998543252272784
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3536157763219312229}
-  - component: {fileID: 763702450029514175}
-  m_Layer: 5
-  m_Name: DecoyGrid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3536157763219312229
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7722998543252272784}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5361407800599291304}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 300}
-  m_SizeDelta: {x: -80, y: 100}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &763702450029514175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7722998543252272784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 90, y: 90}
-  m_Spacing: {x: 0, y: 0}
-  m_Constraint: 1
-  m_ConstraintCount: 12
 --- !u!1 &8372015483660558663
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +420,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5361407800599291304}
-  - component: {fileID: 5815496315014696643}
+  - component: {fileID: 690969583057812994}
   m_Layer: 5
   m_Name: Grid
   m_TagString: Untagged
@@ -500,17 +440,16 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3536157763219312229}
   - {fileID: 7787025823178759501}
   m_Father: {fileID: 4524963785802926346}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5815496315014696643
+--- !u!114 &690969583057812994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -519,9 +458,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8372015483660558663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 737ce04a0df14e3a988637770589f23a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7feada13549d4954bef12a6720148ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellPrefab: {fileID: 6088050808163156226, guid: d58fc2f92d66e534bb74464284bde332, type: 3}
-  cellContainer: {fileID: 7787025823178759501}
-  decoyGrid: {fileID: 3536157763219312229}
+  spacing: {x: 10, y: 10}
+  content: {fileID: 7787025823178759501}
+  levelDataTest: {fileID: 11400000, guid: bf8b57a723e4e97439d14dd5c7fd1bf4, type: 2}

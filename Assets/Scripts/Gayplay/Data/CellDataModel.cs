@@ -27,6 +27,7 @@ namespace Gayplay.Data
         public CellType CellType => cellType;
 
         public RowColumnPair RowColumnPair { get; private set; }
+        public Vector2 Size { get; }
 
         public void ChangeRowColumn(int rowNum, int columnNum)
         {
@@ -38,8 +39,9 @@ namespace Gayplay.Data
             RowColumnPair = new RowColumnPair(rowColumnPair);
         }
 
-        public CellDataModel(Sprite pieceIcon, Sprite pieceFace, CellType cellType, RowColumnPair rowColumnPair)
+        public CellDataModel(Sprite pieceIcon, Sprite pieceFace, CellType cellType, RowColumnPair rowColumnPair, Vector2 size)
         {
+            Size = size;
             this.pieceIcon = pieceIcon;
             this.pieceFace = pieceFace;
             this.cellType = cellType;
