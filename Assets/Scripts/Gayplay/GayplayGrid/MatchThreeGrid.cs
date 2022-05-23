@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using Gayplay.Data;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = System.Random;
 
 namespace Gayplay.GayplayGrid
@@ -51,7 +52,7 @@ namespace Gayplay.GayplayGrid
 
         public void Initialize(PiecesData levelData)
         {
-            var rowCount = levelData.IsActiveCellRows.Count();
+            var rowCount = levelData.IsActiveCellRows.Count;
             _cellSize = GetCellSize(levelData.IsActiveCellRows[0].Row.Count, rowCount);
             
             CreatCells(levelData);
@@ -65,7 +66,7 @@ namespace Gayplay.GayplayGrid
             {
                 throw new Exception("Can't move null pair cells");
             }
-            
+
             Vector3 firstPosition;
             Vector3 secondPosition;
             if (firstCell != null)
@@ -90,13 +91,25 @@ namespace Gayplay.GayplayGrid
                 secondPosition = GetPositionToMove(swipeDirection, firstCellSize, firstCellPosition);
             }
 
-            firstCell.transform.DOMove(secondPosition, 0.3f);
-            Tween tween = secondCell.transform.DOMove(firstPosition, 0.3f);
-            tween.onComplete += () => onCellSwipeAnimationCompleted?.Invoke();
+            var secondCellPositionInGrid = secondCell.CellModel.CellPositionInGrid;
+            var firstCellPositionInGrid = firstCell.CellModel.CellPositionInGrid;
+
+            firstCell.transform.DOLocalMove(secondPosition, 0.3f);
+
+            Tween secondCellTween = secondCell.transform.DOLocalMove(firstPosition, 0.3f);
+            secondCellTween.onComplete += () =>
+            {
+                secondCell.CellModel.CellPositionInGrid = firstCellPositionInGrid;
+                SwapCells(firstCellPositionInGrid, secondCellPositionInGrid);
+                onCellSwipeAnimationCompleted?.Invoke();
+            };
         }
 
-        public bool TryGetCell(int rowNum, int columnNum, out CellController cellController)
+        public bool TryGetCell(CellPositionInGrid cellPositionInGrid, out CellController cellController)
         {
+            var rowNum = cellPositionInGrid.rowNum;
+            var columnNum = cellPositionInGrid.columnNum;
+            
             if (_cellsRowsToColumns.Count < rowNum || _cellsRowsToColumns[0].Count < columnNum)
             {
                 cellController = null;
@@ -106,6 +119,19 @@ namespace Gayplay.GayplayGrid
             cellController = _cellsRowsToColumns[rowNum][columnNum];
             
             return true;
+        }
+
+        private void SwapCells(CellPositionInGrid newCellPosition, CellPositionInGrid oldCellPosition)
+        {
+            var firstCell = GetCell(oldCellPosition);
+            var secondCell = GetCell(newCellPosition);
+            // ReSharper disable once InlineTemporaryVariable
+            var temp = secondCell;
+            _cellsRowsToColumns[newCellPosition.rowNum][newCellPosition.columnNum] = firstCell;
+            _cellsRowsToColumns[oldCellPosition.rowNum][oldCellPosition.columnNum] = temp;
+
+            firstCell.CellModel.CellPositionInGrid = new CellPositionInGrid(newCellPosition);
+            secondCell.CellModel.CellPositionInGrid = new CellPositionInGrid(oldCellPosition);
         }
 
         private void InitCellsPosition()
@@ -236,55 +262,20 @@ namespace Gayplay.GayplayGrid
         {
             var cellController = Instantiate(cellPrefab, content);
             cellController.Init(cellModel);
-            cellController.CellSwiped += OnCellSwiped;
             CellCreated?.Invoke(cellController);
 
             return cellController;
         }
-
-        private void OnCellSwiped(SwipeDirection direction, CellModel model)
+        
+        public CellController GetCell(CellPositionInGrid cellPositionInGrid)
         {
-            var firstCellPosition = model.CellPositionInGrid;
-            CellPositionInGrid secondCellPosition = default;
-            switch (direction)
-            {
-                case SwipeDirection.None:
-                    throw new Exception("Duration can't be None");
-                case SwipeDirection.Up:
-                    secondCellPosition =
-                        new CellPositionInGrid(firstCellPosition.RowNum - 1, firstCellPosition.ColumnNum);
-                    break;
-                case SwipeDirection.Down:
-                    secondCellPosition =
-                        new CellPositionInGrid(firstCellPosition.RowNum + 1, firstCellPosition.ColumnNum);
-                    break;
-                case SwipeDirection.Left:
-                    secondCellPosition =
-                        new CellPositionInGrid(firstCellPosition.RowNum, firstCellPosition.ColumnNum - 1);
-                    break;
-                case SwipeDirection.Right:
-                    secondCellPosition =
-                        new CellPositionInGrid(firstCellPosition.RowNum, firstCellPosition.ColumnNum + 1);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
-            }
-
-            var firstCell = GetCell(model.CellPositionInGrid);
-            var secondCell = GetCell(secondCellPosition);
-            
-            SwipeCells(firstCell, secondCell, direction);
-        }
-
-        private CellController GetCell(CellPositionInGrid cellPositionInGrid)
-        {
-            if (_cellsRowsToColumns.Count < cellPositionInGrid.RowNum ||
-                _cellsRowsToColumns[0].Count < cellPositionInGrid.ColumnNum)
+            if (_cellsRowsToColumns.Count < cellPositionInGrid.rowNum ||
+                _cellsRowsToColumns[0].Count < cellPositionInGrid.columnNum)
             {
                 return null;
             }
             
-            return _cellsRowsToColumns[cellPositionInGrid.RowNum][cellPositionInGrid.ColumnNum];
+            return _cellsRowsToColumns[cellPositionInGrid.rowNum][cellPositionInGrid.columnNum];
         }
 
         private CellDataModel GetRandomLevelDataModel(PiecesData levelData)
@@ -298,7 +289,7 @@ namespace Gayplay.GayplayGrid
 
         private Vector3 GetPositionToMove(SwipeDirection swipeDirection, Vector2 cellSize, Vector3 cellPosition)
         {
-            var movePosition = Vector3.zero;
+            Vector3 movePosition;
             var offsetX = spacing.x * 2 + cellSize.x / 2;
             var offsetY = spacing.y * 2 + cellSize.y / 2;
 
@@ -336,69 +327,127 @@ namespace Gayplay.GayplayGrid
 
         public async void DeleteMatchedCellsIfNeedAsync()
         {
-            foreach (var row in _cellsRowsToColumns)
+            var cellsToMatch = new List<CellPositionInGrid>(_cellsRowsToColumns.Count);
+            
+            for (var i = 0; i < _cellsRowsToColumns[0].Count; i++)
             {
-                foreach (var cellController in row)
+                var column = GetColumn(i);
+
+                var sequenceCellsToMatch = new List<CellPositionInGrid>();
+                var targetCellType = column[0].CellModel.CellType;
+                sequenceCellsToMatch.Add(column[0].CellModel.CellPositionInGrid);
+                for (var j = 1; j < column.Count; j++)
                 {
-                    var cellModelCellPositionInGrid = cellController.CellModel.CellPositionInGrid;
-                    if (IsCanMatchHorizontal(cellModelCellPositionInGrid))
+                    if (targetCellType == CellType.None)
                     {
-                        MatchCell(cellController);
+                        targetCellType = column[j].CellModel.CellType;
+                        continue;
                     }
-                    else if(IsCanMatchVertical(cellModelCellPositionInGrid))
+                    
+                    if (column[j].CellModel.CellType == targetCellType)
                     {
-                        MatchCell(cellController);
+                        sequenceCellsToMatch.Add(column[j].CellModel.CellPositionInGrid);
+                    }
+                    else
+                    {
+                        if (sequenceCellsToMatch.Count > 2)
+                        {
+                            cellsToMatch.AddRange(sequenceCellsToMatch);
+                        }
+                        
+                        sequenceCellsToMatch.Clear();
+
+                        if (column.Count > j + 1)
+                        {
+                            targetCellType = column[j + 1].CellModel.CellType;
+                        }
                     }
                 }
+            }
+            
+            for (var i = 1; i < _cellsRowsToColumns.Count; i++)
+            {
+                var sequenceCellsToMatch = new List<CellPositionInGrid>();
+                var targetCellType = _cellsRowsToColumns[i][0].CellModel.CellType;
+                for (var j = 1; j < _cellsRowsToColumns[i].Count - 1; j++)
+                {
+                    var cellController = _cellsRowsToColumns[i][j];
+                    if (targetCellType == CellType.None)
+                    {
+                        targetCellType = cellController.CellModel.CellType;
+                        continue;
+                    }
+                    
+                    if (cellController.CellModel.CellType == targetCellType)
+                    {
+                        sequenceCellsToMatch.Add(cellController.CellModel.CellPositionInGrid);
+                    }
+                    else
+                    {
+                        if (sequenceCellsToMatch.Count > 2)
+                        {
+                            cellsToMatch.AddRange(sequenceCellsToMatch);
+                        }
+                        
+                        sequenceCellsToMatch.Clear();
 
-                await Task.Yield();
+                        if (_cellsRowsToColumns[i].Count > j + 1)
+                        {
+                            targetCellType = _cellsRowsToColumns[i][j + 1].CellModel.CellType;
+                        }
+                    }
+                }
+            }
+
+            foreach (var cellPositionInGrid in cellsToMatch)
+            {
+                MatchCell(cellPositionInGrid);
             }
         }
 
-        private void MatchCell(CellController cellController)
+        private void MatchCell(CellPositionInGrid cellPositionInGrid)
         {
+            var cellController = GetCell(cellPositionInGrid);
             cellController.DeleteCell();
         }
 
-        private bool IsCanMatchVertical(CellPositionInGrid cellPositionInGrid)
+        public bool IsCanMatchVertical(CellPositionInGrid cellPositionInGrid)
         {
-            var columnNum = cellPositionInGrid.ColumnNum;
-            var rowNum = cellPositionInGrid.RowNum;
+            var columnNum = cellPositionInGrid.columnNum;
+            var rowNum = cellPositionInGrid.rowNum;
             var column = GetColumn(columnNum);
             var cellsToMatchCount = 0;
             
-            for (var i = rowNum + 1; i < column.Count - 1; i++)
+            for (var i = rowNum; i < column.Count - 1; i++)
             {
-                if (column[i].CellModel.CellType == column[i + 1].CellType)
+                if (column[i].CellModel.CellType == column[i + 1].CellModel.CellType)
                 {
                     cellsToMatchCount++;
                 }
                 else
                 {
-                    cellsToMatchCount = 0;
                     break;
                 }
             }
             
-            if (cellsToMatchCount >= 3)
+            if (cellsToMatchCount >= 2)
             {
                 return true;
             }
             
-            for (var i = rowNum - 1; i > 0; i--)
+            for (var i = rowNum; i > 0; i--)
             {
-                if (column[i].CellModel.CellType == column[i - 1].CellType)
+                if (column[i].CellModel.CellType == column[i - 1].CellModel.CellType)
                 {
                     cellsToMatchCount++;
                 }
                 else
                 {
-                    cellsToMatchCount = 0;
                     break;
                 }
             }
             
-            if (cellsToMatchCount >= 3)
+            if (cellsToMatchCount >= 2)
             {
                 return true;
             }
@@ -406,22 +455,21 @@ namespace Gayplay.GayplayGrid
             return false;
         }
 
-        private bool IsCanMatchHorizontal(CellPositionInGrid cellPositionInGrid)
+        public bool IsCanMatchHorizontal(CellPositionInGrid cellPositionInGrid)
         {
-            var rowNum = cellPositionInGrid.RowNum;
-            var columnNum = cellPositionInGrid.ColumnNum;
+            var rowNum = cellPositionInGrid.rowNum;
+            var columnNum = cellPositionInGrid.columnNum;
             var row = _cellsRowsToColumns[rowNum];
             var cellsToMatchCount = 0;
             
-            for (var i = columnNum + 1; i < row.Count - 1; i++)
+            for (var i = columnNum; i < row.Count - 1; i++)
             {
-                if (row[i].CellModel.CellType == row[i + 1].CellType)
+                if (row[i].CellModel.CellType == row[i + 1].CellModel.CellType)
                 {
                     cellsToMatchCount++;
                 }
                 else
                 {
-                    cellsToMatchCount = 0;
                     break;
                 }
             }
@@ -431,15 +479,14 @@ namespace Gayplay.GayplayGrid
                 return true;
             }
             
-            for (var i = columnNum - 1; i > 0; i--)
+            for (var i = columnNum; i > 0; i--)
             {
-                if (row[i].CellModel.CellType == row[i - 1].CellType)
+                if (row[i].CellModel.CellType == row[i - 1].CellModel.CellType)
                 {
                     cellsToMatchCount++;
                 }
                 else
                 {
-                    cellsToMatchCount = 0;
                     break;
                 }
             }

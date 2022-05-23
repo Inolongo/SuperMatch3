@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Gayplay.GayplayGrid
 {
-    public struct CellModel
+    public class CellModel
     {
         public bool IsEmpty { get; }
         public Sprite PieceIcon { get; }
@@ -11,7 +11,7 @@ namespace Gayplay.GayplayGrid
         public CellType CellType { get; }
         public Vector2 Size { get; }
 
-        public CellPositionInGrid CellPositionInGrid;
+        public CellPositionInGrid CellPositionInGrid { get; set; }
 
         public CellModel
         (

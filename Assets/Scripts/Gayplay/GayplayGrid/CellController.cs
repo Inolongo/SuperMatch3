@@ -11,8 +11,6 @@ namespace Gayplay.GayplayGrid
         [SerializeField] private CellView cellView;
         [SerializeField] private Ease func;
 
-        public CellType CellType => CellModel.CellType;
-
         public CellModel CellModel { get; private set; }
 
         private Vector2 _swipeStartPosition;
