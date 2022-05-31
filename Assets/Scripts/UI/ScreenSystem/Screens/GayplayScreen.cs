@@ -1,7 +1,9 @@
 ﻿using Gayplay.Data;
+using Gayplay.Gameplay;
 using Gayplay.GayplayGrid;
 using UI.DialogSystem;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.ScreenSystem.Screens
@@ -9,12 +11,12 @@ namespace UI.ScreenSystem.Screens
     public class GayplayScreen : ScreenBase
     {
         [SerializeField] private Button exitButton;
-        [SerializeField] private GayplayController gayplayController;
+        [FormerlySerializedAs("gayplayController")] [SerializeField] private GameplayController gameplayController;
         [SerializeField] private MatchThreeGrid gridController;
         [SerializeField] private PiecesData levelData;
         public override void OnShown()
         {
-            gayplayController.Initialize(gridController);
+            gameplayController.Initialize(gridController);
             gridController.Initialize(levelData);
             
             exitButton.onClick.AddListener(OnExitButtonClick);

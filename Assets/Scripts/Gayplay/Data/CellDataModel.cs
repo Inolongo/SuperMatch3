@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Gayplay.Data
 {
+    //TODO:refactoring
     [Serializable]
     public class CellDataModel
     {
@@ -16,7 +17,7 @@ namespace Gayplay.Data
             get => _isMatched;
             set
             {
-                Debug.Log("Set is matched value = " + value + " | Row = " + RowColumnPair.RowNum + ";  Column = " + RowColumnPair.ColumnNum);
+                Debug.Log("Set is matched value = " + value + " | Row = " + RowColumnPair.rowNum + ";  Column = " + RowColumnPair.columnNum);
                 _isMatched = value;
             }
         }

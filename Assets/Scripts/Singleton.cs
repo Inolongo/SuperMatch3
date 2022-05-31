@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+//TODO:Get rid of the temporary solution. Make according to DI rules
 public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
     public static T Instance =>

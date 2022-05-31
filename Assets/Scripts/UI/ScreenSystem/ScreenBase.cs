@@ -8,7 +8,7 @@ namespace UI.ScreenSystem
     public abstract class ScreenBase : UIView
     {
         public override IViewAnimator ViewAnimator { get; protected set; }
-        
+
         public override void OnShown()
         {
             ViewAnimator = GetComponent<ScreensAnimator>();

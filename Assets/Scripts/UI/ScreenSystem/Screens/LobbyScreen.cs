@@ -15,6 +15,7 @@ namespace UI.ScreenSystem.Screens
         [SerializeField] private LeaderboardController leaderboardController;
 
         private APIController _apiController;
+        private UISystem _uiSystem;
 
         private void InitializeLeaderboard()
         {
@@ -40,12 +41,12 @@ namespace UI.ScreenSystem.Screens
 
         private void OnSettingsButtonClick()
         {
-            UISystem.Instance.Show<SettingsDialog>();
+            _uiSystem.Show<SettingsDialog>();
         }
 
         private void OnStartButtonClick()
         {
-            UISystem.Instance.Show<GayplayScreen>();
+            _uiSystem.Show<GayplayScreen>();
         }
 
         public override void OnClosed()
@@ -66,6 +67,7 @@ namespace UI.ScreenSystem.Screens
         public void Init(APIController apiController)
         {
             _apiController = apiController;
+            _uiSystem = UISystem.Instance;
         }
 
         private void InitializeFooter()

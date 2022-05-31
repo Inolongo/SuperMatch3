@@ -2,19 +2,19 @@
 {
     public struct RowColumnPair
     {
-        public int ColumnNum;
-        public int RowNum;
+        public readonly int columnNum;
+        public readonly int rowNum;
 
         public RowColumnPair(int rowNum, int columnNum)
         {
-            ColumnNum = columnNum;
-            RowNum = rowNum;
+            this.columnNum = columnNum;
+            this.rowNum = rowNum;
         }
         
         public RowColumnPair(RowColumnPair rowColumnPair)
         {
-            ColumnNum = rowColumnPair.ColumnNum;
-            RowNum = rowColumnPair.RowNum;
+            columnNum = rowColumnPair.columnNum;
+            rowNum = rowColumnPair.rowNum;
         }
     }
 }

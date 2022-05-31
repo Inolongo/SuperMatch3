@@ -1,12 +1,12 @@
 ﻿using System;
-using Gayplay.Data;
+using MVC;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gayplay.GayplayGrid
+namespace Gayplay.Gameplay.Cell
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class CellView : MonoBehaviour
+    public class CellView : MonoBehaviour, IView
     {
         [SerializeField] private Image icon;
         [SerializeField] private Image face;
@@ -20,20 +20,14 @@ namespace Gayplay.GayplayGrid
             rectTransform = GetComponent<RectTransform>();
         }
         #endif
-        
-        public void Init(CellDataModel cellDataModel, RectTransform decoyRectTransform)
-        {
-            rectTransform.offsetMax =
-                new Vector2(decoyRectTransform.rect.width / 2, decoyRectTransform.rect.height / 2);
-            rectTransform.offsetMin =
-                new Vector2(-decoyRectTransform.rect.width / 2, -decoyRectTransform.rect.height / 2);
-            rectTransform.localPosition = decoyRectTransform.localPosition;
-            icon.sprite = cellDataModel.PieceIcon;
-            face.sprite = cellDataModel.PieceFace;
-        }
 
-        public void Init(CellModel cellModel)
+        public void Initialize(IModel model)
         {
+            if (model is not CellModel cellModel)
+            {
+                throw new Exception("CellView.cs only work with CellModel.cs");
+            }
+
             SetSize(cellModel.Size);
 
             if (cellModel.IsEmpty)

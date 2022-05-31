@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace UI
 {
+    //TODO:think about how you can reduce abstractions count
     public abstract class UIView : MonoBehaviour
     {
         public abstract IViewAnimator  ViewAnimator { get; protected set; }

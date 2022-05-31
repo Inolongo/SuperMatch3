@@ -1,9 +1,11 @@
 ﻿using Gayplay.Data;
+using Gayplay.GayplayGrid;
+using MVC;
 using UnityEngine;
 
-namespace Gayplay.GayplayGrid
+namespace Gayplay.Gameplay.Cell
 {
-    public class CellModel
+    public class CellModel : IModel
     {
         public bool IsEmpty { get; }
         public Sprite PieceIcon { get; }

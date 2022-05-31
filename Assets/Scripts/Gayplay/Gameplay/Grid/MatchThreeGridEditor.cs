@@ -1,15 +1,16 @@
-﻿using System;
+﻿using System.Reflection;
+using Gayplay.GayplayGrid;
 using UnityEditor;
 using UnityEngine;
 
-namespace Gayplay.GayplayGrid
+namespace Gayplay.Gameplay.Grid
 {
     [CustomEditor(typeof(MatchThreeGrid))]
     public class MatchThreeGridEditor : Editor
     {
         private MatchThreeGrid _matchThreeGrid;
 
-        public override void OnInspectorGUI()
+        public override async void OnInspectorGUI()
         {
             base.OnInspectorGUI();
             
@@ -20,12 +21,16 @@ namespace Gayplay.GayplayGrid
 
             if (GUILayout.Button("Create cells"))
             {
-                _matchThreeGrid.CreatCellsTest();
+                _matchThreeGrid.CreatCellsFromEditor();
             }
             
             if (GUILayout.Button("Destroy cells"))
             {
                 _matchThreeGrid.DestroyCells();
+                var assembly = Assembly.GetAssembly(typeof(SceneView));
+                var type = assembly.GetType("UnityEditor.LogEntries");
+                var method = type.GetMethod("Clear");
+                method!.Invoke(new object(), null);
             }
         }
     }

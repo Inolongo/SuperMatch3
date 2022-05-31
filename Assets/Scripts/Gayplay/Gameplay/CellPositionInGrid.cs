@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gayplay.GayplayGrid
+namespace Gayplay.Gameplay
 {
     public readonly struct CellPositionInGrid : IEquatable<CellPositionInGrid>
     {

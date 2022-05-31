@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gayplay.Gameplay.Cell;
 using Gayplay.GayplayGrid;
 using UnityEngine;
 
 namespace Gayplay.Data
 {
+    //TODO:refactoring
     [CreateAssetMenu(fileName = "PiecesData", menuName = "ScriptableObjects/Pieces", order = 1)]
     public class PiecesData : ScriptableObject
     {

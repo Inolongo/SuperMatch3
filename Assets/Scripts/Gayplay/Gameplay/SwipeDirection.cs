@@ -1,4 +1,4 @@
-﻿namespace Gayplay.GayplayGrid
+﻿namespace Gayplay.Gameplay
 {
     public enum SwipeDirection
     {
