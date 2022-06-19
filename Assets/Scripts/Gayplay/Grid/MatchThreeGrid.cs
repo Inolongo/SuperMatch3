@@ -52,7 +52,7 @@ namespace Gayplay.GayplayGrid
             var rowCount = levelData.IsActiveCellRows.Count;
             _cellSize = GetCellSize(levelData.IsActiveCellRows[0].Row.Count, rowCount);
 
-            CreatCellsAsync(levelData);
+            CreateCells(levelData);
             InitCellsPosition();
         }
 
@@ -64,8 +64,8 @@ namespace Gayplay.GayplayGrid
                 throw new Exception("Can't move null pair cells");
             }
 
-            if (firstCell.CellModel is not CellModel firstCellModel) return;
-            if (secondCell.CellModel is not CellModel secondCellModel) return;
+            if (firstCell.Model is not CellModel firstCellModel) return;
+            if (secondCell.Model is not CellModel secondCellModel) return;
             
             Vector3 firstPosition;
             Vector3 secondPosition;
@@ -138,7 +138,7 @@ namespace Gayplay.GayplayGrid
                 throw new Exception("Column index can't be less than zero");
             }
 
-            if (columnIndex > ((CellModel)_cellsRowsToColumns[0][^1].CellModel).CellPositionInGrid.columnNum)
+            if (columnIndex > ((CellModel)_cellsRowsToColumns[0][^1].Model).CellPositionInGrid.columnNum)
             {
                 throw new Exception("Column index can't be bigger row lenght");
             }
@@ -169,8 +169,8 @@ namespace Gayplay.GayplayGrid
             var firstCell = GetCell(oldCellPosition);
             var secondCell = GetCell(newCellPosition);
             
-            if (firstCell.CellModel is not CellModel firstCellModel) return;
-            if (secondCell.CellModel is not CellModel secondCellModel) return;
+            if (firstCell.Model is not CellModel firstCellModel) return;
+            if (secondCell.Model is not CellModel secondCellModel) return;
             
             // ReSharper disable once InlineTemporaryVariable
             var temp = secondCell;
@@ -241,7 +241,7 @@ namespace Gayplay.GayplayGrid
             return new Vector2(cellSideSize, cellSideSize);
         }
 
-        private void CreatCellsAsync(PiecesData levelData)
+        private void CreateCells(PiecesData levelData)
         {
             _cellsRowsToColumns = new List<List<CellController>>(levelData.IsActiveCellRows.Count);
 
@@ -299,12 +299,12 @@ namespace Gayplay.GayplayGrid
                 return true;
             }
 
-            if (row[columnNum - 1].CellModel is not CellModel firstCellModel)
+            if (row[columnNum - 1].Model is not CellModel firstCellModel)
             {
                 throw new Exception("Incorrect model type");
             }
 
-            if (row[columnNum - 2].CellModel is not CellModel secondCellModel)
+            if (row[columnNum - 2].Model is not CellModel secondCellModel)
             {
                 throw new Exception("Incorrect model type");
             }
@@ -330,12 +330,12 @@ namespace Gayplay.GayplayGrid
 
             var column = GetColumn(columnNum);
 
-            if (column[rowNum - 1].CellModel is not CellModel firstCellModel)
+            if (column[rowNum - 1].Model is not CellModel firstCellModel)
             {
                 throw new Exception("Incorrect model type");
             }
 
-            if (column[rowNum - 2].CellModel is not CellModel secondCellModel)
+            if (column[rowNum - 2].Model is not CellModel secondCellModel)
             {
                 throw new Exception("Incorrect model type");
             }
@@ -460,11 +460,11 @@ namespace Gayplay.GayplayGrid
             for (var i = 0; i < _cellsRowsToColumns.Count; i++)
             {
                 var sequenceCellsToMatch = new List<CellPositionInGrid>();
-                var targetCellType = ((CellModel)_cellsRowsToColumns[i][0].CellModel).CellType;
+                var targetCellType = ((CellModel)_cellsRowsToColumns[i][0].Model).CellType;
                 
                 for (var j = 0; j < _cellsRowsToColumns[i].Count - 1; j++)
                 {
-                    var cellModel = (CellModel)_cellsRowsToColumns[i][j].CellModel;
+                    var cellModel = (CellModel)_cellsRowsToColumns[i][j].Model;
 
                     if (cellModel.CellType == targetCellType)
                     {
@@ -501,7 +501,7 @@ namespace Gayplay.GayplayGrid
             for (var i = 0; i < _cellsRowsToColumns[0].Count; i++)
             {
                 var column = GetColumn(i);
-                var firstCellModel = ((CellModel)column[0].CellModel);
+                var firstCellModel = ((CellModel)column[0].Model);
                 var sequenceCellsToMatch = new List<CellPositionInGrid>();
                 
                 var targetCellType = firstCellModel.CellType;
@@ -509,7 +509,7 @@ namespace Gayplay.GayplayGrid
                 
                 for (var j = 0; j < column.Count; j++)
                 {
-                    var cellModel = (CellModel)column[j].CellModel;
+                    var cellModel = (CellModel)column[j].Model;
                     
                     if (cellModel.CellType == targetCellType)
                     {
@@ -547,7 +547,7 @@ namespace Gayplay.GayplayGrid
 
         public bool IsCanMatchVertical(CellPositionInGrid cellPositionInGrid)
         {
-            var firstCellModelToCompare = (CellModel)GetCell(cellPositionInGrid).CellModel;
+            var firstCellModelToCompare = (CellModel)GetCell(cellPositionInGrid).Model;
             if (firstCellModelToCompare.CellType == CellType.None) return false;
 
             var columnNum = cellPositionInGrid.columnNum;
@@ -566,7 +566,7 @@ namespace Gayplay.GayplayGrid
             
             for (var i = rowNum; i > 0; i--)
             {
-                if (((CellModel)column[i].CellModel).CellType == ((CellModel)column[i - 1].CellModel).CellType)
+                if (((CellModel)column[i].Model).CellType == ((CellModel)column[i - 1].Model).CellType)
                 {
                     cellsToMatchCount++;
                 }
@@ -585,7 +585,7 @@ namespace Gayplay.GayplayGrid
             
             for (var i = rowNum; i < column.Count - 1; i++)
             {
-                if (((CellModel)column[i].CellModel).CellType == ((CellModel)column[i + 1].CellModel).CellType)
+                if (((CellModel)column[i].Model).CellType == ((CellModel)column[i + 1].Model).CellType)
                 {
                     cellsToMatchCount++;
                 }
@@ -600,7 +600,7 @@ namespace Gayplay.GayplayGrid
 
         public bool IsCanMatchHorizontal(CellPositionInGrid cellPositionInGrid)
         {
-            var firstCellModelToCompare = (CellModel)GetCell(cellPositionInGrid).CellModel;
+            var firstCellModelToCompare = (CellModel)GetCell(cellPositionInGrid).Model;
             if (firstCellModelToCompare.CellType == CellType.None) return false;
 
             var rowNum = cellPositionInGrid.rowNum;
@@ -619,7 +619,7 @@ namespace Gayplay.GayplayGrid
             
             for (var i = columnNum; i > 0; i--)
             {
-                if (((CellModel)row[i].CellModel).CellType == ((CellModel)row[i - 1].CellModel).CellType)
+                if (((CellModel)row[i].Model).CellType == ((CellModel)row[i - 1].Model).CellType)
                 {
                     cellsToMatchCount++;
                 }
@@ -638,7 +638,7 @@ namespace Gayplay.GayplayGrid
             
             for (var i = columnNum; i < row.Count - 1; i++)
             {
-                if (((CellModel)row[i].CellModel).CellType == ((CellModel)row[i + 1].CellModel).CellType)
+                if (((CellModel)row[i].Model).CellType == ((CellModel)row[i + 1].Model).CellType)
                 {
                     cellsToMatchCount++;
                 }
