@@ -68,8 +68,8 @@ namespace Gayplay.Gameplay
 
         private async void OnCellSwipeAnimationCompleted(CellController firstCell, CellController secondCell, SwipeDirection swipeDirection)
         {
-            if (firstCell.CellModel is not CellModel firstCellCellModel) return;
-            if (secondCell.CellModel is not CellModel secondCellCellModel) return;
+            if (firstCell.Model is not CellModel firstCellCellModel) return;
+            if (secondCell.Model is not CellModel secondCellCellModel) return;
 
             var firstCellCanMatch = _gridController.IsCanMatchHorizontal(firstCellCellModel.CellPositionInGrid) ||
                                     _gridController.IsCanMatchVertical(firstCellCellModel.CellPositionInGrid);

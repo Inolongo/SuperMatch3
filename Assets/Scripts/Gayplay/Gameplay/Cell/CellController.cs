@@ -11,7 +11,7 @@ namespace Gayplay.Gameplay.Cell
         [SerializeField] private CellView cellView;
         [SerializeField] private Ease func;
 
-        public IModel CellModel => _cellModel;
+        public IModel Model => _cellModel;
         public event Action<SwipeDirection, CellModel> CellSwiped;
 
         private CellModel _cellModel;
@@ -33,9 +33,10 @@ namespace Gayplay.Gameplay.Cell
             }
             
             _cellModel = cellModel;
-            cellView.Initialize(CellModel);
+            cellView.Initialize(Model);
         }
         
+        //TODO:move to model change property
         public void DeleteCell()
         {
             transform.DOScale(Vector3.zero, 0.2f).SetEase(func);

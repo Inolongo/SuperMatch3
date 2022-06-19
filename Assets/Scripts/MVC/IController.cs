@@ -2,7 +2,7 @@
 {
     public interface IController
     {
-        IModel CellModel { get; }
+        IModel Model { get; }
         void Initialize(IModel model);
     }
 }
