@@ -1,25 +1,16 @@
 ﻿using System;
 using MVC;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Gayplay.Gameplay.Cell
 {
-    [RequireComponent(typeof(CanvasGroup))]
+    [RequireComponent(typeof(SpriteRenderer))]
     public class CellView : MonoBehaviour, IView
     {
-        [SerializeField] private Image icon;
-        [SerializeField] private Image face;
-        [SerializeField] private RectTransform rectTransform;
-        [SerializeField] private CanvasGroup canvasGroup;
+        [SerializeField] private SpriteRenderer icon;
+        [SerializeField] private SpriteRenderer face;
 
-        #if UNITY_EDITOR
-        private void OnValidate()
-        {
-            canvasGroup = GetComponent<CanvasGroup>();
-            rectTransform = GetComponent<RectTransform>();
-        }
-        #endif
+        private SpriteRenderer _spriteRenderer;
 
         public void Initialize(IModel model)
         {
@@ -27,12 +18,14 @@ namespace Gayplay.Gameplay.Cell
             {
                 throw new Exception("CellView.cs only work with CellModel.cs");
             }
+            
+            _spriteRenderer ??= GetComponent<SpriteRenderer>();
 
             SetSize(cellModel.Size);
 
             if (cellModel.IsEmpty)
             {
-                canvasGroup.alpha = 0;
+                HideCell();
             }
             else
             {
@@ -41,10 +34,22 @@ namespace Gayplay.Gameplay.Cell
             }
         }
 
+        private void HideCell()
+        {
+            
+        }
+
         private void SetSize(Vector2 size)
         {
-            rectTransform.offsetMax = new Vector2(size.x / 2, size.y / 2);
-            rectTransform.offsetMin = new Vector2(-size.x / 2, -size.y / 2);
+            var bounds = _spriteRenderer.bounds;
+            var xSizeCoefficient = size.x / bounds.size.x;
+            var ySizeCoefficient = size.y / bounds.size.y;
+
+            transform.localScale 
+                = new Vector3(
+                    transform.localScale.x * xSizeCoefficient, 
+                    transform.localScale.y * ySizeCoefficient, 
+                    transform.localScale.z);
         }
     }
 }

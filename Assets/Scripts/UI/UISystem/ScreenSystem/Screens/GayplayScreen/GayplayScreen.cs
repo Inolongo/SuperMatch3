@@ -1,6 +1,6 @@
 ﻿using Gayplay.Data;
 using Gayplay.Gameplay;
-using Gayplay.GayplayGrid;
+using Gayplay.Grid;
 using UI.DialogSystem;
 using UnityEngine;
 using UnityEngine.Serialization;

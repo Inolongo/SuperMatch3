@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Gayplay.GayplayGrid;
+using Gayplay.Grid;
 using UnityEditor;
 using UnityEngine;
 

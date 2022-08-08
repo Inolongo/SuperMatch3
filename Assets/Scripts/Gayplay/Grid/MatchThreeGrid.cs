@@ -8,12 +8,12 @@ using Gayplay.Gameplay.Cell;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Gayplay.GayplayGrid
+namespace Gayplay.Grid
 {
     public class MatchThreeGrid : MonoBehaviour
     {
         [SerializeField] private Vector2 spacing;
-        [SerializeField] private RectTransform content;
+        [SerializeField] private GridContent content;
         
         //TODO:Remove after tests
         #region Test
@@ -24,13 +24,12 @@ namespace Gayplay.GayplayGrid
 
         private Vector2 _cellSize;
         private List<List<CellController>> _cellsRowsToColumns;
-        private RectTransform _rectTransform;
 
         #region Editor
 
         public void DestroyCells()
         {
-            if (content.childCount > 0)
+            if (content.transform.childCount > 0)
             {
                 var componentsInChildren = GetComponentsInChildren<CellController>();
                 foreach (var componentsInChild in componentsInChildren)
@@ -207,12 +206,8 @@ namespace Gayplay.GayplayGrid
 
         private Vector2 GetLeftUpPosition()
         {
-            var contentRect = ((RectTransform)content.transform);
-            var contentLocalPosition = contentRect.localPosition;
-
-            var rect = contentRect.rect;
-            var leftUpGridXPosition = contentLocalPosition.x - rect.width / 2;
-            var leftUpGridYPosition = contentLocalPosition.y + rect.height / 2;
+            var leftUpGridXPosition = content.GridRect.LeftDot.position.x;
+            var leftUpGridYPosition = content.GridRect.UpDot.position.y;
 
             var leftUpGridPosition = new Vector2(leftUpGridXPosition, leftUpGridYPosition);
 
@@ -221,14 +216,15 @@ namespace Gayplay.GayplayGrid
 
         private Vector2 GetCellSize(int rowCellsCount, int columnCellsCount)
         {
-            var contentRect = ((RectTransform)content.transform).rect;
+            var contentWight = content.GridRect.Weight;
+            var contentHeight = content.GridRect.Height;
 
             var allSpacingSizeX = (rowCellsCount + 1) * spacing.x;
-            var sizeForAllCellsX = contentRect.width - allSpacingSizeX;
+            var sizeForAllCellsX = contentWight - allSpacingSizeX;
             var cellWidth = sizeForAllCellsX / rowCellsCount;
 
             var allSpacingSizeY = (columnCellsCount + 1) * spacing.y;
-            var sizeForAllCellsY = contentRect.height - allSpacingSizeY;
+            var sizeForAllCellsY = contentHeight - allSpacingSizeY;
             var cellHeight = sizeForAllCellsY / columnCellsCount;
 
             var cellSideSize = cellHeight > cellWidth ? cellWidth : cellHeight;
@@ -366,7 +362,7 @@ namespace Gayplay.GayplayGrid
 
         private CellController CreatCell(CellController cellPrefab, CellModel cellModel)
         {
-            var cellController = Instantiate(cellPrefab, content);
+            var cellController = Instantiate(cellPrefab, content.transform);
             cellController.Initialize(cellModel);
             CellCreated?.Invoke(cellController);
 

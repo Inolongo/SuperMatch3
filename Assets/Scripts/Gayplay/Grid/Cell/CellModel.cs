@@ -1,6 +1,5 @@
 ﻿using System;
 using Gayplay.Data;
-using Gayplay.GayplayGrid;
 using MVC;
 using UnityEngine;
 

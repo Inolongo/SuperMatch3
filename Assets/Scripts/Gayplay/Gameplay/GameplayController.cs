@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Gayplay.Gameplay.Cell;
-using Gayplay.GayplayGrid;
+using Gayplay.Grid;
 using UnityEngine;
 
 namespace Gayplay.Gameplay
@@ -34,6 +34,7 @@ namespace Gayplay.Gameplay
         {
             var firstCellPosition = cellModel.CellPositionInGrid;
             CellPositionInGrid secondCellPosition;
+            
             switch (swipeDirection)
             {
                 case SwipeDirection.None:

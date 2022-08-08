@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gayplay.Gameplay.Cell;
-using Gayplay.GayplayGrid;
 using UnityEngine;
 
 namespace Gayplay.Data
