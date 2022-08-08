@@ -1,0 +1,16 @@
+{
+    "name": "MatchThreeGrid",
+    "rootNamespace": "",
+    "references": [
+        "GUID:488a04ecd0d95814d88d37ab27efddb8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

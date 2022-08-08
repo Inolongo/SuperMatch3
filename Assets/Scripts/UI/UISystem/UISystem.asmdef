@@ -1,0 +1,20 @@
+{
+    "name": "UISystem",
+    "rootNamespace": "",
+    "references": [
+        "GUID:21aee71fe679cee469439ffb9f285d9a",
+        "GUID:ed23a2d43c97fa64e96f7488d59fb358",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:48efe2b2ff05ea047a291878ce38dbe1",
+        "GUID:3a713778cdbe9d7448d3be4c8a42b985"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
